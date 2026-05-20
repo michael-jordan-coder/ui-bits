@@ -9,7 +9,9 @@ export const CATEGORIES = [
   {
     name: 'Components',
     subcategories: [
-      'Fill Button'
+      'Fill Button',
+      'Honeycomb Grid',
+      'Poster Drum'
     ]
   }
 ];

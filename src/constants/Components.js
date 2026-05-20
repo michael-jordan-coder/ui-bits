@@ -5,7 +5,9 @@ const getStarted = {
 };
 
 const components = {
-  'fill-button': () => import('../demo/Components/FillButtonDemo')
+  'fill-button': () => import('../demo/Components/FillButtonDemo'),
+  'honeycomb-grid': () => import('../demo/Components/HoneycombGridDemo'),
+  'poster-drum': () => import('../demo/Components/PosterDrumDemo')
 };
 
 export const componentMap = {
