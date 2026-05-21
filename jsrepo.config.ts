@@ -16,6 +16,7 @@ interface ComponentMeta {
 export default defineConfig({
   registry: {
     name: '@community-bits',
+    homepage: 'https://community-bits.vercel.app',
     description:
       'A community-driven collection of animated, interactive React components shipped as copyable source.',
     authors: ['community-bits'],
