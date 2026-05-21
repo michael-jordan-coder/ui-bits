@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 const PALETTES = [
-  { id: 'purple', name: 'Purple', primary: '#a855f7', accent: '#b497cf' },
+  { id: 'cherry', name: 'Cherry', primary: '#fc4d6e', accent: '#ffa0b2' },
   { id: 'amber', name: 'Amber', primary: '#f59e0b', accent: '#fcd34d' },
   { id: 'green', name: 'Green', primary: '#22c55e', accent: '#86efac' },
   { id: 'cyan', name: 'Cyan', primary: '#06b6d4', accent: '#67e8f9' },

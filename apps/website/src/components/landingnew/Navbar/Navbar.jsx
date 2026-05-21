@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import AccentPicker from './AccentPicker';
+// import AccentPicker from './AccentPicker';
 
 const NAV_LINKS = [
   { label: 'Docs', to: '/get-started/introduction', match: '/get-started' },
@@ -21,7 +21,7 @@ const Navbar = ({ showDocs }) => {
             {label}
           </Link>
         ))}
-        <AccentPicker />
+        {/* <AccentPicker /> */}
       </nav>
       {showDocs ? null : null}
     </header>

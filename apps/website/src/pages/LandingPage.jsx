@@ -15,11 +15,11 @@ const LandingPage = () => {
     <section className="landing-wrapper">
       <Navbar />
       <Hero />
-      {/* <Features />
+      <Features />
       <LiveDemo />
       <QuickStart />
       <Testimonials />
-      <CTA /> */}
+      <CTA />
       <Footer />
     </section>
   );
