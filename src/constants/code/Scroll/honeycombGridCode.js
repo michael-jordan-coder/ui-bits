@@ -1,8 +1,8 @@
-import code from '@content/Components/HoneycombGrid/HoneycombGrid.jsx?raw';
-import css from '@content/Components/HoneycombGrid/HoneycombGrid.css?raw';
-import tailwind from '@tailwind/Components/HoneycombGrid/HoneycombGrid.jsx?raw';
-import tsCode from '@ts-default/Components/HoneycombGrid/HoneycombGrid.tsx?raw';
-import tsTailwind from '@ts-tailwind/Components/HoneycombGrid/HoneycombGrid.tsx?raw';
+import code from '@content/Scroll/HoneycombGrid/HoneycombGrid.jsx?raw';
+import css from '@content/Scroll/HoneycombGrid/HoneycombGrid.css?raw';
+import tailwind from '@tailwind/Scroll/HoneycombGrid/HoneycombGrid.jsx?raw';
+import tsCode from '@ts-default/Scroll/HoneycombGrid/HoneycombGrid.tsx?raw';
+import tsTailwind from '@ts-tailwind/Scroll/HoneycombGrid/HoneycombGrid.tsx?raw';
 
 export const honeycombGrid = {
   dependencies: '',

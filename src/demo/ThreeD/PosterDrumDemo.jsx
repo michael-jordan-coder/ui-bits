@@ -13,8 +13,8 @@ import useForceRerender from '../../hooks/useForceRerender';
 import useComponentProps from '../../hooks/useComponentProps';
 import { ComponentPropsProvider } from '../../components/context/ComponentPropsContext';
 
-import PosterDrum from '../../content/Components/PosterDrum/PosterDrum';
-import { posterDrum } from '../../constants/code/Components/posterDrumCode';
+import PosterDrum from '../../content/ThreeD/PosterDrum/PosterDrum';
+import { posterDrum } from '../../constants/code/ThreeD/posterDrumCode';
 
 const DEFAULT_PROPS = {
   radius: 410,

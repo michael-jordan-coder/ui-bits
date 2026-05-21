@@ -13,8 +13,8 @@ import useForceRerender from '../../hooks/useForceRerender';
 import useComponentProps from '../../hooks/useComponentProps';
 import { ComponentPropsProvider } from '../../components/context/ComponentPropsContext';
 
-import HoneycombGrid from '../../content/Components/HoneycombGrid/HoneycombGrid';
-import { honeycombGrid } from '../../constants/code/Components/honeycombGridCode';
+import HoneycombGrid from '../../content/Scroll/HoneycombGrid/HoneycombGrid';
+import { honeycombGrid } from '../../constants/code/Scroll/honeycombGridCode';
 
 const DEFAULT_PROPS = {
   wideCount: 4,

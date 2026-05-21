@@ -1,8 +1,8 @@
-import code from '@content/Components/PosterDrum/PosterDrum.jsx?raw';
-import css from '@content/Components/PosterDrum/PosterDrum.css?raw';
-import tailwind from '@tailwind/Components/PosterDrum/PosterDrum.jsx?raw';
-import tsCode from '@ts-default/Components/PosterDrum/PosterDrum.tsx?raw';
-import tsTailwind from '@ts-tailwind/Components/PosterDrum/PosterDrum.tsx?raw';
+import code from '@content/ThreeD/PosterDrum/PosterDrum.jsx?raw';
+import css from '@content/ThreeD/PosterDrum/PosterDrum.css?raw';
+import tailwind from '@tailwind/ThreeD/PosterDrum/PosterDrum.jsx?raw';
+import tsCode from '@ts-default/ThreeD/PosterDrum/PosterDrum.tsx?raw';
+import tsTailwind from '@ts-tailwind/ThreeD/PosterDrum/PosterDrum.tsx?raw';
 
 export const posterDrum = {
   dependencies: '',

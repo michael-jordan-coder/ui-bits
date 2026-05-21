@@ -1,8 +1,8 @@
-import code from '@content/Components/PosterHelix/PosterHelix.jsx?raw';
-import css from '@content/Components/PosterHelix/PosterHelix.css?raw';
-import tailwind from '@tailwind/Components/PosterHelix/PosterHelix.jsx?raw';
-import tsCode from '@ts-default/Components/PosterHelix/PosterHelix.tsx?raw';
-import tsTailwind from '@ts-tailwind/Components/PosterHelix/PosterHelix.tsx?raw';
+import code from '@content/ThreeD/PosterHelix/PosterHelix.jsx?raw';
+import css from '@content/ThreeD/PosterHelix/PosterHelix.css?raw';
+import tailwind from '@tailwind/ThreeD/PosterHelix/PosterHelix.jsx?raw';
+import tsCode from '@ts-default/ThreeD/PosterHelix/PosterHelix.tsx?raw';
+import tsTailwind from '@ts-tailwind/ThreeD/PosterHelix/PosterHelix.tsx?raw';
 
 export const posterHelix = {
   dependencies: '',

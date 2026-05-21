@@ -13,8 +13,8 @@ import useForceRerender from '../../hooks/useForceRerender';
 import useComponentProps from '../../hooks/useComponentProps';
 import { ComponentPropsProvider } from '../../components/context/ComponentPropsContext';
 
-import PosterHelix from '../../content/Components/PosterHelix/PosterHelix';
-import { posterHelix } from '../../constants/code/Components/posterHelixCode';
+import PosterHelix from '../../content/ThreeD/PosterHelix/PosterHelix';
+import { posterHelix } from '../../constants/code/ThreeD/posterHelixCode';
 
 const SAMPLE_POSTERS = [
   { id: 'p01', image: 'https://picsum.photos/seed/aurora/480/640', title: 'Aurora Drift', meta: ['Drama', '6 episodes'] },

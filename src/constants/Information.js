@@ -1,5 +1,5 @@
 /**
- * @typedef {'Components'} Category
+ * @typedef {'Components' | 'ThreeD' | 'Scroll'} Category
  */
 export const VARIANTS = ['JS-CSS', 'JS-TW', 'TS-CSS', 'TS-TW'];
 
@@ -27,23 +27,23 @@ export const componentMetadata = {
     name: 'FillButton',
     tags: ['button', 'cta', 'gsap', 'hover']
   },
-  'Components/HoneycombGrid': {
+  'Scroll/HoneycombGrid': {
     description:
       'Infinite hex-tessellated grid with Apple Watch–style fisheye distortion, drag-scroll inertia, and tap detection. Virtualized DOM pool — handles hundreds of cells at 60fps.',
-    category: 'Components',
+    category: 'Scroll',
     name: 'HoneycombGrid',
     tags: ['grid', 'hex', 'fisheye', 'drag', 'virtualized', 'apple-watch']
   },
-  'Components/PosterDrum': {
+  'ThreeD/PosterDrum': {
     description:
       'Drag-orbit cylinder of film posters with cinema HUD chrome — SVG grain, ember REC counter, italic-serif title rail. Single rAF loop, inertial release, keyboard arrows, reduced-motion-safe.',
-    category: 'Components',
+    category: 'ThreeD',
     name: 'PosterDrum',
     tags: ['3d', 'carousel', 'cylinder', 'cinema', 'drag', 'css-3d']
   },
-  'Components/PosterHelix': {
+  'ThreeD/PosterHelix': {
     description: 'A 3D helix of posters that drifts on idle, scrubs on drag, and reports the active card in a HUD.',
-    category: 'Components',
+    category: 'ThreeD',
     name: 'PosterHelix',
     tags: ['3d', 'helix', 'spiral', 'cinema', 'drag', 'css-3d']
   }
