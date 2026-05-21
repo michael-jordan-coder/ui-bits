@@ -1,17 +1,7 @@
 import { useMemo } from 'react';
-import { Flex } from '@chakra-ui/react';
-import { CodeTab, PreviewTab, TabsLayout } from '../../components/common/TabsLayout';
-import Customize from '../../components/common/Preview/Customize';
+import DemoShell from '../../components/common/Preview/DemoShell';
 import PreviewSlider from '../../components/common/Preview/PreviewSlider';
 import PreviewSwitch from '../../components/common/Preview/PreviewSwitch';
-import CodeExample from '../../components/code/CodeExample';
-import RefreshButton from '../../components/common/Preview/RefreshButton';
-import FullscreenButton from '../../components/common/Preview/FullscreenButton';
-import PropTable from '../../components/common/Preview/PropTable';
-import Dependencies from '../../components/code/Dependencies';
-import useForceRerender from '../../hooks/useForceRerender';
-import useComponentProps from '../../hooks/useComponentProps';
-import { ComponentPropsProvider } from '../../components/context/ComponentPropsContext';
 
 import HoneycombGrid from '../../content/Scroll/HoneycombGrid/HoneycombGrid';
 import { honeycombGrid } from '../../constants/code/Scroll/honeycombGridCode';
@@ -25,10 +15,6 @@ const DEFAULT_PROPS = {
 };
 
 const HoneycombGridDemo = () => {
-  const [key, forceRerender] = useForceRerender();
-  const { props, updateProp, resetProps, hasChanges } = useComponentProps(DEFAULT_PROPS);
-  const { wideCount, fillFactor, gapRatio, fisheyeStrength, enabled } = props;
-
   const propData = useMemo(
     () => [
       {
@@ -85,99 +71,62 @@ const HoneycombGridDemo = () => {
   );
 
   return (
-    <ComponentPropsProvider
-      props={props}
+    <DemoShell
       defaultProps={DEFAULT_PROPS}
-      resetProps={resetProps}
-      hasChanges={hasChanges}
-    >
-      <TabsLayout>
-        <PreviewTab>
-          <Flex
-            overflow="hidden"
-            justifyContent="center"
-            alignItems="center"
-            minH="600px"
-            h="600px"
-            position="relative"
-            className="demo-container"
-          >
-            <HoneycombGrid
-              key={key}
-              wideCount={wideCount}
-              fillFactor={fillFactor}
-              gapRatio={gapRatio}
-              fisheyeStrength={fisheyeStrength}
-              enabled={enabled}
-            />
-            <FullscreenButton />
-            <RefreshButton onClick={forceRerender} />
-          </Flex>
-
-          <Customize>
+      propData={propData}
+      dependencies={[]}
+      codeObject={honeycombGrid}
+      componentName="HoneycombGrid"
+      flexProps={{ minH: '600px', h: '600px' }}
+      preview={({ props, key }) => <HoneycombGrid key={key} {...props} />}
+      controls={({ props, updateProp, forceRerender }) => {
+        const set = (name, val) => {
+          updateProp(name, val);
+          forceRerender();
+        };
+        return (
+          <>
             <PreviewSlider
               title="Wide row count"
               min={3}
               max={7}
               step={1}
-              value={wideCount}
-              onChange={val => {
-                updateProp('wideCount', val);
-                forceRerender();
-              }}
+              value={props.wideCount}
+              onChange={v => set('wideCount', v)}
             />
             <PreviewSlider
               title="Fill factor"
               min={0.5}
               max={1}
               step={0.02}
-              value={fillFactor}
-              onChange={val => {
-                updateProp('fillFactor', val);
-                forceRerender();
-              }}
+              value={props.fillFactor}
+              onChange={v => set('fillFactor', v)}
             />
             <PreviewSlider
               title="Gap ratio"
               min={0}
               max={0.4}
               step={0.01}
-              value={gapRatio}
-              onChange={val => {
-                updateProp('gapRatio', val);
-                forceRerender();
-              }}
+              value={props.gapRatio}
+              onChange={v => set('gapRatio', v)}
             />
             <PreviewSlider
               title="Fisheye strength"
               min={0}
               max={1}
               step={0.05}
-              value={fisheyeStrength}
-              onChange={val => {
-                updateProp('fisheyeStrength', val);
-                forceRerender();
-              }}
+              value={props.fisheyeStrength}
+              onChange={v => set('fisheyeStrength', v)}
             />
             <PreviewSwitch
               title="Interactive"
-              isChecked={enabled}
-              onChange={checked => {
-                updateProp('enabled', checked);
-                forceRerender();
-              }}
+              isChecked={props.enabled}
+              onChange={v => set('enabled', v)}
             />
-          </Customize>
-
-          <PropTable data={propData} />
-          <Dependencies dependencyList={[]} />
-        </PreviewTab>
-
-        <CodeTab>
-          <CodeExample codeObject={honeycombGrid} componentName="HoneycombGrid" />
-        </CodeTab>
-      </TabsLayout>
-    </ComponentPropsProvider>
+          </>
+        );
+      }}
+    />
   );
 };
 

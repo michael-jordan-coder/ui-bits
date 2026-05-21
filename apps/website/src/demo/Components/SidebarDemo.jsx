@@ -1,18 +1,8 @@
 import { useMemo } from 'react';
-import { Flex } from '@chakra-ui/react';
-import { CodeTab, PreviewTab, TabsLayout } from '../../components/common/TabsLayout';
-import Customize from '../../components/common/Preview/Customize';
+import DemoShell from '../../components/common/Preview/DemoShell';
 import PreviewSlider from '../../components/common/Preview/PreviewSlider';
 import PreviewSwitch from '../../components/common/Preview/PreviewSwitch';
 import PreviewSelect from '../../components/common/Preview/PreviewSelect';
-import CodeExample from '../../components/code/CodeExample';
-import RefreshButton from '../../components/common/Preview/RefreshButton';
-import FullscreenButton from '../../components/common/Preview/FullscreenButton';
-import PropTable from '../../components/common/Preview/PropTable';
-import Dependencies from '../../components/code/Dependencies';
-import useForceRerender from '../../hooks/useForceRerender';
-import useComponentProps from '../../hooks/useComponentProps';
-import { ComponentPropsProvider } from '../../components/context/ComponentPropsContext';
 
 import Sidebar from '../../content/Components/Sidebar/Sidebar';
 import { sidebar } from '../../constants/code/Components/sidebarCode';
@@ -45,10 +35,6 @@ const SURFACE_OPTIONS = [
 ];
 
 const SidebarDemo = () => {
-  const [key, forceRerender] = useForceRerender();
-  const { props, updateProp, resetProps, hasChanges } = useComponentProps(DEFAULT_PROPS);
-  const { defaultCollapsed, defaultWidth, minWidth, maxWidth, brand, accentColor, surfaceColor } = props;
-
   const propData = useMemo(
     () => [
       {
@@ -128,112 +114,71 @@ const SidebarDemo = () => {
   );
 
   return (
-    <ComponentPropsProvider
-      props={props}
+    <DemoShell
       defaultProps={DEFAULT_PROPS}
-      resetProps={resetProps}
-      hasChanges={hasChanges}
-    >
-      <TabsLayout>
-        <PreviewTab>
-          <Flex
-            overflow="hidden"
-            justifyContent="flex-start"
-            alignItems="stretch"
-            minH="520px"
-            position="relative"
-            className="demo-container"
-          >
-            <Sidebar
-              key={key}
-              brand={brand}
-              defaultCollapsed={defaultCollapsed}
-              defaultWidth={defaultWidth}
-              minWidth={minWidth}
-              maxWidth={maxWidth}
-              accentColor={accentColor}
-              surfaceColor={surfaceColor}
-            />
-            <FullscreenButton />
-            <RefreshButton onClick={forceRerender} />
-          </Flex>
-
-          <Customize>
+      propData={propData}
+      dependencies={['lucide-react', 'tailwind-merge']}
+      codeObject={sidebar}
+      componentName="Sidebar"
+      flexProps={{ justifyContent: 'flex-start', alignItems: 'stretch', minH: '520px' }}
+      preview={({ props, key }) => <Sidebar key={key} {...props} />}
+      controls={({ props, updateProp, forceRerender }) => {
+        const set = (name, val) => {
+          updateProp(name, val);
+          forceRerender();
+        };
+        return (
+          <>
             <PreviewSelect
               title="Accent color"
               name="sidebar-accent"
-              value={accentColor}
+              value={props.accentColor}
               options={ACCENT_OPTIONS}
-              onChange={val => {
-                updateProp('accentColor', val);
-                forceRerender();
-              }}
+              onChange={v => set('accentColor', v)}
             />
             <PreviewSelect
               title="Surface"
               name="sidebar-surface"
-              value={surfaceColor}
+              value={props.surfaceColor}
               options={SURFACE_OPTIONS}
-              onChange={val => {
-                updateProp('surfaceColor', val);
-                forceRerender();
-              }}
+              onChange={v => set('surfaceColor', v)}
             />
             <PreviewSwitch
               title="Start collapsed"
-              isChecked={defaultCollapsed}
-              onChange={checked => {
-                updateProp('defaultCollapsed', checked);
-                forceRerender();
-              }}
+              isChecked={props.defaultCollapsed}
+              onChange={v => set('defaultCollapsed', v)}
             />
             <PreviewSlider
               title="Default width"
-              min={minWidth}
-              max={maxWidth}
+              min={props.minWidth}
+              max={props.maxWidth}
               step={10}
-              value={defaultWidth}
+              value={props.defaultWidth}
               valueUnit="px"
-              onChange={val => {
-                updateProp('defaultWidth', val);
-                forceRerender();
-              }}
+              onChange={v => set('defaultWidth', v)}
             />
             <PreviewSlider
               title="Min width"
               min={160}
               max={260}
               step={10}
-              value={minWidth}
+              value={props.minWidth}
               valueUnit="px"
-              onChange={val => {
-                updateProp('minWidth', val);
-                forceRerender();
-              }}
+              onChange={v => set('minWidth', v)}
             />
             <PreviewSlider
               title="Max width"
               min={280}
               max={480}
               step={10}
-              value={maxWidth}
+              value={props.maxWidth}
               valueUnit="px"
-              onChange={val => {
-                updateProp('maxWidth', val);
-                forceRerender();
-              }}
+              onChange={v => set('maxWidth', v)}
             />
-          </Customize>
-
-          <PropTable data={propData} />
-          <Dependencies dependencyList={['lucide-react', 'tailwind-merge']} />
-        </PreviewTab>
-
-        <CodeTab>
-          <CodeExample codeObject={sidebar} componentName="Sidebar" />
-        </CodeTab>
-      </TabsLayout>
-    </ComponentPropsProvider>
+          </>
+        );
+      }}
+    />
   );
 };
 

@@ -48,15 +48,28 @@ Three constants files act as the global registry, all auto-updated by `npm run n
 - `src/constants/Categories.js` — category → subcategories arrays (+ `NEW` / `UPDATED` arrays for sidebar badges)
 - `src/constants/Information.js` — per-component metadata (description, category, name, tags)
 
-Demo files follow a strict pattern: `ComponentPropsProvider` + `TabsLayout` (`PreviewTab` / `CodeTab`), `useComponentProps` + `useForceRerender`, `Customize` controls (`PreviewSlider` / `PreviewSwitch` / `PreviewSelect`), `PropTable`, `Dependencies`, `CodeExample`. Demo always imports the component from `content/` (the JS+CSS variant).
+Demo files render through a shared shell component, **`DemoShell`** (`src/components/common/Preview/DemoShell.jsx`). The shell owns `ComponentPropsProvider`, `TabsLayout` (`PreviewTab` / `CodeTab`), `useComponentProps` + `useForceRerender`, the preview `<Flex>` container, the `FullscreenButton` + `RefreshButton` toolbar, `Customize`, `PropTable`, `Dependencies`, and `CodeExample`. Individual demos pass static props (`defaultProps`, `propData`, `dependencies`, `codeObject`, `componentName`, optional `flexProps`, `demoOnlyProps`, `computedProps`) and two render callbacks:
+
+- `preview={({ props, key, updateProp, forceRerender }) => <Component key={key} {...props} />}` — returns the component JSX. Caller applies `key={key}` directly so refresh works. Render-prop is the escape hatch for children-bearing components, sample data, or literal-string prop overrides (see `FillButtonDemo` and `PosterHelixDemo`).
+- `controls={({ props, updateProp, forceRerender }) => <>...</>}` — returns the Customize controls. Rendered inside the shared `<Customize>` which portals into the right shell panel.
+
+Optional `extraPreview` callback receives the same ctx and renders alongside the component inside the preview Flex (escape hatch for overlay elements, currently unused).
+
+Demos always import the component from `content/` (the JS+CSS variant).
 
 ## Components currently shipped
 
 - `Components/FillButton` (`/components/fill-button`) — pill button with a radial GSAP fill that reveals from the cursor entry point. Uses `gsap`, `@gsap/react`, `motion` (not `framer-motion`), `tailwind-merge`.
+- `Components/Sidebar` (`/components/sidebar`) — collapsible icon-rail sidebar with resize handle, accent + surface color tokens, badge support.
+- `Scroll/HoneycombGrid` (`/scroll/honeycomb-grid`) — infinite drag-tilable hex grid with fisheye scaling.
+- `ThreeD/PosterDrum` (`/3-d/poster-drum`) — cylindrical poster carousel with idle drift, drag inertia, HUD.
+- `ThreeD/PosterHelix` (`/3-d/poster-helix`) — vertical helix of posters with grain/vignette/axis overlays and twist drag.
 
 ## Authoritative recipe for adding components
 
-Before creating or modifying a component, read `reactbits-clone/react-bits/.context/new-component.md`. It is the canonical, complete spec: variant rules, demo template, code-metadata template, registration, naming conventions, and the final checklist. The scaffolder at `website/scripts/generateComponent.js` reproduces that contract.
+The scaffolder at `website/scripts/generateComponent.js` is the source of truth. It generates all 8 files and patches the three constants registries. The generated demo file uses `DemoShell` directly — see `src/components/common/Preview/DemoShell.jsx` for the API and any ported demo (e.g. `src/demo/Components/SidebarDemo.jsx`, `src/demo/ThreeD/PosterHelixDemo.jsx`) for examples covering plain spread, children-bearing, and sample-data overrides.
+
+`reactbits-clone/react-bits/.context/new-component.md` is the upstream react-bits recipe and still useful for variant rules, naming, and the byte-identical CSS rule across content/ts-default — but its inline demo pattern is intentionally **not** followed here; this codebase has diverged in favor of the `DemoShell` wrapper.
 
 Naming: `PascalCase` for component/file/folder, `kebab-case` for route slug and CSS class prefix, `camelCase` for the code metadata export, category display name is space-separated.
 

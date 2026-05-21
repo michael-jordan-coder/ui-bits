@@ -1,17 +1,7 @@
 import { useMemo } from 'react';
-import { Flex } from '@chakra-ui/react';
-import { CodeTab, PreviewTab, TabsLayout } from '../../components/common/TabsLayout';
-import Customize from '../../components/common/Preview/Customize';
+import DemoShell from '../../components/common/Preview/DemoShell';
 import PreviewSlider from '../../components/common/Preview/PreviewSlider';
 import PreviewSwitch from '../../components/common/Preview/PreviewSwitch';
-import CodeExample from '../../components/code/CodeExample';
-import RefreshButton from '../../components/common/Preview/RefreshButton';
-import FullscreenButton from '../../components/common/Preview/FullscreenButton';
-import PropTable from '../../components/common/Preview/PropTable';
-import Dependencies from '../../components/code/Dependencies';
-import useForceRerender from '../../hooks/useForceRerender';
-import useComponentProps from '../../hooks/useComponentProps';
-import { ComponentPropsProvider } from '../../components/context/ComponentPropsContext';
 
 import PosterHelix from '../../content/ThreeD/PosterHelix/PosterHelix';
 import { posterHelix } from '../../constants/code/ThreeD/posterHelixCode';
@@ -45,10 +35,6 @@ const DEFAULT_PROPS = {
 };
 
 const PosterHelixDemo = () => {
-  const [key, forceRerender] = useForceRerender();
-  const { props, updateProp, resetProps, hasChanges } = useComponentProps(DEFAULT_PROPS);
-  const { radius, yStep, turnDeg, idleSpeed, height, showGrain, showVignette, showAxis, showCounter, showHint } = props;
-
   const propData = useMemo(
     () => [
       {
@@ -76,149 +62,97 @@ const PosterHelixDemo = () => {
     []
   );
 
-  const controlledProps = {
-    posters: SAMPLE_POSTERS,
-    radius,
-    yStep,
-    turnDeg,
-    idleSpeed,
-    height,
-    showGrain,
-    showVignette,
-    showAxis,
-    showCounter,
-    showHint,
-    accentColor: 'var(--accent)'
-  };
-
   return (
-    <ComponentPropsProvider props={props} defaultProps={DEFAULT_PROPS} resetProps={resetProps} hasChanges={hasChanges}>
-      <TabsLayout>
-        <PreviewTab>
-          <Flex
-            overflow="hidden"
-            justifyContent="center"
-            alignItems="stretch"
-            minH="640px"
-            position="relative"
-            className="demo-container"
-          >
-            <PosterHelix key={key} {...controlledProps} />
-            <FullscreenButton />
-            <RefreshButton onClick={forceRerender} />
-          </Flex>
-
-          <Customize>
+    <DemoShell
+      defaultProps={DEFAULT_PROPS}
+      propData={propData}
+      dependencies={[]}
+      codeObject={posterHelix}
+      componentName="PosterHelix"
+      flexProps={{ alignItems: 'stretch', minH: '640px' }}
+      preview={({ props, key }) => (
+        <PosterHelix key={key} {...props} posters={SAMPLE_POSTERS} accentColor="var(--accent)" />
+      )}
+      controls={({ props, updateProp, forceRerender }) => {
+        const set = (name, val) => {
+          updateProp(name, val);
+          forceRerender();
+        };
+        return (
+          <>
             <PreviewSlider
               title="Radius"
               min={220}
               max={520}
               step={10}
-              value={radius}
+              value={props.radius}
               valueUnit="px"
-              onChange={val => {
-                updateProp('radius', val);
-                forceRerender();
-              }}
+              onChange={v => set('radius', v)}
             />
             <PreviewSlider
               title="Y step"
               min={40}
               max={140}
               step={2}
-              value={yStep}
+              value={props.yStep}
               valueUnit="px"
-              onChange={val => {
-                updateProp('yStep', val);
-                forceRerender();
-              }}
+              onChange={v => set('yStep', v)}
             />
             <PreviewSlider
               title="Turn"
               min={20}
               max={90}
               step={1}
-              value={turnDeg}
+              value={props.turnDeg}
               valueUnit="°"
-              onChange={val => {
-                updateProp('turnDeg', val);
-                forceRerender();
-              }}
+              onChange={v => set('turnDeg', v)}
             />
             <PreviewSlider
               title="Idle speed"
               min={0}
               max={0.2}
               step={0.01}
-              value={idleSpeed}
-              onChange={val => {
-                updateProp('idleSpeed', val);
-                forceRerender();
-              }}
+              value={props.idleSpeed}
+              onChange={v => set('idleSpeed', v)}
             />
             <PreviewSlider
               title="Height"
               min={420}
               max={900}
               step={20}
-              value={height}
+              value={props.height}
               valueUnit="px"
-              onChange={val => {
-                updateProp('height', val);
-                forceRerender();
-              }}
+              onChange={v => set('height', v)}
             />
             <PreviewSwitch
               title="Grain"
-              isChecked={showGrain}
-              onChange={checked => {
-                updateProp('showGrain', checked);
-                forceRerender();
-              }}
+              isChecked={props.showGrain}
+              onChange={v => set('showGrain', v)}
             />
             <PreviewSwitch
               title="Vignette"
-              isChecked={showVignette}
-              onChange={checked => {
-                updateProp('showVignette', checked);
-                forceRerender();
-              }}
+              isChecked={props.showVignette}
+              onChange={v => set('showVignette', v)}
             />
             <PreviewSwitch
               title="Axis"
-              isChecked={showAxis}
-              onChange={checked => {
-                updateProp('showAxis', checked);
-                forceRerender();
-              }}
+              isChecked={props.showAxis}
+              onChange={v => set('showAxis', v)}
             />
             <PreviewSwitch
               title="Counter"
-              isChecked={showCounter}
-              onChange={checked => {
-                updateProp('showCounter', checked);
-                forceRerender();
-              }}
+              isChecked={props.showCounter}
+              onChange={v => set('showCounter', v)}
             />
             <PreviewSwitch
               title="Hint"
-              isChecked={showHint}
-              onChange={checked => {
-                updateProp('showHint', checked);
-                forceRerender();
-              }}
+              isChecked={props.showHint}
+              onChange={v => set('showHint', v)}
             />
-          </Customize>
-
-          <PropTable data={propData} />
-          <Dependencies dependencyList={[]} />
-        </PreviewTab>
-
-        <CodeTab>
-          <CodeExample codeObject={posterHelix} componentName="PosterHelix" />
-        </CodeTab>
-      </TabsLayout>
-    </ComponentPropsProvider>
+          </>
+        );
+      }}
+    />
   );
 };
 

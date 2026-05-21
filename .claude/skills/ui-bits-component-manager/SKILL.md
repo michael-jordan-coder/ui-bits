@@ -52,7 +52,10 @@ Then do the work. Don't ask permission to start — only ask if the category is 
 
 3. **Fill the 8 files** per `reactbits-clone/react-bits/.context/new-component.md`. The four variants must produce identical visuals and behavior.
 
-4. **Demo file** uses the standard pattern: `ComponentPropsProvider` + `TabsLayout` (`PreviewTab`/`CodeTab`) + `Customize` (`PreviewSlider`/`PreviewSwitch`/`PreviewSelect`) + `PropTable` + `Dependencies` + `CodeExample` + `RefreshButton` + `FullscreenButton`. Demo imports the component from `content/` (the JS+CSS variant).
+4. **Demo file** uses `DemoShell` (`src/components/common/Preview/DemoShell.jsx`). The shell owns `ComponentPropsProvider`, `TabsLayout`, `useComponentProps` + `useForceRerender`, the preview `<Flex>`, `FullscreenButton` + `RefreshButton`, `Customize`, `PropTable`, `Dependencies`, and `CodeExample`. The demo passes static props (`defaultProps`, `propData`, `dependencies`, `codeObject`, `componentName`, optional `flexProps`, `demoOnlyProps`, `computedProps`) and two render callbacks:
+   - `preview={({ props, key }) => <Component key={key} {...props} />}` — caller applies `key` so refresh works. Use this to handle children-bearing components (`<Component>{props.label}</Component>`), sample data, or literal-string overrides.
+   - `controls={({ props, updateProp, forceRerender }) => <>...</>}` — Customize controls (`PreviewSlider` / `PreviewSwitch` / `PreviewSelect`). Rendered inside the shell's `<Customize>` which portals into the right shell panel.
+   Demo imports the component from `content/` (the JS+CSS variant). Reference: `src/demo/Components/SidebarDemo.jsx` (plain spread + `flexProps` override), `src/demo/Components/FillButtonDemo.jsx` (children-bearing + `demoOnlyProps`), `src/demo/ThreeD/PosterHelixDemo.jsx` (sample data + literal accent prop).
 
 5. **Update the Information.js description** — the scaffolder writes a placeholder like `"Foo component."`; replace with a real one-line description.
 
@@ -132,6 +135,7 @@ Use `git mv` to preserve history. Update every reference.
 
 ## Reference
 
-- Canonical recipe: `reactbits-clone/react-bits/.context/new-component.md`
-- Scaffolder source: `website/scripts/generateComponent.js`
-- Workspace + repo conventions: workspace CLAUDE.md and `website/CLAUDE.md`
+- Demo shell API: `src/components/common/Preview/DemoShell.jsx`
+- Scaffolder source: `scripts/generateComponent.js` (source of truth — generates a `DemoShell`-based demo)
+- Upstream react-bits recipe (variant rules, naming): `reactbits-clone/react-bits/.context/new-component.md` — note the inline demo pattern there is intentionally **not** followed; this codebase uses `DemoShell` instead.
+- Workspace + repo conventions: workspace CLAUDE.md and the website CLAUDE.md

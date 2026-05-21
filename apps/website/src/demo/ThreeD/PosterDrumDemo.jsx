@@ -1,17 +1,7 @@
 import { useMemo } from 'react';
-import { Flex } from '@chakra-ui/react';
-import { CodeTab, PreviewTab, TabsLayout } from '../../components/common/TabsLayout';
-import Customize from '../../components/common/Preview/Customize';
+import DemoShell from '../../components/common/Preview/DemoShell';
 import PreviewSlider from '../../components/common/Preview/PreviewSlider';
 import PreviewSwitch from '../../components/common/Preview/PreviewSwitch';
-import CodeExample from '../../components/code/CodeExample';
-import RefreshButton from '../../components/common/Preview/RefreshButton';
-import FullscreenButton from '../../components/common/Preview/FullscreenButton';
-import PropTable from '../../components/common/Preview/PropTable';
-import Dependencies from '../../components/code/Dependencies';
-import useForceRerender from '../../hooks/useForceRerender';
-import useComponentProps from '../../hooks/useComponentProps';
-import { ComponentPropsProvider } from '../../components/context/ComponentPropsContext';
 
 import PosterDrum from '../../content/ThreeD/PosterDrum/PosterDrum';
 import { posterDrum } from '../../constants/code/ThreeD/posterDrumCode';
@@ -27,11 +17,6 @@ const DEFAULT_PROPS = {
 };
 
 const PosterDrumDemo = () => {
-  const [key, forceRerender] = useForceRerender();
-  const { props, updateProp, resetProps, hasChanges } = useComponentProps(DEFAULT_PROPS);
-  const { radius, itemWidth, itemHeight, idleSpeed, dragSensitivity, enableInertia, showHud } =
-    props;
-
   const propData = useMemo(
     () => [
       {
@@ -46,18 +31,8 @@ const PosterDrumDemo = () => {
         default: '410',
         description: 'Cylinder radius in px. Auto-bumped if chord < itemWidth so adjacent posters never intersect.'
       },
-      {
-        name: 'itemWidth',
-        type: 'number',
-        default: '240',
-        description: 'Poster width in px.'
-      },
-      {
-        name: 'itemHeight',
-        type: 'number',
-        default: '340',
-        description: 'Poster height in px.'
-      },
+      { name: 'itemWidth', type: 'number', default: '240', description: 'Poster width in px.' },
+      { name: 'itemHeight', type: 'number', default: '340', description: 'Poster height in px.' },
       {
         name: 'idleSpeed',
         type: 'number',
@@ -111,123 +86,78 @@ const PosterDrumDemo = () => {
   );
 
   return (
-    <ComponentPropsProvider
-      props={props}
+    <DemoShell
       defaultProps={DEFAULT_PROPS}
-      resetProps={resetProps}
-      hasChanges={hasChanges}
-    >
-      <TabsLayout>
-        <PreviewTab>
-          <Flex
-            overflow="hidden"
-            justifyContent="center"
-            alignItems="center"
-            minH="640px"
-            h="640px"
-            position="relative"
-            className="demo-container"
-          >
-            <PosterDrum
-              key={key}
-              radius={radius}
-              itemWidth={itemWidth}
-              itemHeight={itemHeight}
-              idleSpeed={idleSpeed}
-              dragSensitivity={dragSensitivity}
-              enableInertia={enableInertia}
-              showHud={showHud}
-            />
-            <FullscreenButton />
-            <RefreshButton onClick={forceRerender} />
-          </Flex>
-
-          <Customize>
+      propData={propData}
+      dependencies={[]}
+      codeObject={posterDrum}
+      componentName="PosterDrum"
+      flexProps={{ minH: '640px', h: '640px' }}
+      preview={({ props, key }) => <PosterDrum key={key} {...props} />}
+      controls={({ props, updateProp, forceRerender }) => {
+        const set = (name, val) => {
+          updateProp(name, val);
+          forceRerender();
+        };
+        return (
+          <>
             <PreviewSlider
               title="Radius"
               min={320}
               max={760}
               step={10}
-              value={radius}
+              value={props.radius}
               valueUnit="px"
-              onChange={val => {
-                updateProp('radius', val);
-                forceRerender();
-              }}
+              onChange={v => set('radius', v)}
             />
             <PreviewSlider
               title="Poster width"
               min={160}
               max={320}
               step={4}
-              value={itemWidth}
+              value={props.itemWidth}
               valueUnit="px"
-              onChange={val => {
-                updateProp('itemWidth', val);
-                forceRerender();
-              }}
+              onChange={v => set('itemWidth', v)}
             />
             <PreviewSlider
               title="Poster height"
               min={220}
               max={440}
               step={4}
-              value={itemHeight}
+              value={props.itemHeight}
               valueUnit="px"
-              onChange={val => {
-                updateProp('itemHeight', val);
-                forceRerender();
-              }}
+              onChange={v => set('itemHeight', v)}
             />
             <PreviewSlider
               title="Idle speed"
               min={0}
               max={0.18}
               step={0.005}
-              value={idleSpeed}
-              onChange={val => {
-                updateProp('idleSpeed', val);
-                forceRerender();
-              }}
+              value={props.idleSpeed}
+              onChange={v => set('idleSpeed', v)}
             />
             <PreviewSlider
               title="Drag sensitivity"
               min={0.06}
               max={0.4}
               step={0.01}
-              value={dragSensitivity}
-              onChange={val => {
-                updateProp('dragSensitivity', val);
-                forceRerender();
-              }}
+              value={props.dragSensitivity}
+              onChange={v => set('dragSensitivity', v)}
             />
             <PreviewSwitch
               title="Drag inertia"
-              isChecked={enableInertia}
-              onChange={checked => {
-                updateProp('enableInertia', checked);
-                forceRerender();
-              }}
+              isChecked={props.enableInertia}
+              onChange={v => set('enableInertia', v)}
             />
             <PreviewSwitch
               title="Show HUD"
-              isChecked={showHud}
-              onChange={checked => {
-                updateProp('showHud', checked);
-                forceRerender();
-              }}
+              isChecked={props.showHud}
+              onChange={v => set('showHud', v)}
             />
-          </Customize>
-
-          <PropTable data={propData} />
-          <Dependencies dependencyList={[]} />
-        </PreviewTab>
-
-        <CodeTab>
-          <CodeExample codeObject={posterDrum} componentName="PosterDrum" />
-        </CodeTab>
-      </TabsLayout>
-    </ComponentPropsProvider>
+          </>
+        );
+      }}
+    />
   );
 };
 

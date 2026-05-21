@@ -1,17 +1,7 @@
 import { useMemo } from 'react';
-import { Flex } from '@chakra-ui/react';
-import { CodeTab, PreviewTab, TabsLayout } from '../../components/common/TabsLayout';
-import Customize from '../../components/common/Preview/Customize';
+import DemoShell from '../../components/common/Preview/DemoShell';
 import PreviewSelect from '../../components/common/Preview/PreviewSelect';
 import PreviewSwitch from '../../components/common/Preview/PreviewSwitch';
-import CodeExample from '../../components/code/CodeExample';
-import RefreshButton from '../../components/common/Preview/RefreshButton';
-import FullscreenButton from '../../components/common/Preview/FullscreenButton';
-import PropTable from '../../components/common/Preview/PropTable';
-import Dependencies from '../../components/code/Dependencies';
-import useForceRerender from '../../hooks/useForceRerender';
-import useComponentProps from '../../hooks/useComponentProps';
-import { ComponentPropsProvider } from '../../components/context/ComponentPropsContext';
 
 import FillButton from '../../content/Components/FillButton/FillButton';
 import { fillButton } from '../../constants/code/Components/fillButtonCode';
@@ -36,10 +26,6 @@ const FILL_OPTIONS = [
 ];
 
 const FillButtonDemo = () => {
-  const [key, forceRerender] = useForceRerender();
-  const { props, updateProp, resetProps, hasChanges } = useComponentProps(DEFAULT_PROPS);
-  const { label, size, filled, fillColor } = props;
-
   const propData = useMemo(
     () => [
       { name: 'children', type: 'ReactNode', default: '—', description: 'Button label content.' },
@@ -89,73 +75,52 @@ const FillButtonDemo = () => {
     []
   );
 
-  const controlledProps = { size, filled, fillColor };
-
   return (
-    <ComponentPropsProvider
-      props={props}
+    <DemoShell
       defaultProps={DEFAULT_PROPS}
-      resetProps={resetProps}
-      hasChanges={hasChanges}
+      propData={propData}
+      dependencies={['gsap', '@gsap/react', 'motion', 'tailwind-merge']}
+      codeObject={fillButton}
+      componentName="FillButton"
       demoOnlyProps={['label']}
-    >
-      <TabsLayout>
-        <PreviewTab>
-          <Flex
-            overflow="hidden"
-            justifyContent="center"
-            alignItems="center"
-            minH="400px"
-            position="relative"
-            className="demo-container"
-          >
-            <FillButton key={key} {...controlledProps}>
-              {label}
-            </FillButton>
-            <FullscreenButton />
-            <RefreshButton onClick={forceRerender} />
-          </Flex>
-
-          <Customize>
+      preview={({ props, key }) => {
+        const { label, ...rest } = props;
+        return (
+          <FillButton key={key} {...rest}>
+            {label}
+          </FillButton>
+        );
+      }}
+      controls={({ props, updateProp, forceRerender }) => {
+        const set = (name, val) => {
+          updateProp(name, val);
+          forceRerender();
+        };
+        return (
+          <>
             <PreviewSelect
               title="Size"
               name="fillbutton-size"
-              value={size}
+              value={props.size}
               options={SIZE_OPTIONS}
-              onChange={val => {
-                updateProp('size', val);
-                forceRerender();
-              }}
+              onChange={v => set('size', v)}
             />
             <PreviewSelect
               title="Fill color"
               name="fillbutton-color"
-              value={fillColor}
+              value={props.fillColor}
               options={FILL_OPTIONS}
-              onChange={val => {
-                updateProp('fillColor', val);
-                forceRerender();
-              }}
+              onChange={v => set('fillColor', v)}
             />
             <PreviewSwitch
               title="Filled"
-              isChecked={filled}
-              onChange={checked => {
-                updateProp('filled', checked);
-                forceRerender();
-              }}
+              isChecked={props.filled}
+              onChange={v => set('filled', v)}
             />
-          </Customize>
-
-          <PropTable data={propData} />
-          <Dependencies dependencyList={['gsap', '@gsap/react', 'motion', 'tailwind-merge']} />
-        </PreviewTab>
-
-        <CodeTab>
-          <CodeExample codeObject={fillButton} componentName="FillButton" />
-        </CodeTab>
-      </TabsLayout>
-    </ComponentPropsProvider>
+          </>
+        );
+      }}
+    />
   );
 };
 

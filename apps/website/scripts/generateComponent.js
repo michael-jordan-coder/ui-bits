@@ -92,16 +92,7 @@ export default function ${componentName}({ className = '' }: ${componentName}Pro
 `;
 
 const demoFile = `import { useMemo } from 'react';
-import { Flex } from '@chakra-ui/react';
-import { CodeTab, PreviewTab, TabsLayout } from '../../components/common/TabsLayout';
-import Customize from '../../components/common/Preview/Customize';
-import CodeExample from '../../components/code/CodeExample';
-import RefreshButton from '../../components/common/Preview/RefreshButton';
-import PropTable from '../../components/common/Preview/PropTable';
-import Dependencies from '../../components/code/Dependencies';
-import useForceRerender from '../../hooks/useForceRerender';
-import useComponentProps from '../../hooks/useComponentProps';
-import { ComponentPropsProvider } from '../../components/context/ComponentPropsContext';
+import DemoShell from '../../components/common/Preview/DemoShell';
 
 import ${componentName} from '../../content/${category}/${componentName}/${componentName}';
 import { ${camelName} } from '../../constants/code/${category}/${camelName}Code';
@@ -109,9 +100,6 @@ import { ${camelName} } from '../../constants/code/${category}/${camelName}Code'
 const DEFAULT_PROPS = {};
 
 const ${componentName}Demo = () => {
-  const [key, forceRerender] = useForceRerender();
-  const { props, resetProps, hasChanges } = useComponentProps(DEFAULT_PROPS);
-
   const propData = useMemo(
     () => [
       { name: 'className', type: 'string', default: '', description: 'Optional class applied to the root element.' }
@@ -120,32 +108,17 @@ const ${componentName}Demo = () => {
   );
 
   return (
-    <ComponentPropsProvider props={props} defaultProps={DEFAULT_PROPS} resetProps={resetProps} hasChanges={hasChanges}>
-      <TabsLayout>
-        <PreviewTab>
-          <Flex
-            overflow="hidden"
-            justifyContent="center"
-            alignItems="center"
-            minH="400px"
-            position="relative"
-            className="demo-container"
-          >
-            <${componentName} key={key} {...props} />
-            <RefreshButton onClick={forceRerender} />
-          </Flex>
-
-          <Customize>{/* Add controls here */}</Customize>
-
-          <PropTable data={propData} />
-          <Dependencies dependencyList={[]} />
-        </PreviewTab>
-
-        <CodeTab>
-          <CodeExample codeObject={${camelName}} componentName="${componentName}" />
-        </CodeTab>
-      </TabsLayout>
-    </ComponentPropsProvider>
+    <DemoShell
+      defaultProps={DEFAULT_PROPS}
+      propData={propData}
+      dependencies={[]}
+      codeObject={${camelName}}
+      componentName="${componentName}"
+      preview={({ props, key }) => <${componentName} key={key} {...props} />}
+      controls={(/* { props, updateProp, forceRerender } */) => (
+        <>{/* Add PreviewSlider / PreviewSwitch / PreviewSelect controls here */}</>
+      )}
+    />
   );
 };
 
