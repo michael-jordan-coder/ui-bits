@@ -6,6 +6,7 @@ import PreviewSelect from '../../components/common/Preview/PreviewSelect';
 import PreviewSwitch from '../../components/common/Preview/PreviewSwitch';
 import CodeExample from '../../components/code/CodeExample';
 import RefreshButton from '../../components/common/Preview/RefreshButton';
+import FullscreenButton from '../../components/common/Preview/FullscreenButton';
 import PropTable from '../../components/common/Preview/PropTable';
 import Dependencies from '../../components/code/Dependencies';
 import useForceRerender from '../../hooks/useForceRerender';
@@ -111,6 +112,7 @@ const FillButtonDemo = () => {
             <FillButton key={key} {...controlledProps}>
               {label}
             </FillButton>
+            <FullscreenButton />
             <RefreshButton onClick={forceRerender} />
           </Flex>
 

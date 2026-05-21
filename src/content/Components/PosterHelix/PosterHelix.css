@@ -1,0 +1,276 @@
+.poster-helix {
+  --phx-bg-from: #14101a;
+  --phx-bg-mid: #08080c;
+  --phx-bg-to: #040406;
+  --phx-ink: #f4f1ea;
+  --phx-ink-soft: rgba(244, 241, 234, 0.7);
+  --phx-ink-dim: rgba(244, 241, 234, 0.35);
+  --phx-accent: #ff4d2e;
+  --phx-poster-bg: #1b1722;
+
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: radial-gradient(120% 90% at 50% 30%, var(--phx-bg-from) 0%, var(--phx-bg-mid) 60%, var(--phx-bg-to) 100%);
+  color: var(--phx-ink);
+  isolation: isolate;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  font-family: inherit;
+}
+
+.poster-helix-grain {
+  position: absolute;
+  inset: -10%;
+  z-index: 12;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  opacity: 0.32;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-size: 200px 200px;
+  animation: poster-helix-grain 1.4s steps(5) infinite;
+}
+
+@keyframes poster-helix-grain {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-2%, 1%); }
+  40% { transform: translate(1%, -2%); }
+  60% { transform: translate(-1%, 2%); }
+  80% { transform: translate(2%, -1%); }
+  100% { transform: translate(0, 0); }
+}
+
+.poster-helix-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 11;
+  pointer-events: none;
+  background:
+    radial-gradient(80% 60% at 50% 50%, transparent 0%, transparent 30%, rgba(4, 4, 6, 0.65) 80%, rgba(4, 4, 6, 0.95) 100%),
+    linear-gradient(180deg, rgba(4, 4, 6, 0.55) 0%, transparent 22%, transparent 78%, rgba(4, 4, 6, 0.7) 100%);
+}
+
+.poster-helix-axis {
+  position: absolute;
+  top: 12%;
+  bottom: 18%;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(244, 241, 234, 0.18) 18%, rgba(244, 241, 234, 0.18) 82%, transparent);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.poster-helix-axis-tick {
+  width: 12px;
+  height: 1px;
+  background: rgba(244, 241, 234, 0.28);
+  display: block;
+}
+
+.poster-helix-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  cursor: grab;
+}
+
+.poster-helix.is-dragging .poster-helix-stage {
+  cursor: grabbing;
+}
+
+.poster-helix-perspective {
+  position: absolute;
+  inset: 0;
+  perspective: 1500px;
+  perspective-origin: 50% 50%;
+}
+
+.poster-helix-track {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  transform: translate(-50%, -50%) rotateY(0deg);
+  will-change: transform;
+}
+
+.poster-helix-poster {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 320px;
+  margin-left: -120px;
+  margin-top: -160px;
+  transform-style: preserve-3d;
+  transition: filter 0.5s ease;
+  filter: brightness(0.55) saturate(0.7);
+}
+
+.poster-helix-poster.is-active {
+  filter: brightness(1.1) saturate(1.05);
+  z-index: 2;
+}
+
+.poster-helix-poster.is-active .poster-helix-poster-frame {
+  box-shadow:
+    0 30px 60px -10px rgba(0, 0, 0, 0.7),
+    0 0 0 1px color-mix(in srgb, var(--phx-accent) 40%, transparent),
+    0 0 50px -10px color-mix(in srgb, var(--phx-accent) 50%, transparent);
+}
+
+.poster-helix-poster-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--phx-poster-bg);
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow:
+    0 24px 50px -12px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(244, 241, 234, 0.06);
+  backface-visibility: hidden;
+}
+
+.poster-helix-poster-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.poster-helix-poster-id {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  font-variant-numeric: tabular-nums;
+  color: var(--phx-ink);
+  background: rgba(0, 0, 0, 0.5);
+  padding: 4px 7px;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.poster-helix-hud {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  padding: 22px 32px 26px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: end;
+}
+
+.poster-helix-hud-left {
+  min-width: 0;
+  max-width: 60%;
+}
+
+.poster-helix-hud-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  animation: poster-helix-meta-in 0.45s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+@keyframes poster-helix-meta-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+.poster-helix-hud-title {
+  margin: 0;
+  font-size: clamp(20px, 2.4vw, 32px);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  color: var(--phx-ink);
+}
+
+.poster-helix-hud-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--phx-ink-soft);
+}
+
+.poster-helix-sep {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--phx-ink-dim);
+  display: inline-block;
+}
+
+.poster-helix-hud-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  min-width: 140px;
+}
+
+.poster-helix-counter {
+  font-size: 44px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--phx-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.poster-helix-hint {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--phx-ink-dim);
+}
+
+@media (max-width: 720px) {
+  .poster-helix-poster {
+    width: 180px;
+    height: 240px;
+    margin-left: -90px;
+    margin-top: -120px;
+  }
+  .poster-helix-hud {
+    padding: 18px 18px 22px;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .poster-helix-hud-left {
+    max-width: 100%;
+  }
+  .poster-helix-hud-right {
+    align-items: flex-start;
+  }
+  .poster-helix-counter {
+    font-size: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .poster-helix-grain {
+    animation: none;
+  }
+  .poster-helix-hud-meta {
+    animation: none;
+  }
+}

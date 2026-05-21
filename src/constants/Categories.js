@@ -11,7 +11,8 @@ export const CATEGORIES = [
     subcategories: [
       'Fill Button',
       'Honeycomb Grid',
-      'Poster Drum'
+      'Poster Drum',
+      'Poster Helix'
     ]
   }
 ];

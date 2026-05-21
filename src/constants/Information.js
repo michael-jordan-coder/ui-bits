@@ -40,5 +40,11 @@ export const componentMetadata = {
     category: 'Components',
     name: 'PosterDrum',
     tags: ['3d', 'carousel', 'cylinder', 'cinema', 'drag', 'css-3d']
+  },
+  'Components/PosterHelix': {
+    description: 'A 3D helix of posters that drifts on idle, scrubs on drag, and reports the active card in a HUD.',
+    category: 'Components',
+    name: 'PosterHelix',
+    tags: ['3d', 'helix', 'spiral', 'cinema', 'drag', 'css-3d']
   }
 };

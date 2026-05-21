@@ -141,6 +141,18 @@ a {
   padding: 1.5em;
 }
 
+.demo-container:fullscreen {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  min-height: 0;
+  background: #000;
+}
+
+.demo-container:fullscreen .poster-helix {
+  height: 100vh !important;
+}
+
 .demo-title {
   font-size: 16px;
   font-weight: 600;
