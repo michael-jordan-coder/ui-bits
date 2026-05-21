@@ -1,0 +1,19 @@
+{
+  "name": "ui-bits-monorepo",
+  "private": true,
+  "version": "0.0.0",
+  "packageManager": "pnpm@10.15.1",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "format": "turbo run format",
+    "new:component": "pnpm --filter website new:component"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.3"
+  }
+}
