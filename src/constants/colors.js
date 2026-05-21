@@ -6,8 +6,8 @@ export const colors = {
   bgAction: '#1E1430',
   borderPrimary: '#2F293A',
   borderSecondary: '#2F293A',
-  primary: '#A855F7',
-  accent: '#B497CF',
-  accentMuted: '#B497CF',
+  primary: 'var(--primary)',
+  accent: 'var(--accent)',
+  accentMuted: 'var(--accent)',
   textMuted: '#a1a1aa'
 };
