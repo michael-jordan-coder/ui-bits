@@ -1,7 +1,7 @@
-import { Fragment, memo, useMemo, useState } from 'react';
+import { Fragment, memo, useMemo, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Box, Stack, Text } from '@chakra-ui/react';
-import { Search, LayoutGrid, BookOpen } from 'lucide-react';
+import { Search, LayoutGrid, BookOpen, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 
 import { CATEGORIES, NEW, UPDATED } from '../../constants/Categories';
 import { componentMap } from '../../constants/Components';
@@ -52,11 +52,18 @@ const TOP_LINKS = [
   { label: 'Get started', to: '/get-started/introduction', match: '/get-started', icon: BookOpen }
 ];
 
-const Sidebar = () => {
+const Sidebar = ({ collapsed = false, onToggle, onExpand }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { startTransition, isTransitioning } = useTransition();
   const [query, setQuery] = useState('');
+  const searchInputRef = useRef(null);
+
+  const handleSearchIconClick = () => {
+    if (!collapsed) return;
+    onExpand?.();
+    requestAnimationFrame(() => searchInputRef.current?.focus());
+  };
 
   const handleNavigation = async (path, subcategory) => {
     if (isTransitioning || location.pathname === path) return;
@@ -87,16 +94,40 @@ const Sidebar = () => {
   );
 
   return (
-    <Box as="nav" className="sidebar">
-      <div className="sidebar-search">
+    <Box as="nav" className={`sidebar${collapsed ? ' sidebar--collapsed' : ''}`}>
+      <button
+        type="button"
+        className="sidebar-toggle"
+        onClick={onToggle}
+        aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+        aria-expanded={!collapsed}
+        title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+      >
+        {collapsed ? (
+          <PanelLeftOpen size={14} strokeWidth={1.75} />
+        ) : (
+          <PanelLeftClose size={14} strokeWidth={1.75} />
+        )}
+      </button>
+
+      <div
+        className="sidebar-search"
+        onClick={handleSearchIconClick}
+        role={collapsed ? 'button' : undefined}
+        tabIndex={collapsed ? 0 : undefined}
+        onKeyDown={collapsed ? e => (e.key === 'Enter' || e.key === ' ') && handleSearchIconClick() : undefined}
+        title={collapsed ? 'Search components' : undefined}
+      >
         <Search size={14} strokeWidth={2} className="sidebar-search-icon" aria-hidden="true" />
         <input
+          ref={searchInputRef}
           type="text"
           className="sidebar-search-input"
           placeholder="Search components"
           value={query}
           onChange={e => setQuery(e.target.value)}
           aria-label="Search components"
+          tabIndex={collapsed ? -1 : 0}
         />
         <kbd className="sidebar-search-kbd">⌘K</kbd>
       </div>
@@ -110,6 +141,8 @@ const Sidebar = () => {
                 key={to}
                 to={to}
                 className={`sidebar-item sidebar-item--top ${isActive ? 'active-sidebar-item' : ''}`}
+                title={collapsed ? label : undefined}
+                aria-label={collapsed ? label : undefined}
               >
                 <Icon size={15} strokeWidth={1.75} className="sidebar-item-icon" />
                 <span className="sidebar-item-label">{label}</span>
@@ -119,25 +152,27 @@ const Sidebar = () => {
         </Stack>
       </div>
 
-      <div className="sidebar-divider" aria-hidden="true" />
+      {!collapsed && <div className="sidebar-divider" aria-hidden="true" />}
 
-      <div className="sidebar-sections">
-        {categoriesWithItems.map(({ category, items }) => (
-          <Fragment key={category.name}>
-            <Category
-              category={category}
-              location={location}
-              handleNavigation={handleNavigation}
-              isTransitioning={isTransitioning}
-              items={items}
-            />
-          </Fragment>
-        ))}
-      </div>
+      {!collapsed && (
+        <div className="sidebar-sections">
+          {categoriesWithItems.map(({ category, items }) => (
+            <Fragment key={category.name}>
+              <Category
+                category={category}
+                location={location}
+                handleNavigation={handleNavigation}
+                isTransitioning={isTransitioning}
+                items={items}
+              />
+            </Fragment>
+          ))}
+        </div>
+      )}
 
       <div className="sidebar-footer">
-        <span className="sidebar-footer-brand">ui bits</span>
-        <span className="sidebar-footer-version">v0.1</span>
+        <span className="sidebar-footer-brand">{collapsed ? 'ui' : 'ui bits'}</span>
+        {!collapsed && <span className="sidebar-footer-version">v0.1</span>}
       </div>
     </Box>
   );
