@@ -4,31 +4,45 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project name
 
-The site under `website/` is called **ui bits**. The placeholder `community-bits` still appears in `website/package.json` and as the GitHub repo name (`michael-jordan-coder/community-bits`, private) until Daniel renames them. Treat "ui bits" as the canonical product name in any user-facing copy, docs, and new code; do not propagate the `community-bits` placeholder further.
+The site under `apps/website/` is called **ui bits**. The placeholder `community-bits` still appears in `apps/website/package.json` (as `"name": "website"` — the older `community-bits` string survives in the jsrepo registry namespace) and as the GitHub repo name (`michael-jordan-coder/community-bits`, private) until Daniel renames them. Treat "ui bits" as the canonical product name in any user-facing copy, docs, and new code; do not propagate the `community-bits` placeholder further.
 
 ## Workspace layout
 
-There is no top-level package.json. Four sibling trees, each with a distinct role:
+This is a **pnpm + turbo monorepo**. Top-level `package.json` is `ui-bits-monorepo` (private, not published). Workspaces glob: `apps/*` and `packages/*`.
 
-- `website/` — **the build target.** Vite + React 19 + Chakra v3 + Tailwind v4 docs site for ui bits. Has its own git repo (initial commit pushed to a private GitHub). All real development happens here. Run all commands from this directory.
-- `docs/` — **planning artifacts only.** Contains `PLAN.md` (the canonical spec used to scaffold `website/`) and any future markdown briefs / context for future Claude sessions. No code.
-- `reactbits-clone/react-bits/` — read-only reference clone of the upstream [react-bits](https://reactbits.dev) library. `website/` was scaffolded by mirroring its architecture. Open it to look up patterns; do not modify it.
-- `components/` — work-in-progress single-file extractions lifted from Daniel's other projects (`apple-watch/HoneycombGrid.tsx` + `.module.css`, `gsap-button/fill-button.tsx`). Some have broken imports against modules that don't exist here. These are reference material to be ported into `website/`'s 4-variant structure, not edited standalone.
+- `apps/website/` — **the build target.** Vite + React 19 + Chakra v3 + Tailwind v4 docs site for ui bits. All real development happens here.
+- `packages/` — empty placeholder for future shared packages.
+- `docs/` — **planning artifacts only.** Contains `PLAN.md` (the canonical spec that produced the `apps/website/` shell) and any future markdown briefs. No code.
+- `branding/` — brand source artwork and standalone previews. Currently: `Logo.preview.jsx` (renders the mark at 16/24/48/128/512 on light + dark surfaces) and `explorations/` (source SVGs that fed the canonical assets in `apps/website/public/`).
 
-## Working inside `website/`
+The git remote (`origin`) is the private `michael-jordan-coder/community-bits` repo. Deployment is wired through `vercel.json` pointing `outputDirectory` at `apps/website/dist`.
 
-Commands (always `cd website/` first):
+## Commands
+
+Two equivalent ways to run things — pick whichever:
+
+**From repo root (preferred — turbo handles routing):**
 
 | Command | What it does |
 |---|---|
-| `npm run dev` | Concurrent: `jsrepo build --watch` (registry) + `vite` (docs site, defaults to :5173, falls back if busy) |
-| `npm run build` | `registry:build` → vite build |
-| `npm run new:component -- <Category> <ComponentName>` | Scaffold all 8 files + register in `Components.js`, `Categories.js`, `Information.js` |
-| `npm run registry:build` | Build jsrepo registry to `public/r/` |
-| `npm run lint` | ESLint over `.js,.jsx`. Max warnings = 0. |
-| `npm run format` | Prettier write |
+| `pnpm dev` | Concurrent `jsrepo build --watch` + `vite` for `apps/website` |
+| `pnpm build` | `registry:build` → vite build |
+| `pnpm lint` | ESLint over `.js,.jsx`. Max warnings = 0. |
+| `pnpm format` | Prettier write |
+| `pnpm new:component -- <Category> <ComponentName>` | Scaffold all 8 files + register in `Components.js`, `Categories.js`, `Information.js` |
 
-No test script. No CI. The git remote (`origin`) is the private `michael-jordan-coder/community-bits` repo.
+**From `apps/website/`:**
+
+| Command | What it does |
+|---|---|
+| `pnpm dev` | Same as above, scoped to this workspace |
+| `pnpm build` | `registry:build` → vite build |
+| `pnpm new:component -- <Category> <ComponentName>` | Scaffolder |
+| `pnpm registry:build` | Build jsrepo registry to `public/r/` |
+| `pnpm lint` | ESLint, max warnings = 0 |
+| `pnpm format` | Prettier write |
+
+No test script. No CI.
 
 ## Architecture (mirrored from react-bits)
 
@@ -41,9 +55,9 @@ Each component ships in **four variants that must be visually and behaviorally i
 | TS + CSS | `src/ts-default/<Category>/<Name>/<Name>.tsx` + `.css` (byte-identical copy) | TS | CSS classes |
 | TS + Tailwind | `src/ts-tailwind/<Category>/<Name>/<Name>.tsx` | TS | Tailwind inline |
 
-Plus a **demo file** (`src/demo/<Category>/<Name>Demo.jsx`) and a **code metadata file** (`src/constants/code/<Category>/<camelName>Code.js`) that uses Vite's `?raw` imports with the path aliases `@content`, `@tailwind`, `@ts-default`, `@ts-tailwind` (see `website/vite.config.js`).
+Plus a **demo file** (`src/demo/<Category>/<Name>Demo.jsx`) and a **code metadata file** (`src/constants/code/<Category>/<camelName>Code.js`) that uses Vite's `?raw` imports with the path aliases `@content`, `@tailwind`, `@ts-default`, `@ts-tailwind` (see `apps/website/vite.config.js`).
 
-Three constants files act as the global registry, all auto-updated by `npm run new:component`:
+Three constants files act as the global registry, all auto-updated by `pnpm new:component`:
 - `src/constants/Components.js` — lazy demo imports keyed by kebab-case slug
 - `src/constants/Categories.js` — category → subcategories arrays (+ `NEW` / `UPDATED` arrays for sidebar badges)
 - `src/constants/Information.js` — per-component metadata (description, category, name, tags)
@@ -59,20 +73,39 @@ Demos always import the component from `content/` (the JS+CSS variant).
 
 ## Components currently shipped
 
+- `Components/Dropdown` (`/components/dropdown`) — polished select dropdown with keyboard navigation, click-outside dismiss, active-descendant pattern, optional per-option descriptions, themable via `accentColor` + `surfaceColor`.
 - `Components/FillButton` (`/components/fill-button`) — pill button with a radial GSAP fill that reveals from the cursor entry point. Uses `gsap`, `@gsap/react`, `motion` (not `framer-motion`), `tailwind-merge`.
 - `Components/Sidebar` (`/components/sidebar`) — collapsible icon-rail sidebar with resize handle, accent + surface color tokens, badge support.
 - `Scroll/HoneycombGrid` (`/scroll/honeycomb-grid`) — infinite drag-tilable hex grid with fisheye scaling.
 - `ThreeD/PosterDrum` (`/3-d/poster-drum`) — cylindrical poster carousel with idle drift, drag inertia, HUD.
 - `ThreeD/PosterHelix` (`/3-d/poster-helix`) — vertical helix of posters with grain/vignette/axis overlays and twist drag.
 
+## Brand assets
+
+The ui bits mark is a hand-authored line-art trefoil (three rounded-rectangle "bits" crossed at 0°/60°/120°, tilted -12° off vertical, with a center dot). It lives in two places:
+
+- **Public deployment assets** at `apps/website/public/`:
+  - `logo.svg` — canonical, currentColor
+  - `logo-mono.svg` — alias for currentColor mark
+  - `logo-color.svg` — pinned to `#fafafa` (the `--primary` token)
+  - `logo-favicon.svg` — same geometry, stroke bumped to 1.4 for 16px legibility. Wired in `index.html` via `<link rel="icon" type="image/svg+xml" href="/logo-favicon.svg">`.
+- **Shared inline-SVG component** at `apps/website/src/components/common/Logo.jsx` — used in the landing hero and the chrome sidebar footer. Props: `size`, `strokeWidth`, `dotRadius`, `className`, `ariaLabel`. Uses `currentColor` so it themes with the surrounding text color.
+- **Source artwork** at `branding/explorations/v4-knot.svg` (currentColor) and `branding/explorations/v4-knot-on-dark.svg` (preview rendering). The chosen design only — earlier explorations were removed.
+- **Standalone preview** at `branding/Logo.preview.jsx` — renders the mark at 16/24/48/128/512 on light and dark surfaces, plus the wordmark lockup. Not routed in the app; open it in a sandbox or temporary route to inspect.
+
+When the mark needs to change, edit `apps/website/src/components/common/Logo.jsx` and the four files in `apps/website/public/` together — they must stay in sync.
+
 ## Authoritative recipe for adding components
 
-The scaffolder at `website/scripts/generateComponent.js` is the source of truth. It generates all 8 files and patches the three constants registries. The generated demo file uses `DemoShell` directly — see `src/components/common/Preview/DemoShell.jsx` for the API and any ported demo (e.g. `src/demo/Components/SidebarDemo.jsx`, `src/demo/ThreeD/PosterHelixDemo.jsx`) for examples covering plain spread, children-bearing, and sample-data overrides.
-
-`reactbits-clone/react-bits/.context/new-component.md` is the upstream react-bits recipe and still useful for variant rules, naming, and the byte-identical CSS rule across content/ts-default — but its inline demo pattern is intentionally **not** followed here; this codebase has diverged in favor of the `DemoShell` wrapper.
+The scaffolder at `apps/website/scripts/generateComponent.js` is the source of truth. It generates all 8 files and patches the three constants registries. The generated demo file uses `DemoShell` directly — see `src/components/common/Preview/DemoShell.jsx` for the API and any existing demo (e.g. `src/demo/Components/SidebarDemo.jsx`, `src/demo/Components/DropdownDemo.jsx`, `src/demo/ThreeD/PosterHelixDemo.jsx`) for examples covering plain spread, customize-controls, children-bearing, and sample-data overrides.
 
 Naming: `PascalCase` for component/file/folder, `kebab-case` for route slug and CSS class prefix, `camelCase` for the code metadata export, category display name is space-separated.
 
+**Variant rules to know:**
+- CSS files in `src/content/<Cat>/<Name>/<Name>.css` and `src/ts-default/<Cat>/<Name>/<Name>.css` MUST be byte-identical (copy with `cp`, don't retype).
+- All 4 variants render identically. Differences are language and styling syntax only.
+- After scaffolding, replace the scaffolder's placeholder description in `Information.js` with a real one-line description.
+
 ## Source of the planning spec
 
-`docs/PLAN.md` is the spec that produced the current `website/` shell. If you need to understand a design decision (provider stack ordering, route table, why a context exists), check it first — it predates the codebase and explains the why.
+`docs/PLAN.md` is the spec that produced the current `apps/website/` shell. If you need to understand a design decision (provider stack ordering, route table, why a context exists), check it first — it predates the codebase and explains the why.
