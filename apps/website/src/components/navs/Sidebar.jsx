@@ -7,6 +7,7 @@ import { CATEGORIES, NEW, UPDATED } from '../../constants/Categories';
 import { componentMap } from '../../constants/Components';
 import { useTransition } from '../../hooks/useTransition';
 import { slug } from '../../utils/utils';
+import Logo from '../common/Logo';
 
 const Category = memo(({ category, location, handleNavigation, isTransitioning, items }) => {
   if (items.length === 0) {
@@ -171,7 +172,10 @@ const Sidebar = ({ collapsed = false, onToggle, onExpand }) => {
       )}
 
       <div className="sidebar-footer">
-        <span className="sidebar-footer-brand">{collapsed ? 'ui' : 'ui bits'}</span>
+        <span className="sidebar-footer-brand">
+          <Logo size={16} strokeWidth={1.4} dotRadius={1.3} className="sidebar-footer-logo" />
+          {!collapsed && <span>ui bits</span>}
+        </span>
         {!collapsed && <span className="sidebar-footer-version">v0.1</span>}
       </div>
     </Box>
