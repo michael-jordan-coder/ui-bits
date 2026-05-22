@@ -53,5 +53,12 @@ export const componentMetadata = {
     category: 'Components',
     name: 'Sidebar',
     tags: ['navigation', 'sidebar', 'layout', 'collapsible', 'resizable']
+  },
+  'Components/Dropdown': {
+    description:
+      'A polished select dropdown with keyboard navigation, click-outside dismiss, optional per-option descriptions, and a smooth open animation.',
+    category: 'Components',
+    name: 'Dropdown',
+    tags: ['form', 'select', 'dropdown', 'keyboard', 'accessible']
   }
 };
