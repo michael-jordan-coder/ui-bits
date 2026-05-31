@@ -1,12 +1,10 @@
 import { Link } from 'react-router-dom';
 import { FaArrowRight } from 'react-icons/fa6';
-import ActiveMembers from './ActiveMembers';
 import Logo from '../../common/Logo';
 
 const Hero = () => (
   <section className="cb-hero">
     <Logo size={56} strokeWidth={0.9} dotRadius={1} className="cb-hero-logo" />
-    <ActiveMembers />
     <h1 className="cb-hero-headline">
       Components for
       <br />

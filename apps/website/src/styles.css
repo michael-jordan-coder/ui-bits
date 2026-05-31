@@ -849,61 +849,6 @@ a {
   margin-bottom: 1.5em;
 }
 
-.cb-hero-active {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5em;
-  margin-bottom: 1.75em;
-  color: #fff;
-}
-
-.cb-hero-active-number {
-  display: inline-flex;
-  align-items: flex-end;
-  font-size: clamp(72px, 9vw, 128px);
-  font-weight: 600;
-  line-height: 0.95;
-  letter-spacing: -0.04em;
-  font-variant-numeric: tabular-nums;
-}
-
-.cb-hero-active-digit {
-  display: inline-block;
-  width: 1ch;
-  height: 1em;
-  overflow: hidden;
-}
-
-.cb-hero-active-digit-roll {
-  display: flex;
-  flex-direction: column;
-  transition: transform 900ms cubic-bezier(0.7, 0, 0.2, 1);
-}
-
-.cb-hero-active-digit-roll > span {
-  display: block;
-  height: 1em;
-  line-height: 1;
-}
-
-.cb-hero-active-comma {
-  display: inline-block;
-  padding-right: 0.05em;
-}
-
-.cb-hero-active-label {
-  font-size: 11px;
-  color: var(--text-muted);
-  letter-spacing: 0.04em;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cb-hero-active-digit-roll {
-    transition: none;
-  }
-}
-
 .cb-hero-headline {
   font-size: clamp(40px, 6vw, 72px);
   font-weight: 700;
@@ -960,27 +905,6 @@ a {
 .cb-hero-btn-primary:hover {
   background: #fff;
   border-color: #fff;
-}
-
-/* Landing section placeholder */
-.cb-section-stub {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 4em 2em;
-  border-top: 1px solid var(--border-primary);
-}
-
-.cb-section-stub h2 {
-  font-size: 24px;
-  font-weight: 600;
-  color: #fff;
-  margin: 0 0 0.5em;
-}
-
-.cb-section-stub p {
-  color: var(--text-muted);
-  font-size: 15px;
-  margin: 0;
 }
 
 /* Footer */

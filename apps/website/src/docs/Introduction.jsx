@@ -9,7 +9,7 @@ const Introduction = () => {
       <h3 className="docs-category-title">Introduction</h3>
 
       <p className="docs-paragraph dim">
-        community-bits is a personal collection of animated, interactive React components, designed to be dropped into
+        ui bits is a personal collection of animated, interactive React components, designed to be dropped into
         a project without pulling in a heavy dependency.
       </p>
       <p className="docs-paragraph">

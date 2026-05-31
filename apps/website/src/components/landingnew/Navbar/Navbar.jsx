@@ -13,7 +13,7 @@ const Navbar = ({ showDocs }) => {
   return (
     <header className="cb-navbar">
       <Link to="/" className="cb-navbar-brand">
-        community-bits
+        ui bits
       </Link>
       <nav className="cb-navbar-links" aria-label="Primary">
         {NAV_LINKS.map(({ label, to, match }) => (

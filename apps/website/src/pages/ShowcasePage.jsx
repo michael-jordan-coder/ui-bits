@@ -9,7 +9,7 @@ const ShowcasePage = () => (
         Showcase
       </Text>
       <Text color="#a1a1aa" mt={3}>
-        Projects built with community-bits will appear here.
+        Projects built with ui bits will appear here.
       </Text>
     </Box>
   </main>

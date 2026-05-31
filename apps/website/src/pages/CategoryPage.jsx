@@ -31,7 +31,7 @@ const CategoryPage = () => {
 
   useEffect(() => {
     if (decodedLabel) {
-      document.title = `community-bits — ${decodedLabel}`;
+      document.title = `ui bits — ${decodedLabel}`;
     }
   }, [decodedLabel]);
 
