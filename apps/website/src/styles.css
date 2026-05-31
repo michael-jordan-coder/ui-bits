@@ -1071,3 +1071,34 @@ a {
   border-radius: 10px !important;
   font-size: 13px !important;
 }
+
+/* Components index catalog */
+.index-page {
+  padding-bottom: 2em;
+}
+
+.index-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5em;
+  margin-top: 1.5em;
+}
+
+.index-section-title {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #fff;
+  margin: 0 0 1em;
+}
+
+.index-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+/* Catalog cards are uniform tiles; bento sizing only applies in the hero. */
+.index-grid .index-card {
+  height: 240px;
+}

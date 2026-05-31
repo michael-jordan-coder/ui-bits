@@ -1,52 +1,42 @@
-import { Box, SimpleGrid, Text } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
-import { componentMetadata } from '../constants/Information';
-import { slug } from '../utils/utils';
+import { useMemo } from 'react';
+import { showcaseItems } from '../constants/showcaseItems';
+import ComponentCard from '../components/common/ComponentCard';
 import BackToTopButton from '../components/common/BackToTopButton';
-import { colors } from '../constants/colors';
+
+const CATEGORY_ORDER = ['Components', '3D', 'Scroll'];
 
 const IndexPage = () => {
-  const entries = Object.entries(componentMetadata);
+  const sections = useMemo(() => {
+    const byCategory = new Map();
+    for (const item of showcaseItems) {
+      if (!byCategory.has(item.category)) byCategory.set(item.category, []);
+      byCategory.get(item.category).push(item);
+    }
+    return CATEGORY_ORDER.filter(name => byCategory.has(name)).map(name => ({
+      name,
+      items: byCategory.get(name)
+    }));
+  }, []);
 
   return (
-    <Box>
-      <h2 className="sub-category">Index</h2>
-      {entries.length === 0 ? (
-        <Text color={colors.textMuted} fontSize="14px">
-          No components yet. Add one with{' '}
-          <code style={{ background: colors.bgElevated, padding: '2px 6px', borderRadius: 4 }}>
-            npm run new:component -- Components &lt;Name&gt;
-          </code>
-          .
-        </Text>
-      ) : (
-        <SimpleGrid columns={{ base: 1, md: 2, xl: 3 }} gap={4}>
-          {entries.map(([key, meta]) => {
-            const to = `/${slug(meta.category)}/${slug(meta.name)}`;
-            return (
-              <Link key={key} to={to}>
-                <Box
-                  p={4}
-                  bg={colors.bgCard}
-                  border={`1px solid ${colors.borderPrimary}`}
-                  borderRadius="12px"
-                  transition="background 0.2s ease"
-                  _hover={{ bg: colors.bgHover }}
-                >
-                  <Text color="#fff" fontWeight={600} fontSize="15px">
-                    {meta.name}
-                  </Text>
-                  <Text color={colors.textMuted} fontSize="13px" mt={1}>
-                    {meta.description}
-                  </Text>
-                </Box>
-              </Link>
-            );
-          })}
-        </SimpleGrid>
-      )}
+    <div className="index-page">
+      <h2 className="sub-category">All components</h2>
+
+      <div className="index-sections">
+        {sections.map(section => (
+          <section key={section.name} className="index-section">
+            <h3 className="index-section-title">{section.name}</h3>
+            <div className="index-grid">
+              {section.items.map(item => (
+                <ComponentCard key={item.key} item={item} className="index-card" />
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+
       <BackToTopButton />
-    </Box>
+    </div>
   );
 };
 
