@@ -9,7 +9,7 @@ import { useTransition } from '../../hooks/useTransition';
 import { slug } from '../../utils/utils';
 import Logo from '../common/Logo';
 
-const Category = memo(({ category, location, handleNavigation, isTransitioning, items }) => {
+const Category = memo(({ category, handleNavigation, isTransitioning, items }) => {
   if (items.length === 0) {
     return (
       <div className="sidebar-section">
@@ -161,7 +161,6 @@ const Sidebar = ({ collapsed = false, onToggle, onExpand }) => {
             <Fragment key={category.name}>
               <Category
                 category={category}
-                location={location}
                 handleNavigation={handleNavigation}
                 isTransitioning={isTransitioning}
                 items={items}
