@@ -17,7 +17,8 @@ export const CATEGORIES = [
       'Animated Menu',
       'Rainbow Button',
       'Otp Input',
-      'Tooltip'
+      'Tooltip',
+      'Score Meter'
     ]
   },
   {
