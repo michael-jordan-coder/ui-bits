@@ -18,6 +18,19 @@ const join = (...classes: (string | false | undefined)[]) => classes.filter(Bool
 // Append an alpha channel to a 6-digit hex so the glow tracks the accent color.
 const withAlpha = (hex: string, alpha = '4d') => (/^#[0-9a-fA-F]{6}$/.test(hex) ? `${hex}${alpha}` : hex);
 
+// Pick black or white for the active label based on the accent's luminance, so a
+// light accent (e.g. white) keeps the label readable.
+const readableTextColor = (hex: string) => {
+  const m = /^#?([0-9a-fA-F]{6})$/.exec(hex);
+  if (!m) return '#fff';
+  const int = parseInt(m[1], 16);
+  const r = (int >> 16) & 255;
+  const g = (int >> 8) & 255;
+  const b = int & 255;
+  const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+  return luminance > 0.55 ? '#000' : '#fff';
+};
+
 export default function PillNav({
   tabs = DEFAULT_TABS,
   defaultActive,
@@ -50,7 +63,9 @@ export default function PillNav({
                 transition={{ type: 'tween', ease: 'easeOut', duration }}
               />
             )}
-            <span className="pill-nav__label">{tab}</span>
+            <span className="pill-nav__label" style={isActive ? { color: readableTextColor(accentColor) } : undefined}>
+              {tab}
+            </span>
           </button>
         );
       })}
