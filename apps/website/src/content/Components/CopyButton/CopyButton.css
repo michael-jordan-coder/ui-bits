@@ -1,0 +1,57 @@
+.copy-button-root {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fafafa;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  outline: none;
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.copy-button-root:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.copy-button-root:focus-visible {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+}
+
+.copy-button-icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+}
+
+.copy-button-glyph {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  line-height: 0;
+}
+
+.copy-button-label {
+  text-align: left;
+}
+
+.copy-button-pulse {
+  position: absolute;
+  inset: -1px;
+  border: 1.5px solid #22c55e;
+  border-radius: 10px;
+  pointer-events: none;
+}

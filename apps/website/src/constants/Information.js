@@ -166,5 +166,12 @@ export const componentMetadata = {
     category: 'Components',
     name: 'AvatarStack',
     tags: ['avatar', 'facepile', 'hover', 'group', 'motion']
+  },
+  'Components/CopyButton': {
+    description:
+      'A copy-to-clipboard button whose clipboard icon morphs into a check, whose label swaps to "Copied!", and which pulses a ring before reverting, inspired by the copy-confirmation buttons in apps like Vercel and Linear.',
+    category: 'Components',
+    name: 'CopyButton',
+    tags: ['button', 'copy', 'clipboard', 'feedback', 'motion']
   }
 };

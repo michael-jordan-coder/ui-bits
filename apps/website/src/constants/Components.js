@@ -24,7 +24,8 @@ const components = {
   'number-ticker': () => import('../demo/TextAnimations/NumberTickerDemo'),
   'theme-toggle': () => import('../demo/Components/ThemeToggleDemo'),
   'tilt-card': () => import('../demo/Components/TiltCardDemo'),
-  'avatar-stack': () => import('../demo/Components/AvatarStackDemo')
+  'avatar-stack': () => import('../demo/Components/AvatarStackDemo'),
+  'copy-button': () => import('../demo/Components/CopyButtonDemo')
 };
 
 export const componentMap = {
