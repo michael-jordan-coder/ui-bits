@@ -1,4 +1,8 @@
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Menu } from 'lucide-react';
+import useIsMobile from '../../../hooks/useIsMobile';
+import MobileNav from '../../navs/MobileNav';
 // import AccentPicker from './AccentPicker';
 
 const NAV_LINKS = [
@@ -8,6 +12,8 @@ const NAV_LINKS = [
 
 const Navbar = ({ showDocs }) => {
   const location = useLocation();
+  const isMobile = useIsMobile();
+  const [menuOpen, setMenuOpen] = useState(false);
   const isActive = match => location.pathname.startsWith(match);
 
   return (
@@ -23,6 +29,16 @@ const Navbar = ({ showDocs }) => {
         ))}
         {/* <AccentPicker /> */}
       </nav>
+      <button
+        type="button"
+        className="cb-navbar-toggle"
+        onClick={() => setMenuOpen(true)}
+        aria-label="Open navigation menu"
+        aria-expanded={menuOpen}
+      >
+        <Menu size={20} strokeWidth={1.75} />
+      </button>
+      {isMobile ? <MobileNav open={menuOpen} onClose={() => setMenuOpen(false)} /> : null}
       {showDocs ? null : null}
     </header>
   );
