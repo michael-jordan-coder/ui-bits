@@ -16,11 +16,15 @@ export interface LikeButtonProps {
 
 const join = (...classes: (string | false | undefined)[]) => classes.filter(Boolean).join(' ');
 
+// Particle geometry is tuned for the default 28px icon and scales from there.
+const BASE_SIZE = 28;
+const BASE_PARTICLE = 6;
+
 // Even radial spread, with a little distance variation so the burst feels organic.
-const buildParticles = (count: number) =>
+const buildParticles = (count: number, scale: number) =>
   Array.from({ length: count }, (_, i) => {
     const angle = (i / count) * Math.PI * 2;
-    const distance = 22 + (i % 3) * 7;
+    const distance = (22 + (i % 3) * 7) * scale;
     return { id: i, x: Math.cos(angle) * distance, y: Math.sin(angle) * distance };
   });
 
@@ -37,7 +41,9 @@ export default function LikeButton({
   const [actionId, setActionId] = useState(0);
   const [bursts, setBursts] = useState<number[]>([]);
 
-  const particles = buildParticles(particleCount);
+  const scale = size / BASE_SIZE;
+  const particleSize = BASE_PARTICLE * scale;
+  const particles = buildParticles(particleCount, scale);
   const displayCount = count + (liked ? 1 : 0);
 
   const toggle = () => {
@@ -69,8 +75,13 @@ export default function LikeButton({
             {particles.map(p => (
               <motion.span
                 key={p.id}
-                className="absolute left-1/2 top-1/2 -ml-[3px] -mt-[3px] h-1.5 w-1.5 rounded-full"
-                style={{ backgroundColor: color }}
+                className="absolute left-1/2 top-1/2 rounded-full"
+                style={{
+                  backgroundColor: color,
+                  width: particleSize,
+                  height: particleSize,
+                  margin: `${-particleSize / 2}px 0 0 ${-particleSize / 2}px`
+                }}
                 initial={{ x: 0, y: 0, scale: 1, opacity: 1 }}
                 animate={{ x: p.x, y: p.y, scale: 0, opacity: 0 }}
                 transition={{ duration: 0.8, ease: 'easeOut' }}
