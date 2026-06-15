@@ -10,7 +10,8 @@ export const CATEGORIES = [
     name: 'Components',
     subcategories: ['Fill Button',
       'Sidebar',
-      'Dropdown'
+      'Dropdown',
+      'Pill Nav'
     ]
   },
   {

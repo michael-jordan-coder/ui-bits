@@ -74,5 +74,12 @@ export const componentMetadata = {
     category: 'Backgrounds',
     name: 'DotGrid',
     tags: ['canvas', 'background', 'cursor', 'grid', 'interactive']
+  },
+  'Components/PillNav': {
+    description:
+      'A tab navigation bar with a sliding pill highlight that magic-moves between tabs using a shared layout animation.',
+    category: 'Components',
+    name: 'PillNav',
+    tags: ['navigation', 'tabs', 'motion', 'layout']
   }
 };

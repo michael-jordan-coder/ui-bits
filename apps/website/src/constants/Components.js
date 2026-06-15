@@ -10,7 +10,8 @@ const components = {
   'sidebar': () => import('../demo/Components/SidebarDemo'),
   'dropdown': () => import('../demo/Components/DropdownDemo'),
   'scramble-text': () => import('../demo/TextAnimations/ScrambleTextDemo'),
-  'dot-grid': () => import('../demo/Backgrounds/DotGridDemo')
+  'dot-grid': () => import('../demo/Backgrounds/DotGridDemo'),
+  'pill-nav': () => import('../demo/Components/PillNavDemo')
 };
 
 export const componentMap = {
