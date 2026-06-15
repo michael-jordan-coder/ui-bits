@@ -21,7 +21,8 @@ const components = {
   'score-meter': () => import('../demo/Components/ScoreMeterDemo'),
   'rubber-slider': () => import('../demo/Components/RubberSliderDemo'),
   'star-rating': () => import('../demo/Components/StarRatingDemo'),
-  'number-ticker': () => import('../demo/TextAnimations/NumberTickerDemo')
+  'number-ticker': () => import('../demo/TextAnimations/NumberTickerDemo'),
+  'theme-toggle': () => import('../demo/Components/ThemeToggleDemo')
 };
 
 export const componentMap = {

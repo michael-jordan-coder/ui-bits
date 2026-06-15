@@ -20,7 +20,8 @@ export const CATEGORIES = [
       'Tooltip',
       'Score Meter',
       'Rubber Slider',
-      'Star Rating'
+      'Star Rating',
+      'Theme Toggle'
     ]
   },
   {

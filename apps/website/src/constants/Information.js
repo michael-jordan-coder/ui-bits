@@ -145,5 +145,12 @@ export const componentMetadata = {
     category: 'TextAnimations',
     name: 'NumberTicker',
     tags: ['number', 'counter', 'odometer', 'roll', 'motion']
+  },
+  'Components/ThemeToggle': {
+    description:
+      'A sun/moon switch whose knob springs across the track while the icon morphs with a rotate-and-scale swap and stars fade in over the night sky, inspired by the classic animated dark-mode toggle interaction.',
+    category: 'Components',
+    name: 'ThemeToggle',
+    tags: ['toggle', 'switch', 'theme', 'dark-mode', 'motion']
   }
 };
