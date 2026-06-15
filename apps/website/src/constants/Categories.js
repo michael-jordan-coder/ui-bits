@@ -23,7 +23,8 @@ export const CATEGORIES = [
       'Star Rating',
       'Theme Toggle',
       'Tilt Card',
-      'Avatar Stack'
+      'Avatar Stack',
+      'Copy Button'
     ]
   },
   {
