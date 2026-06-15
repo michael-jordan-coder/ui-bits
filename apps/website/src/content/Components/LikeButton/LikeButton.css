@@ -1,0 +1,52 @@
+.like-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.25rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #e5e7eb;
+  cursor: pointer;
+}
+
+.like-button__icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.like-button__heart {
+  display: inline-flex;
+}
+
+.like-button__burst {
+  position: absolute;
+  inset: 0;
+  display: block;
+  pointer-events: none;
+}
+
+.like-button__particle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 9999px;
+}
+
+.like-button__count {
+  font-variant-numeric: tabular-nums;
+  transition: color 0.2s ease;
+}
+
+.like-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #000, 0 0 0 4px rgba(255, 255, 255, 0.4);
+}

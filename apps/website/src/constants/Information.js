@@ -81,5 +81,23 @@ export const componentMetadata = {
     category: 'Components',
     name: 'PillNav',
     tags: ['navigation', 'tabs', 'motion', 'layout']
+  },
+  'Components/LikeButton': {
+    description: 'A heart like button that pops on a spring and bursts a ring of particles, inspired by Instagram and X.',
+    category: 'Components',
+    name: 'LikeButton',
+    tags: ['button', 'like', 'motion', 'particles', 'social']
+  },
+  'Components/SegmentedToggle': {
+    description: 'A two-up segmented switch with a sliding pill and a springy icon pop on select, inspired by Airbnb.',
+    category: 'Components',
+    name: 'SegmentedToggle',
+    tags: ['toggle', 'segmented', 'tabs', 'motion', 'layout']
+  },
+  'Components/AnimatedMenu': {
+    description: 'A vertical menu whose row icons play a playful micro-animation on hover, inspired by Supabase and Mobbin.',
+    category: 'Components',
+    name: 'AnimatedMenu',
+    tags: ['menu', 'navigation', 'hover', 'icons', 'motion']
   }
 };

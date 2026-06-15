@@ -11,7 +11,10 @@ export const CATEGORIES = [
     subcategories: ['Fill Button',
       'Sidebar',
       'Dropdown',
-      'Pill Nav'
+      'Pill Nav',
+      'Like Button',
+      'Segmented Toggle',
+      'Animated Menu'
     ]
   },
   {

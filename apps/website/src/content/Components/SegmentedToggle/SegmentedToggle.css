@@ -1,0 +1,59 @@
+.segmented-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.3rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.segmented-toggle__option {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 0;
+  border-radius: 9999px;
+  background: transparent;
+  font-family: inherit;
+  font-weight: 600;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.segmented-toggle__option:hover:not(.is-active) {
+  color: #e5e7eb;
+}
+
+.segmented-toggle--md .segmented-toggle__option {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.segmented-toggle--sm .segmented-toggle__option {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8125rem;
+}
+
+.segmented-toggle__pill {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 9999px;
+}
+
+.segmented-toggle__icon {
+  display: inline-flex;
+}
+
+.segmented-toggle__label {
+  position: relative;
+}
+
+.segmented-toggle__option:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #000, 0 0 0 4px rgba(255, 255, 255, 0.5);
+}

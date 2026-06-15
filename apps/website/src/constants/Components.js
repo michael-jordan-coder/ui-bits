@@ -11,7 +11,10 @@ const components = {
   'dropdown': () => import('../demo/Components/DropdownDemo'),
   'scramble-text': () => import('../demo/TextAnimations/ScrambleTextDemo'),
   'dot-grid': () => import('../demo/Backgrounds/DotGridDemo'),
-  'pill-nav': () => import('../demo/Components/PillNavDemo')
+  'pill-nav': () => import('../demo/Components/PillNavDemo'),
+  'like-button': () => import('../demo/Components/LikeButtonDemo'),
+  'segmented-toggle': () => import('../demo/Components/SegmentedToggleDemo'),
+  'animated-menu': () => import('../demo/Components/AnimatedMenuDemo')
 };
 
 export const componentMap = {
