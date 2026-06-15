@@ -131,5 +131,12 @@ export const componentMetadata = {
     category: 'Components',
     name: 'RubberSlider',
     tags: ['slider', 'input', 'drag', 'elastic', 'motion']
+  },
+  'Components/StarRating': {
+    description:
+      'A star rating that fills on hover, springs through the stars when you commit, and bursts with sparkles plus a pop-in caption, inspired by the celebratory "Love this!" rating reveal on Netflix.',
+    category: 'Components',
+    name: 'StarRating',
+    tags: ['rating', 'stars', 'input', 'motion', 'feedback']
   }
 };

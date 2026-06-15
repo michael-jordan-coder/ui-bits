@@ -19,7 +19,8 @@ export const CATEGORIES = [
       'Otp Input',
       'Tooltip',
       'Score Meter',
-      'Rubber Slider'
+      'Rubber Slider',
+      'Star Rating'
     ]
   },
   {

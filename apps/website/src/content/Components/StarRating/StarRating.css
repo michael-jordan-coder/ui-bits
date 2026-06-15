@@ -1,0 +1,68 @@
+.star-rating-root {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  font-family: inherit;
+  color: #fff;
+  user-select: none;
+}
+
+.star-rating-stars {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.star-rating-star {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  outline: none;
+  border-radius: 8px;
+  -webkit-tap-highlight-color: transparent;
+  will-change: transform;
+}
+
+.star-rating-star:disabled {
+  cursor: default;
+}
+
+.star-rating-star:focus-visible {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35);
+}
+
+.star-rating-sparks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.star-rating-spark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 999px;
+  will-change: transform, opacity;
+}
+
+.star-rating-label-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.4em;
+}
+
+.star-rating-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}

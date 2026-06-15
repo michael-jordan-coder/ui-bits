@@ -19,7 +19,8 @@ const components = {
   'otp-input': () => import('../demo/Components/OtpInputDemo'),
   'tooltip': () => import('../demo/Components/TooltipDemo'),
   'score-meter': () => import('../demo/Components/ScoreMeterDemo'),
-  'rubber-slider': () => import('../demo/Components/RubberSliderDemo')
+  'rubber-slider': () => import('../demo/Components/RubberSliderDemo'),
+  'star-rating': () => import('../demo/Components/StarRatingDemo')
 };
 
 export const componentMap = {
