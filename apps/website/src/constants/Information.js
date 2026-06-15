@@ -159,5 +159,12 @@ export const componentMetadata = {
     category: 'Components',
     name: 'TiltCard',
     tags: ['3d', 'tilt', 'hover', 'card', 'motion']
+  },
+  'Components/AvatarStack': {
+    description:
+      'An overlapping facepile that fans apart on hover and lifts the avatar under the cursor while the others dim, with photo or initials fallbacks and a "+N" overflow chip, inspired by collaborator avatar stacks in apps like Linear and Slack.',
+    category: 'Components',
+    name: 'AvatarStack',
+    tags: ['avatar', 'facepile', 'hover', 'group', 'motion']
   }
 };
