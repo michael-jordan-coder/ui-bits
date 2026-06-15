@@ -17,7 +17,8 @@ const components = {
   'animated-menu': () => import('../demo/Components/AnimatedMenuDemo'),
   'rainbow-button': () => import('../demo/Components/RainbowButtonDemo'),
   'otp-input': () => import('../demo/Components/OtpInputDemo'),
-  'tooltip': () => import('../demo/Components/TooltipDemo')
+  'tooltip': () => import('../demo/Components/TooltipDemo'),
+  'score-meter': () => import('../demo/Components/ScoreMeterDemo')
 };
 
 export const componentMap = {

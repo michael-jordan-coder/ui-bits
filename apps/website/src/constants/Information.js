@@ -117,5 +117,12 @@ export const componentMetadata = {
     category: 'Components',
     name: 'Tooltip',
     tags: ['tooltip', 'overlay', 'hover', 'motion', 'popover']
+  },
+  'Components/ScoreMeter': {
+    description:
+      'A circular gauge that counts up from zero while the ring sweeps in and its color climbs from red to green, inspired by the 1Password Watchtower score reveal.',
+    category: 'Components',
+    name: 'ScoreMeter',
+    tags: ['gauge', 'score', 'counter', 'progress', 'motion']
   }
 };
