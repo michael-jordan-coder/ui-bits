@@ -18,7 +18,8 @@ export const CATEGORIES = [
       'Rainbow Button',
       'Otp Input',
       'Tooltip',
-      'Score Meter'
+      'Score Meter',
+      'Rubber Slider'
     ]
   },
   {

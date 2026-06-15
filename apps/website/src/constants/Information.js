@@ -124,5 +124,12 @@ export const componentMetadata = {
     category: 'Components',
     name: 'ScoreMeter',
     tags: ['gauge', 'score', 'counter', 'progress', 'motion']
+  },
+  'Components/RubberSlider': {
+    description:
+      'A slider whose bar stretches elastically when you drag the handle past either end, then springs back on release, inspired by the rubber-banding timer slider in Opal.',
+    category: 'Components',
+    name: 'RubberSlider',
+    tags: ['slider', 'input', 'drag', 'elastic', 'motion']
   }
 };
