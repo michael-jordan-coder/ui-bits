@@ -21,7 +21,8 @@ export const CATEGORIES = [
       'Score Meter',
       'Rubber Slider',
       'Star Rating',
-      'Theme Toggle'
+      'Theme Toggle',
+      'Tilt Card'
     ]
   },
   {

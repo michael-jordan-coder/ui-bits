@@ -152,5 +152,12 @@ export const componentMetadata = {
     category: 'Components',
     name: 'ThemeToggle',
     tags: ['toggle', 'switch', 'theme', 'dark-mode', 'motion']
+  },
+  'Components/TiltCard': {
+    description:
+      'A card that tilts in 3D toward the pointer with a cursor-tracking specular glare and a spring-back on leave, wrapping any content, inspired by the pointer-tilt product cards popularized across the web.',
+    category: 'Components',
+    name: 'TiltCard',
+    tags: ['3d', 'tilt', 'hover', 'card', 'motion']
   }
 };

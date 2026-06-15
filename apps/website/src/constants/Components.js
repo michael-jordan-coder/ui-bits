@@ -22,7 +22,8 @@ const components = {
   'rubber-slider': () => import('../demo/Components/RubberSliderDemo'),
   'star-rating': () => import('../demo/Components/StarRatingDemo'),
   'number-ticker': () => import('../demo/TextAnimations/NumberTickerDemo'),
-  'theme-toggle': () => import('../demo/Components/ThemeToggleDemo')
+  'theme-toggle': () => import('../demo/Components/ThemeToggleDemo'),
+  'tilt-card': () => import('../demo/Components/TiltCardDemo')
 };
 
 export const componentMap = {
