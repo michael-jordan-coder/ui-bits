@@ -22,7 +22,8 @@ export const CATEGORIES = [
       'Rubber Slider',
       'Star Rating',
       'Theme Toggle',
-      'Tilt Card'
+      'Tilt Card',
+      'Avatar Stack'
     ]
   },
   {

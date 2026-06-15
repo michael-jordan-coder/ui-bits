@@ -23,7 +23,8 @@ const components = {
   'star-rating': () => import('../demo/Components/StarRatingDemo'),
   'number-ticker': () => import('../demo/TextAnimations/NumberTickerDemo'),
   'theme-toggle': () => import('../demo/Components/ThemeToggleDemo'),
-  'tilt-card': () => import('../demo/Components/TiltCardDemo')
+  'tilt-card': () => import('../demo/Components/TiltCardDemo'),
+  'avatar-stack': () => import('../demo/Components/AvatarStackDemo')
 };
 
 export const componentMap = {
