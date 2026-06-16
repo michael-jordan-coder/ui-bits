@@ -32,7 +32,8 @@ const components = {
   'dock': () => import('../demo/Components/DockDemo'),
   'floating-input': () => import('../demo/Components/FloatingInputDemo'),
   'typewriter-text': () => import('../demo/TextAnimations/TypewriterTextDemo'),
-  'hold-button': () => import('../demo/Components/HoldButtonDemo')
+  'hold-button': () => import('../demo/Components/HoldButtonDemo'),
+  'mood-picker': () => import('../demo/Components/MoodPickerDemo')
 };
 
 export const componentMap = {

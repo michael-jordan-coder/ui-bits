@@ -222,5 +222,12 @@ export const componentMetadata = {
     category: 'Components',
     name: 'HoldButton',
     tags: ['button', 'confirm', 'press-hold', 'destructive', 'motion']
+  },
+  'Components/MoodPicker': {
+    description:
+      'Emotion picker whose hero blob morphs into a unique shape and color for each mood, inspired by How We Feel on designspells.com.',
+    category: 'Components',
+    name: 'MoodPicker',
+    tags: ['picker', 'mood', 'emotion', 'morph', 'feedback', 'motion']
   }
 };

@@ -30,7 +30,8 @@ export const CATEGORIES = [
       'Toast',
       'Dock',
       'Floating Input',
-      'Hold Button'
+      'Hold Button',
+      'Mood Picker'
     ]
   },
   {
