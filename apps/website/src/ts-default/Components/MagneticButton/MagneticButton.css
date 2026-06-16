@@ -1,0 +1,50 @@
+.magnetic-button-field {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.magnetic-button-root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.6rem;
+  border: none;
+  border-radius: 999px;
+  background: #6366f1;
+  color: #fff;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  outline: none;
+  will-change: transform;
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.6);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.magnetic-button-root:focus-visible {
+  box-shadow:
+    0 10px 30px -12px rgba(0, 0, 0, 0.6),
+    0 0 0 3px rgba(255, 255, 255, 0.85);
+}
+
+.magnetic-button-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  will-change: transform;
+}
+
+.magnetic-button-arrow {
+  display: inline-flex;
+  line-height: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .magnetic-button-root,
+  .magnetic-button-content {
+    will-change: auto;
+  }
+}

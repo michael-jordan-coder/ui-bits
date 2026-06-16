@@ -24,7 +24,8 @@ export const CATEGORIES = [
       'Theme Toggle',
       'Tilt Card',
       'Avatar Stack',
-      'Copy Button'
+      'Copy Button',
+      'Magnetic Button'
     ]
   },
   {

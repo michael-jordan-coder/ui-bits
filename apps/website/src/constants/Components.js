@@ -25,7 +25,8 @@ const components = {
   'theme-toggle': () => import('../demo/Components/ThemeToggleDemo'),
   'tilt-card': () => import('../demo/Components/TiltCardDemo'),
   'avatar-stack': () => import('../demo/Components/AvatarStackDemo'),
-  'copy-button': () => import('../demo/Components/CopyButtonDemo')
+  'copy-button': () => import('../demo/Components/CopyButtonDemo'),
+  'magnetic-button': () => import('../demo/Components/MagneticButtonDemo')
 };
 
 export const componentMap = {

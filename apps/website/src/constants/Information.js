@@ -173,5 +173,12 @@ export const componentMetadata = {
     category: 'Components',
     name: 'CopyButton',
     tags: ['button', 'copy', 'clipboard', 'feedback', 'motion']
+  },
+  'Components/MagneticButton': {
+    description:
+      'A button pulled toward the cursor inside a magnetic field, with a parallax label and a spring-back on leave, inspired by the magnetic cursor buttons popularized by interaction studios like Cuberto.',
+    category: 'Components',
+    name: 'MagneticButton',
+    tags: ['button', 'cursor', 'magnetic', 'spring', 'motion']
   }
 };
