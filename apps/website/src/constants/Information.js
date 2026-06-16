@@ -243,5 +243,29 @@ export const componentMetadata = {
     category: 'Components',
     name: 'SwipeAction',
     tags: ['swipe', 'list', 'drag', 'actions', 'gesture', 'motion']
+  },
+  'Components/SpotlightCard': {
+    description: 'Card with a soft radial spotlight that tracks the pointer and brightens the nearest border.',
+    category: 'Components',
+    name: 'SpotlightCard',
+    tags: ['card', 'spotlight', 'hover', 'pointer', 'glow']
+  },
+  'Components/BorderBeam': {
+    description: 'Surface card framed by a luminous beam that travels continuously around its rounded border.',
+    category: 'Components',
+    name: 'BorderBeam',
+    tags: ['card', 'border', 'beam', 'animated', 'glow']
+  },
+  'Components/ConfettiButton': {
+    description: 'Pill button that bursts a spray of confetti particles outward on click, then lets them fall and fade.',
+    category: 'Components',
+    name: 'ConfettiButton',
+    tags: ['button', 'confetti', 'particles', 'celebrate', 'motion']
+  },
+  'Backgrounds/Aurora': {
+    description: 'Full-bleed animated aurora-borealis backdrop of soft drifting colored light over a dark surface.',
+    category: 'Backgrounds',
+    name: 'Aurora',
+    tags: ['background', 'aurora', 'gradient', 'animated', 'ambient']
   }
 };

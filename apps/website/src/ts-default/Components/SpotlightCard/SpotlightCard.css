@@ -1,0 +1,64 @@
+.spotlight-card-root {
+  --x: 50%;
+  --y: 50%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  padding: 1.75rem;
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-family: inherit;
+  isolation: isolate;
+}
+
+.spotlight-card-root--border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    calc(var(--radius) * 0.9) circle at var(--x) var(--y),
+    rgba(255, 255, 255, 0.55),
+    transparent 60%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.spotlight-card-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  background: radial-gradient(var(--radius) circle at var(--x) var(--y), var(--spotlight), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.spotlight-card-root[data-active='true'] .spotlight-card-glow,
+.spotlight-card-root[data-active='true'].spotlight-card-root--border::before {
+  opacity: 1;
+}
+
+.spotlight-card-content {
+  position: relative;
+  z-index: 2;
+}
+
+.spotlight-card-root[data-reduced='true'] .spotlight-card-glow,
+.spotlight-card-root[data-reduced='true'].spotlight-card-root--border::before {
+  transition: none;
+}

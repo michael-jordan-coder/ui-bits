@@ -33,7 +33,10 @@ export const CATEGORIES = [
       'Hold Button',
       'Mood Picker',
       'Peek Password',
-      'Swipe Action'
+      'Swipe Action',
+      'Spotlight Card',
+      'Border Beam',
+      'Confetti Button'
     ]
   },
   {
@@ -51,7 +54,8 @@ export const CATEGORIES = [
   {
     name: 'Backgrounds',
     subcategories: [
-      'Dot Grid'
+      'Dot Grid',
+      'Aurora'
     ]
   }
 ];
