@@ -229,5 +229,12 @@ export const componentMetadata = {
     category: 'Components',
     name: 'MoodPicker',
     tags: ['picker', 'mood', 'emotion', 'morph', 'feedback', 'motion']
+  },
+  'Components/PeekPassword': {
+    description:
+      'Login fields with a mascot that follows the caret as you type your email and covers its eyes for the password, inspired by TunnelBear on designspells.com.',
+    category: 'Components',
+    name: 'PeekPassword',
+    tags: ['form', 'password', 'input', 'mascot', 'login', 'motion']
   }
 };

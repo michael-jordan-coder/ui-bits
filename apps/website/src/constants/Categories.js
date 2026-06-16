@@ -31,7 +31,8 @@ export const CATEGORIES = [
       'Dock',
       'Floating Input',
       'Hold Button',
-      'Mood Picker'
+      'Mood Picker',
+      'Peek Password'
     ]
   },
   {
