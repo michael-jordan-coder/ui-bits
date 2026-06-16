@@ -45,7 +45,8 @@ const components = {
   'shiny-text': () => import('../demo/TextAnimations/ShinyTextDemo'),
   'particles': () => import('../demo/Backgrounds/ParticlesDemo'),
   'range-slider': () => import('../demo/Components/RangeSliderDemo'),
-  'command-palette': () => import('../demo/Components/CommandPaletteDemo')
+  'command-palette': () => import('../demo/Components/CommandPaletteDemo'),
+  'reorder-list': () => import('../demo/Components/ReorderListDemo')
 };
 
 export const componentMap = {
