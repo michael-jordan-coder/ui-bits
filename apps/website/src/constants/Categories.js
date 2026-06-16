@@ -39,7 +39,8 @@ export const CATEGORIES = [
       'Confetti Button',
       'Marquee',
       'Radial Progress',
-      'Range Slider'
+      'Range Slider',
+      'Command Palette'
     ]
   },
   {

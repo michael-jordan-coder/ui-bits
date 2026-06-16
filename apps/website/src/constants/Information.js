@@ -298,5 +298,12 @@ export const componentMetadata = {
     category: 'Components',
     name: 'RangeSlider',
     tags: ['slider', 'range', 'input', 'filter', 'price', 'dual-handle', 'accessible']
+  },
+  'Components/CommandPalette': {
+    description:
+      'An inline ⌘K command menu with live substring filtering, full keyboard navigation, and a selection highlight that magic-moves between rows, inspired by the Raycast and Linear command menus catalogued on designspells.com.',
+    category: 'Components',
+    name: 'CommandPalette',
+    tags: ['command-palette', 'cmdk', 'search', 'keyboard', 'menu', 'motion']
   }
 };

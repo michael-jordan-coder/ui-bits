@@ -44,7 +44,8 @@ const components = {
   'radial-progress': () => import('../demo/Components/RadialProgressDemo'),
   'shiny-text': () => import('../demo/TextAnimations/ShinyTextDemo'),
   'particles': () => import('../demo/Backgrounds/ParticlesDemo'),
-  'range-slider': () => import('../demo/Components/RangeSliderDemo')
+  'range-slider': () => import('../demo/Components/RangeSliderDemo'),
+  'command-palette': () => import('../demo/Components/CommandPaletteDemo')
 };
 
 export const componentMap = {
