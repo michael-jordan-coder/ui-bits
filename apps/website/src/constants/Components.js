@@ -28,7 +28,8 @@ const components = {
   'copy-button': () => import('../demo/Components/CopyButtonDemo'),
   'magnetic-button': () => import('../demo/Components/MagneticButtonDemo'),
   'accordion': () => import('../demo/Components/AccordionDemo'),
-  'toast': () => import('../demo/Components/ToastDemo')
+  'toast': () => import('../demo/Components/ToastDemo'),
+  'dock': () => import('../demo/Components/DockDemo')
 };
 
 export const componentMap = {

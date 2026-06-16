@@ -27,7 +27,8 @@ export const CATEGORIES = [
       'Copy Button',
       'Magnetic Button',
       'Accordion',
-      'Toast'
+      'Toast',
+      'Dock'
     ]
   },
   {
