@@ -208,5 +208,12 @@ export const componentMetadata = {
     category: 'Components',
     name: 'FloatingInput',
     tags: ['form', 'input', 'floating-label', 'material', 'motion']
+  },
+  'TextAnimations/TypewriterText': {
+    description:
+      'Types each phrase out one character at a time, holds it, deletes it, and cycles to the next while a caret blinks alongside, with adjustable speeds and a screen-reader copy of the full text, inspired by the classic typewriter / terminal typing effect.',
+    category: 'TextAnimations',
+    name: 'TypewriterText',
+    tags: ['text', 'typewriter', 'typing', 'caret', 'motion']
   }
 };

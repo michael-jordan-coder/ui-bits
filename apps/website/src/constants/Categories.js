@@ -42,7 +42,7 @@ export const CATEGORIES = [
   },
   {
     name: 'Text Animations',
-    subcategories: ['Scramble Text', 'Number Ticker']
+    subcategories: ['Scramble Text', 'Number Ticker', 'Typewriter Text']
   },
   {
     name: 'Backgrounds',

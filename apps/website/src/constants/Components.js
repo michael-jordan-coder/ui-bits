@@ -30,7 +30,8 @@ const components = {
   'accordion': () => import('../demo/Components/AccordionDemo'),
   'toast': () => import('../demo/Components/ToastDemo'),
   'dock': () => import('../demo/Components/DockDemo'),
-  'floating-input': () => import('../demo/Components/FloatingInputDemo')
+  'floating-input': () => import('../demo/Components/FloatingInputDemo'),
+  'typewriter-text': () => import('../demo/TextAnimations/TypewriterTextDemo')
 };
 
 export const componentMap = {
