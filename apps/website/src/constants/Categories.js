@@ -40,7 +40,8 @@ export const CATEGORIES = [
       'Marquee',
       'Radial Progress',
       'Range Slider',
-      'Command Palette'
+      'Command Palette',
+      'Reorder List'
     ]
   },
   {

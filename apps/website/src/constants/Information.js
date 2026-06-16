@@ -305,5 +305,12 @@ export const componentMetadata = {
     category: 'Components',
     name: 'CommandPalette',
     tags: ['command-palette', 'cmdk', 'search', 'keyboard', 'menu', 'motion']
+  },
+  'Components/ReorderList': {
+    description:
+      'A drag-to-reorder list built on motion’s Reorder primitives — rows lift on grab and spring into place, with optional handle-only dragging and arrow-key reordering for keyboard users, inspired by the drag-to-reorder list interaction documented on reactbits.dev.',
+    category: 'Components',
+    name: 'ReorderList',
+    tags: ['list', 'drag', 'reorder', 'sortable', 'keyboard', 'motion']
   }
 };
