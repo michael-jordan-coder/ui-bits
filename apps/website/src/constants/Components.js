@@ -34,7 +34,8 @@ const components = {
   'typewriter-text': () => import('../demo/TextAnimations/TypewriterTextDemo'),
   'hold-button': () => import('../demo/Components/HoldButtonDemo'),
   'mood-picker': () => import('../demo/Components/MoodPickerDemo'),
-  'peek-password': () => import('../demo/Components/PeekPasswordDemo')
+  'peek-password': () => import('../demo/Components/PeekPasswordDemo'),
+  'swipe-action': () => import('../demo/Components/SwipeActionDemo')
 };
 
 export const componentMap = {

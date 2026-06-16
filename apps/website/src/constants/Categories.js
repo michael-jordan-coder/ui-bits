@@ -32,7 +32,8 @@ export const CATEGORIES = [
       'Floating Input',
       'Hold Button',
       'Mood Picker',
-      'Peek Password'
+      'Peek Password',
+      'Swipe Action'
     ]
   },
   {

@@ -236,5 +236,12 @@ export const componentMetadata = {
     category: 'Components',
     name: 'PeekPassword',
     tags: ['form', 'password', 'input', 'mascot', 'login', 'motion']
+  },
+  'Components/SwipeAction': {
+    description:
+      'List row you drag aside to reveal trailing actions, with snap-open detents and fling-to-trigger, inspired by the swipe-to-reveal interaction on designspells.com.',
+    category: 'Components',
+    name: 'SwipeAction',
+    tags: ['swipe', 'list', 'drag', 'actions', 'gesture', 'motion']
   }
 };
