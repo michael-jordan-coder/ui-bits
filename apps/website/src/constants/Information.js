@@ -194,5 +194,12 @@ export const componentMetadata = {
     category: 'Components',
     name: 'Toast',
     tags: ['toast', 'notification', 'stack', 'swipe', 'motion']
+  },
+  'Components/Dock': {
+    description:
+      'A magnifying app dock whose tiles swell toward the cursor with spring physics, raise a tooltip on hover, and bounce on click, inspired by the magnification effect in Apple’s macOS Dock.',
+    category: 'Components',
+    name: 'Dock',
+    tags: ['dock', 'macos', 'magnify', 'navigation', 'motion']
   }
 };

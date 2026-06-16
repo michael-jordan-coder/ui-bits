@@ -1,0 +1,87 @@
+.dock-panel {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 0.6rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: 1.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 24px 60px -24px rgba(0, 0, 0, 0.75),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.dock-item {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.85rem;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04));
+  color: #f4f4f5;
+  cursor: pointer;
+  outline: none;
+  will-change: width, height;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dock-item:focus-visible {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.85);
+}
+
+.dock-icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+}
+
+.dock-icon svg {
+  width: 46%;
+  height: 46%;
+}
+
+.dock-label {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: #18181b;
+  color: #fafafa;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.8);
+}
+
+.dock-dot {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.2s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dock-item {
+    will-change: auto;
+  }
+
+  .dock-icon {
+    will-change: auto;
+  }
+}
