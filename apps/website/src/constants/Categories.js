@@ -41,7 +41,8 @@ export const CATEGORIES = [
       'Radial Progress',
       'Range Slider',
       'Command Palette',
-      'Reorder List'
+      'Reorder List',
+      'Stepper'
     ]
   },
   {

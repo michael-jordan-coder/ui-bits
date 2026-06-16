@@ -46,7 +46,8 @@ const components = {
   'particles': () => import('../demo/Backgrounds/ParticlesDemo'),
   'range-slider': () => import('../demo/Components/RangeSliderDemo'),
   'command-palette': () => import('../demo/Components/CommandPaletteDemo'),
-  'reorder-list': () => import('../demo/Components/ReorderListDemo')
+  'reorder-list': () => import('../demo/Components/ReorderListDemo'),
+  'stepper': () => import('../demo/Components/StepperDemo')
 };
 
 export const componentMap = {

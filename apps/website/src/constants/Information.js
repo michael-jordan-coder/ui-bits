@@ -312,5 +312,12 @@ export const componentMetadata = {
     category: 'Components',
     name: 'ReorderList',
     tags: ['list', 'drag', 'reorder', 'sortable', 'keyboard', 'motion']
+  },
+  'Components/Stepper': {
+    description:
+      'A quantity stepper whose −/+ buttons repeat at an accelerating rate the longer you hold them, with a direction-aware value roll, full keyboard support, and min/max clamping, inspired by the hold-to-repeat stepper interaction documented on reactbits.dev.',
+    category: 'Components',
+    name: 'Stepper',
+    tags: ['stepper', 'input', 'number', 'quantity', 'press-hold', 'motion']
   }
 };
