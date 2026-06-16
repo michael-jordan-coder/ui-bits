@@ -27,7 +27,8 @@ const components = {
   'avatar-stack': () => import('../demo/Components/AvatarStackDemo'),
   'copy-button': () => import('../demo/Components/CopyButtonDemo'),
   'magnetic-button': () => import('../demo/Components/MagneticButtonDemo'),
-  'accordion': () => import('../demo/Components/AccordionDemo')
+  'accordion': () => import('../demo/Components/AccordionDemo'),
+  'toast': () => import('../demo/Components/ToastDemo')
 };
 
 export const componentMap = {

@@ -187,5 +187,12 @@ export const componentMetadata = {
     category: 'Components',
     name: 'Accordion',
     tags: ['accordion', 'disclosure', 'collapse', 'accessible', 'motion']
+  },
+  'Components/Toast': {
+    description:
+      'A stacked notification toaster where toasts pile up at a corner, fan apart and pause on hover, and dismiss on swipe or timeout, inspired by Sonner’s stacked toast interaction.',
+    category: 'Components',
+    name: 'Toast',
+    tags: ['toast', 'notification', 'stack', 'swipe', 'motion']
   }
 };

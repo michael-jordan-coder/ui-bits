@@ -26,7 +26,8 @@ export const CATEGORIES = [
       'Avatar Stack',
       'Copy Button',
       'Magnetic Button',
-      'Accordion'
+      'Accordion',
+      'Toast'
     ]
   },
   {
