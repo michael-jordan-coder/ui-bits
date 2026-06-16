@@ -180,5 +180,12 @@ export const componentMetadata = {
     category: 'Components',
     name: 'MagneticButton',
     tags: ['button', 'cursor', 'magnetic', 'spring', 'motion']
+  },
+  'Components/Accordion': {
+    description:
+      'An animated disclosure list that collapses each panel’s height to zero and rotates a chevron, with a single-open option and full keyboard navigation, inspired by the WAI-ARIA accordion pattern as refined by libraries like Radix UI.',
+    category: 'Components',
+    name: 'Accordion',
+    tags: ['accordion', 'disclosure', 'collapse', 'accessible', 'motion']
   }
 };

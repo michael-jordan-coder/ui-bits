@@ -26,7 +26,8 @@ const components = {
   'tilt-card': () => import('../demo/Components/TiltCardDemo'),
   'avatar-stack': () => import('../demo/Components/AvatarStackDemo'),
   'copy-button': () => import('../demo/Components/CopyButtonDemo'),
-  'magnetic-button': () => import('../demo/Components/MagneticButtonDemo')
+  'magnetic-button': () => import('../demo/Components/MagneticButtonDemo'),
+  'accordion': () => import('../demo/Components/AccordionDemo')
 };
 
 export const componentMap = {
