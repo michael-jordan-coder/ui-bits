@@ -1,0 +1,57 @@
+.mood-picker-root {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  font-family: inherit;
+  color: #fff;
+  user-select: none;
+}
+
+.mood-picker-hero-wrap {
+  display: grid;
+  place-items: center;
+}
+
+.mood-picker-hero {
+  will-change: transform, border-radius;
+}
+
+.mood-picker-label-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.4em;
+}
+
+.mood-picker-label {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.mood-picker-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mood-picker-blob {
+  flex: none;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  will-change: transform, opacity;
+}
+
+.mood-picker-blob:disabled {
+  cursor: default;
+}
+
+.mood-picker-blob:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.75);
+  outline-offset: 3px;
+}
