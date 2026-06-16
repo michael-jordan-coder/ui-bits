@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const MOBILE_QUERY = '(max-width: 768px)';
+const MOBILE_QUERY = '(max-width: 960px)';
 
 /**
  * Single source of truth for "are we on a mobile-sized viewport".

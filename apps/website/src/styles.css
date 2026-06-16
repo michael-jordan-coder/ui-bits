@@ -1120,7 +1120,7 @@ a {
 }
 
 /* ==========================================================================
-   Mobile (≤768px)
+   Mobile (≤960px)
    All rules below are scoped to the mobile breakpoint and must never affect
    the desktop layout. The drawer / bottom-sheet markup is only mounted on
    mobile (gated by the useIsMobile hook), so their styles are inert otherwise.
@@ -1362,7 +1362,7 @@ body.mobile-sheet-open {
   overflow: hidden;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 960px) {
   /* Navbar: swap inline links for the hamburger. */
   .cb-navbar {
     padding: 0.875em 1.25em;
@@ -1374,15 +1374,11 @@ body.mobile-sheet-open {
     display: inline-flex;
   }
 
-  /* Docs layout: drop the desktop rail + right panel, go full width. */
+  /* Docs layout: drop the desktop rail + right panel, go full width.
+     The single-column .category-wrapper grid is already handled by the
+     existing @media (max-width: 960px) block above. */
   .sidebar {
     display: none;
-  }
-  .category-wrapper,
-  .category-wrapper--collapsed {
-    grid-template-columns: 1fr;
-    padding: 1em;
-    gap: 1em;
   }
 
   /* Roomier tap targets / tighter chrome inside demos. */
