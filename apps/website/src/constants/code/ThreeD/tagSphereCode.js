@@ -8,7 +8,16 @@ export const tagSphere = {
   dependencies: '',
   usage: `import TagSphere from './TagSphere';
 
-<TagSphere />`,
+const tags = [
+  'React',
+  'TypeScript',
+  'Vite',
+  'Tailwind',
+  { label: 'Docs', href: '/docs' },
+  // ...
+];
+
+<TagSphere tags={tags} radius={150} height={420} />`,
   code,
   css,
   tailwind,

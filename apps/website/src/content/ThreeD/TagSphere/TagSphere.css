@@ -1,7 +1,93 @@
-.tag-sphere-root {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1em;
-  color: #fff;
+.tag-sphere {
+  --tag-sphere-bg-from: #14101a;
+  --tag-sphere-bg-to: #050508;
+  --tag-sphere-ink: #f4f1ea;
+  --tag-sphere-ink-dim: rgba(244, 241, 234, 0.55);
+  --tag-sphere-accent: #ff4d2e;
+
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: radial-gradient(120% 100% at 50% 38%, var(--tag-sphere-bg-from) 0%, var(--tag-sphere-bg-to) 100%);
+  color: var(--tag-sphere-ink);
+  isolation: isolate;
+  font-family: inherit;
+}
+
+.tag-sphere-scene {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  outline: none;
+}
+
+.tag-sphere.is-dragging .tag-sphere-scene {
+  cursor: grabbing;
+}
+
+.tag-sphere-scene:focus-visible {
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--tag-sphere-accent) 60%, transparent);
+}
+
+.tag-sphere-cloud {
+  position: relative;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transform-style: preserve-3d;
+}
+
+.tag-sphere-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate3d(0, 0, 0);
+  will-change: transform, opacity;
+}
+
+.tag-sphere-tag {
+  display: block;
+  margin: -0.6em 0 0 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--tag-sphere-ink);
+  font: inherit;
+  font-size: inherit;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  transform: translateX(-50%);
+  transition: color 0.15s ease;
+}
+
+.tag-sphere-tag:hover,
+.tag-sphere-tag:focus-visible {
+  color: var(--tag-sphere-accent);
+  outline: none;
+}
+
+.tag-sphere-tag:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.tag-sphere.is-reduced .tag-sphere-scene {
+  cursor: default;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tag-sphere-tag {
+    transition: none;
+  }
 }
