@@ -29,7 +29,8 @@ export const CATEGORIES = [
       'Accordion',
       'Toast',
       'Dock',
-      'Floating Input'
+      'Floating Input',
+      'Hold Button'
     ]
   },
   {

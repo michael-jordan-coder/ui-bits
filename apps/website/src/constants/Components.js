@@ -31,7 +31,8 @@ const components = {
   'toast': () => import('../demo/Components/ToastDemo'),
   'dock': () => import('../demo/Components/DockDemo'),
   'floating-input': () => import('../demo/Components/FloatingInputDemo'),
-  'typewriter-text': () => import('../demo/TextAnimations/TypewriterTextDemo')
+  'typewriter-text': () => import('../demo/TextAnimations/TypewriterTextDemo'),
+  'hold-button': () => import('../demo/Components/HoldButtonDemo')
 };
 
 export const componentMap = {

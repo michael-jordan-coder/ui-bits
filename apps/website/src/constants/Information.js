@@ -215,5 +215,12 @@ export const componentMetadata = {
     category: 'TextAnimations',
     name: 'TypewriterText',
     tags: ['text', 'typewriter', 'typing', 'caret', 'motion']
+  },
+  'Components/HoldButton': {
+    description:
+      'A button that only fires after you press and hold it long enough for the accent fill to sweep all the way across, then locks into a confirmed state with a check and a pulse, springing back if released early — inspired by the press-and-hold confirm interactions catalogued on Design Spells.',
+    category: 'Components',
+    name: 'HoldButton',
+    tags: ['button', 'confirm', 'press-hold', 'destructive', 'motion']
   }
 };

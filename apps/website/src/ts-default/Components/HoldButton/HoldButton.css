@@ -1,0 +1,106 @@
+.hold-button-root {
+  --hold-accent: #ef4444;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--hold-accent) 55%, transparent);
+  border-radius: 999px;
+  background: #18181b;
+  color: #fafafa;
+  font-family: inherit;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: none;
+  will-change: transform;
+  box-shadow: 0 10px 30px -16px rgba(0, 0, 0, 0.7);
+}
+
+.hold-button-root[data-size='sm'] {
+  padding: 0.55rem 1.1rem;
+  font-size: 0.85rem;
+}
+
+.hold-button-root[data-size='md'] {
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+}
+
+.hold-button-root[data-size='lg'] {
+  padding: 0.95rem 1.9rem;
+  font-size: 1.05rem;
+}
+
+.hold-button-root:focus-visible {
+  box-shadow:
+    0 10px 30px -16px rgba(0, 0, 0, 0.7),
+    0 0 0 3px color-mix(in srgb, var(--hold-accent) 45%, transparent);
+}
+
+.hold-button-root[data-state='confirmed'] {
+  border-color: var(--hold-accent);
+}
+
+.hold-button-root:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.hold-button-fill {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  transform-origin: left center;
+  background: var(--hold-accent);
+  will-change: transform;
+}
+
+.hold-button-pulse {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  border: 2px solid var(--hold-accent);
+  pointer-events: none;
+}
+
+.hold-button-content {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.hold-button-icon {
+  display: inline-flex;
+  line-height: 0;
+}
+
+.hold-button-label {
+  white-space: nowrap;
+}
+
+.hold-button-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hold-button-root,
+  .hold-button-fill {
+    will-change: auto;
+  }
+}
