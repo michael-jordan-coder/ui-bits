@@ -42,7 +42,11 @@ export const CATEGORIES = [
       'Range Slider',
       'Command Palette',
       'Reorder List',
-      'Stepper'
+      'Stepper',
+      'Flip Card',
+      'Tag Input',
+      'Tabs',
+      'Speed Dial'
     ]
   },
   {
@@ -62,7 +66,8 @@ export const CATEGORIES = [
     subcategories: [
       'Dot Grid',
       'Aurora',
-      'Particles'
+      'Particles',
+      'Ripple'
     ]
   }
 ];

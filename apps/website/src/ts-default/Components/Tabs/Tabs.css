@@ -1,0 +1,93 @@
+.tabs-root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 380px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.5rem;
+  color: #fff;
+}
+
+.tabs-list {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: 0.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tabs-list--pill {
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border-bottom: none;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.tabs-tab {
+  position: relative;
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 0.75rem;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 9999px;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.18s ease;
+}
+
+.tabs-tab:hover:not(.tabs-tab--active) {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.tabs-tab:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.tabs-tab-label {
+  position: relative;
+  z-index: 1;
+}
+
+.tabs-underline {
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: -1px;
+  height: 2px;
+  border-radius: 9999px;
+}
+
+.tabs-pill {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  z-index: 0;
+}
+
+.tabs-panels {
+  position: relative;
+  padding: 0.85rem 0.5rem 0.4rem;
+  min-height: 88px;
+}
+
+.tabs-panel {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.tabs-panel:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 6px;
+}

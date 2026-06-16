@@ -1,0 +1,118 @@
+.tag-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  width: 360px;
+  max-width: 100%;
+  color: #fff;
+}
+
+.tag-input-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.tag-input-field {
+  --tag-input-accent: #6366f1;
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0.35rem 0.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: text;
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.tag-input-field--focused {
+  border-color: var(--tag-input-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--tag-input-accent) 28%, transparent);
+}
+
+.tag-input-field--full {
+  cursor: default;
+}
+
+.tag-input-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag-input-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  height: 28px;
+  padding: 0 0.35rem 0 0.6rem;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  font-size: 0.82rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: #fff;
+}
+
+.tag-input-chip-text {
+  line-height: 1;
+}
+
+.tag-input-chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex: none;
+  padding: 0;
+  border: none;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s ease;
+}
+
+.tag-input-chip-remove:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.tag-input-entry {
+  flex: 1 1 80px;
+  min-width: 80px;
+  display: flex;
+}
+
+.tag-input-control {
+  width: 100%;
+  min-width: 0;
+  height: 28px;
+  padding: 0 0.25rem;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #fff;
+  font-size: 0.88rem;
+  font-family: inherit;
+}
+
+.tag-input-control::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.tag-input-hint {
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.45);
+  font-variant-numeric: tabular-nums;
+}

@@ -1,0 +1,104 @@
+.flip-card-perspective {
+  width: 280px;
+  height: 340px;
+  perspective: 1200px;
+  outline: none;
+}
+
+.flip-card-perspective:focus-visible {
+  border-radius: 20px;
+  outline: 2px solid var(--flip-card-accent, #6366f1);
+  outline-offset: 4px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.flip-card-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 1.75rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--flip-card-surface, #1c1c22);
+  color: #fff;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.flip-card-front {
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  background:
+    radial-gradient(120% 120% at 18% 12%, color-mix(in srgb, var(--flip-card-accent, #6366f1) 22%, transparent), transparent 60%),
+    var(--flip-card-surface, #1c1c22);
+}
+
+.flip-card-back {
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.75rem;
+  background:
+    radial-gradient(120% 120% at 82% 88%, color-mix(in srgb, var(--flip-card-accent, #6366f1) 26%, transparent), transparent 62%),
+    var(--flip-card-surface, #1c1c22);
+}
+
+.flip-card-back--horizontal {
+  transform: rotateY(180deg);
+}
+
+.flip-card-back--vertical {
+  transform: rotateX(180deg);
+}
+
+.flip-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: auto;
+  border-radius: 16px;
+  color: var(--flip-card-accent, #6366f1);
+  background: color-mix(in srgb, var(--flip-card-accent, #6366f1) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--flip-card-accent, #6366f1) 32%, transparent);
+}
+
+.flip-card-title {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 650;
+  line-height: 1.15;
+}
+
+.flip-card-subtitle {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.flip-card-text {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.flip-card-cta {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--flip-card-accent, #6366f1);
+}

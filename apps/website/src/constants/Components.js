@@ -47,7 +47,12 @@ const components = {
   'range-slider': () => import('../demo/Components/RangeSliderDemo'),
   'command-palette': () => import('../demo/Components/CommandPaletteDemo'),
   'reorder-list': () => import('../demo/Components/ReorderListDemo'),
-  'stepper': () => import('../demo/Components/StepperDemo')
+  'stepper': () => import('../demo/Components/StepperDemo'),
+  'flip-card': () => import('../demo/Components/FlipCardDemo'),
+  'tag-input': () => import('../demo/Components/TagInputDemo'),
+  'tabs': () => import('../demo/Components/TabsDemo'),
+  'speed-dial': () => import('../demo/Components/SpeedDialDemo'),
+  'ripple': () => import('../demo/Backgrounds/RippleDemo')
 };
 
 export const componentMap = {
