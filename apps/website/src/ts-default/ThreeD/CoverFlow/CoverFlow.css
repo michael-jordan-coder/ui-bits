@@ -1,0 +1,219 @@
+.cover-flow {
+  --cf-bg-from: #14101a;
+  --cf-bg-mid: #08080c;
+  --cf-bg-to: #040406;
+  --cf-ink: #f4f1ea;
+  --cf-ink-soft: rgba(244, 241, 234, 0.7);
+  --cf-ink-dim: rgba(244, 241, 234, 0.35);
+  --cf-accent: #ff4d2e;
+  --cf-card-bg: #1b1722;
+  --cf-card-w: 220px;
+  --cf-card-h: 300px;
+
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: radial-gradient(120% 90% at 50% 35%, var(--cf-bg-from) 0%, var(--cf-bg-mid) 60%, var(--cf-bg-to) 100%);
+  color: var(--cf-ink);
+  isolation: isolate;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  font-family: inherit;
+  outline: none;
+}
+
+.cover-flow-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 11;
+  pointer-events: none;
+  background:
+    radial-gradient(80% 70% at 50% 46%, transparent 0%, transparent 38%, rgba(4, 4, 6, 0.6) 82%, rgba(4, 4, 6, 0.92) 100%),
+    linear-gradient(180deg, rgba(4, 4, 6, 0.45) 0%, transparent 20%, transparent 70%, rgba(4, 4, 6, 0.75) 100%);
+}
+
+.cover-flow-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  perspective: 1200px;
+  perspective-origin: 50% 46%;
+  cursor: grab;
+}
+
+.cover-flow.is-dragging .cover-flow-stage {
+  cursor: grabbing;
+}
+
+.cover-flow-track {
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+}
+
+.cover-flow-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--cf-card-w);
+  height: var(--cf-card-h);
+  margin-left: calc(var(--cf-card-w) / -2);
+  margin-top: calc(var(--cf-card-h) / -2);
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  cursor: pointer;
+}
+
+.cover-flow-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--cf-card-bg);
+  border-radius: 3px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  box-shadow:
+    0 24px 50px -12px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(244, 241, 234, 0.06);
+  transition: box-shadow 0.4s ease;
+}
+
+.cover-flow-cover.is-active .cover-flow-card {
+  box-shadow:
+    0 34px 70px -10px rgba(0, 0, 0, 0.78),
+    0 0 0 1px color-mix(in srgb, var(--cf-accent) 42%, transparent),
+    0 0 60px -12px color-mix(in srgb, var(--cf-accent) 50%, transparent);
+}
+
+.cover-flow-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.cover-flow-reflection {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 55%;
+  margin-top: 3px;
+  border-radius: 3px;
+  overflow: hidden;
+  transform: scaleY(-1);
+  transform-origin: top;
+  opacity: 0.32;
+  pointer-events: none;
+  backface-visibility: hidden;
+  -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.85) 0%, transparent 78%);
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.85) 0%, transparent 78%);
+}
+
+.cover-flow-reflection img {
+  width: 100%;
+  height: 182%;
+  object-fit: cover;
+  object-position: top;
+  pointer-events: none;
+}
+
+.cover-flow-hud {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  padding: 22px 32px 26px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: end;
+}
+
+.cover-flow-hud-left {
+  min-width: 0;
+  max-width: 60%;
+}
+
+.cover-flow-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  animation: cover-flow-caption-in 0.45s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+@keyframes cover-flow-caption-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+.cover-flow-title {
+  margin: 0;
+  font-size: clamp(20px, 2.4vw, 32px);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  color: var(--cf-ink);
+}
+
+.cover-flow-meta {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--cf-ink-soft);
+}
+
+.cover-flow-hud-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  min-width: 140px;
+}
+
+.cover-flow-counter {
+  font-size: 44px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--cf-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.cover-flow-hint {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--cf-ink-dim);
+}
+
+@media (max-width: 45rem) {
+  .cover-flow {
+    --cf-card-w: 168px;
+    --cf-card-h: 228px;
+  }
+  .cover-flow-hud {
+    padding: 18px 18px 22px;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .cover-flow-hud-left {
+    max-width: 100%;
+  }
+  .cover-flow-hud-right {
+    align-items: flex-start;
+  }
+  .cover-flow-counter {
+    font-size: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cover-flow-caption {
+    animation: none;
+  }
+}

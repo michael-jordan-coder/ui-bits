@@ -51,7 +51,14 @@ export const CATEGORIES = [
   },
   {
     name: '3D',
-    subcategories: ['Poster Drum', 'Poster Helix']
+    subcategories: ['Poster Drum',
+      'Poster Helix',
+      'Cover Flow',
+      'Card Deck',
+      'Cube Showcase',
+      'Tag Sphere',
+      'Depth Tunnel'
+    ]
   },
   {
     name: 'Scroll',
