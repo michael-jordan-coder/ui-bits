@@ -1,0 +1,72 @@
+@property --border-beam-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.border-beam-root {
+  --border-beam-from: #6366f1;
+  --border-beam-to: #a855f7;
+  --border-beam-duration: 6s;
+  --border-beam-width: 2px;
+  --border-beam-radius: 16px;
+  --border-beam-surface: #16181d;
+
+  position: relative;
+  display: inline-flex;
+  padding: var(--border-beam-width);
+  border-radius: var(--border-beam-radius);
+  isolation: isolate;
+  font-family: inherit;
+  color: #fff;
+}
+
+.border-beam-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--border-beam-angle),
+    transparent 0deg,
+    var(--border-beam-from) 40deg,
+    var(--border-beam-to) 90deg,
+    transparent 130deg,
+    transparent 360deg
+  );
+  animation: border-beam-spin var(--border-beam-duration) linear infinite;
+}
+
+.border-beam-glow::after {
+  content: '';
+  position: absolute;
+  inset: calc(var(--border-beam-width) * -2);
+  border-radius: inherit;
+  background: inherit;
+  filter: blur(10px);
+  opacity: 0.55;
+}
+
+.border-beam-surface {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  border-radius: calc(var(--border-beam-radius) - var(--border-beam-width));
+  background: var(--border-beam-surface);
+}
+
+.border-beam-root--static .border-beam-glow {
+  animation: none;
+}
+
+@keyframes border-beam-spin {
+  to {
+    --border-beam-angle: 360deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .border-beam-glow {
+    animation: none;
+  }
+}

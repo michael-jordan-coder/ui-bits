@@ -1,0 +1,66 @@
+.marquee-root {
+  --marquee-duration: 30s;
+  --marquee-gap: 24px;
+  --marquee-fade-width: 64px;
+  --marquee-direction: normal;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+}
+
+.marquee-root--fade {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 var(--marquee-fade-width),
+    #000 calc(100% - var(--marquee-fade-width)),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 var(--marquee-fade-width),
+    #000 calc(100% - var(--marquee-fade-width)),
+    transparent 100%
+  );
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  flex-wrap: nowrap;
+}
+
+.marquee-track--animated {
+  animation: marquee-scroll var(--marquee-duration) linear infinite;
+  animation-direction: var(--marquee-direction);
+  will-change: transform;
+}
+
+.marquee-root--pause:hover .marquee-track--animated {
+  animation-play-state: paused;
+}
+
+.marquee-group {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: var(--marquee-gap);
+  padding-right: var(--marquee-gap);
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track--animated {
+    animation: none;
+  }
+}

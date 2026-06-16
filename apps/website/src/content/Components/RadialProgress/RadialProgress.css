@@ -1,0 +1,56 @@
+.radial-progress-root {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+}
+
+.radial-progress-ring {
+  display: block;
+  overflow: visible;
+}
+
+.radial-progress-arc {
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+.radial-progress-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2em;
+  pointer-events: none;
+}
+
+.radial-progress-value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.04em;
+  color: #fff;
+  line-height: 1;
+}
+
+.radial-progress-value {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+}
+
+.radial-progress-unit {
+  font-size: 0.42em;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.radial-progress-label {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+}

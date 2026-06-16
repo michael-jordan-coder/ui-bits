@@ -33,7 +33,12 @@ export const CATEGORIES = [
       'Hold Button',
       'Mood Picker',
       'Peek Password',
-      'Swipe Action'
+      'Swipe Action',
+      'Spotlight Card',
+      'Border Beam',
+      'Confetti Button',
+      'Marquee',
+      'Radial Progress'
     ]
   },
   {
@@ -46,12 +51,14 @@ export const CATEGORIES = [
   },
   {
     name: 'Text Animations',
-    subcategories: ['Scramble Text', 'Number Ticker', 'Typewriter Text']
+    subcategories: ['Scramble Text', 'Number Ticker', 'Typewriter Text', 'Shiny Text']
   },
   {
     name: 'Backgrounds',
     subcategories: [
-      'Dot Grid'
+      'Dot Grid',
+      'Aurora',
+      'Particles'
     ]
   }
 ];

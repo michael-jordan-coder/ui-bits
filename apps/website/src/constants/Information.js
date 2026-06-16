@@ -243,5 +243,53 @@ export const componentMetadata = {
     category: 'Components',
     name: 'SwipeAction',
     tags: ['swipe', 'list', 'drag', 'actions', 'gesture', 'motion']
+  },
+  'Components/SpotlightCard': {
+    description: 'Card with a soft radial spotlight that tracks the pointer and brightens the nearest border.',
+    category: 'Components',
+    name: 'SpotlightCard',
+    tags: ['card', 'spotlight', 'hover', 'pointer', 'glow']
+  },
+  'Components/BorderBeam': {
+    description: 'Surface card framed by a luminous beam that travels continuously around its rounded border.',
+    category: 'Components',
+    name: 'BorderBeam',
+    tags: ['card', 'border', 'beam', 'animated', 'glow']
+  },
+  'Components/ConfettiButton': {
+    description: 'Pill button that bursts a spray of confetti particles outward on click, then lets them fall and fade.',
+    category: 'Components',
+    name: 'ConfettiButton',
+    tags: ['button', 'confetti', 'particles', 'celebrate', 'motion']
+  },
+  'Backgrounds/Aurora': {
+    description: 'Full-bleed animated aurora-borealis backdrop of soft drifting colored light over a dark surface.',
+    category: 'Backgrounds',
+    name: 'Aurora',
+    tags: ['background', 'aurora', 'gradient', 'animated', 'ambient']
+  },
+  'Components/Marquee': {
+    description: 'Seamless, dependency-free infinite scroller with hover-to-pause, configurable direction/speed/gap, and soft gradient edge fades.',
+    category: 'Components',
+    name: 'Marquee',
+    tags: ['marquee', 'scroll', 'infinite', 'loop', 'logos']
+  },
+  'Components/RadialProgress': {
+    description: 'Animated circular progress ring that sweeps from zero to its target percentage on mount while the centered number counts up in sync.',
+    category: 'Components',
+    name: 'RadialProgress',
+    tags: ['progress', 'ring', 'circular', 'counter', 'svg']
+  },
+  'TextAnimations/ShinyText': {
+    description: 'Muted text with a bright highlight that sweeps across the glyphs on a loop, like light glancing off brushed metal.',
+    category: 'TextAnimations',
+    name: 'ShinyText',
+    tags: ['text', 'shimmer', 'shine', 'gradient', 'sweep']
+  },
+  'Backgrounds/Particles': {
+    description: 'Canvas background of soft, slowly drifting particles that wrap around the edges and twinkle, with optional connecting lines.',
+    category: 'Backgrounds',
+    name: 'Particles',
+    tags: ['canvas', 'background', 'particles', 'starfield', 'ambient']
   }
 };

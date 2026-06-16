@@ -35,7 +35,15 @@ const components = {
   'hold-button': () => import('../demo/Components/HoldButtonDemo'),
   'mood-picker': () => import('../demo/Components/MoodPickerDemo'),
   'peek-password': () => import('../demo/Components/PeekPasswordDemo'),
-  'swipe-action': () => import('../demo/Components/SwipeActionDemo')
+  'swipe-action': () => import('../demo/Components/SwipeActionDemo'),
+  'spotlight-card': () => import('../demo/Components/SpotlightCardDemo'),
+  'border-beam': () => import('../demo/Components/BorderBeamDemo'),
+  'confetti-button': () => import('../demo/Components/ConfettiButtonDemo'),
+  'aurora': () => import('../demo/Backgrounds/AuroraDemo'),
+  'marquee': () => import('../demo/Components/MarqueeDemo'),
+  'radial-progress': () => import('../demo/Components/RadialProgressDemo'),
+  'shiny-text': () => import('../demo/TextAnimations/ShinyTextDemo'),
+  'particles': () => import('../demo/Backgrounds/ParticlesDemo')
 };
 
 export const componentMap = {
