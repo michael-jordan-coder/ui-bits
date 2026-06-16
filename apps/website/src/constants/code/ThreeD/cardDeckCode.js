@@ -8,7 +8,13 @@ export const cardDeck = {
   dependencies: '',
   usage: `import CardDeck from './CardDeck';
 
-<CardDeck />`,
+const items = [
+  { id: 1, image: '/cards/aurora.jpg', title: 'Aurora Drift', meta: 'Drama · 6 episodes' },
+  { id: 2, image: '/cards/longshore.jpg', title: 'Longshore', meta: 'Documentary' },
+  // ...
+];
+
+<CardDeck items={items} height={520} accentColor="#ff4d2e" />`,
   code,
   css,
   tailwind,

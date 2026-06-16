@@ -1,7 +1,198 @@
-.card-deck-root {
+.card-deck {
+  --card-deck-bg-from: #16131c;
+  --card-deck-bg-to: #050507;
+  --card-deck-surface: #1a1622;
+  --card-deck-ink: #f4f1ea;
+  --card-deck-ink-soft: rgba(244, 241, 234, 0.62);
+  --card-deck-ink-dim: rgba(244, 241, 234, 0.32);
+  --card-deck-accent: #ff4d2e;
+  --card-deck-card-w: 320px;
+  --card-deck-card-h: 420px;
+
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(180deg, var(--card-deck-bg-from) 0%, var(--card-deck-bg-to) 100%);
+  color: var(--card-deck-ink);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  font-family: inherit;
+  outline: none;
+}
+
+.card-deck:focus-visible {
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--card-deck-accent) 60%, transparent);
+}
+
+.card-deck-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(70% 60% at 50% 42%, transparent 0%, transparent 46%, rgba(5, 5, 7, 0.55) 84%, rgba(5, 5, 7, 0.9) 100%);
+}
+
+.card-deck-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1em;
-  color: #fff;
+  cursor: grab;
+}
+
+.card-deck.is-dragging .card-deck-stage {
+  cursor: grabbing;
+}
+
+.card-deck-scene {
+  position: relative;
+  width: var(--card-deck-card-w);
+  height: var(--card-deck-card-h);
+  transform-style: preserve-3d;
+  perspective: 1400px;
+  perspective-origin: 50% 46%;
+}
+
+.card-deck-card {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.card-deck-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--card-deck-surface);
+  box-shadow:
+    0 30px 60px -18px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(244, 241, 234, 0.06);
+}
+
+.card-deck-card[aria-hidden='false'] .card-deck-card-inner {
+  box-shadow:
+    0 40px 80px -24px rgba(0, 0, 0, 0.8),
+    0 0 0 1px color-mix(in srgb, var(--card-deck-accent) 36%, transparent),
+    0 0 56px -16px color-mix(in srgb, var(--card-deck-accent) 42%, transparent);
+}
+
+.card-deck-card-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.card-deck-card-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 38%, rgba(5, 5, 7, 0.82) 100%);
+}
+
+.card-deck-card-body {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card-deck-card-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--card-deck-ink);
+}
+
+.card-deck-card-meta {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--card-deck-ink-soft);
+}
+
+.card-deck-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.card-deck-hud {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  padding: 22px 28px 24px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  pointer-events: none;
+}
+
+.card-deck-counter {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.card-deck-counter-num {
+  font-size: 34px;
+  font-weight: 600;
+  color: var(--card-deck-ink);
+}
+
+.card-deck-counter-sep {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--card-deck-ink-dim);
+}
+
+.card-deck-counter-total {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--card-deck-ink-soft);
+}
+
+.card-deck-hint {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--card-deck-ink-dim);
+}
+
+@media (max-width: 45rem) {
+  .card-deck {
+    --card-deck-card-w: 240px;
+    --card-deck-card-h: 320px;
+  }
+  .card-deck-hud {
+    padding: 18px 18px 20px;
+  }
+  .card-deck-counter-num {
+    font-size: 28px;
+  }
 }
