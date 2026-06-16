@@ -52,7 +52,12 @@ const components = {
   'tag-input': () => import('../demo/Components/TagInputDemo'),
   'tabs': () => import('../demo/Components/TabsDemo'),
   'speed-dial': () => import('../demo/Components/SpeedDialDemo'),
-  'ripple': () => import('../demo/Backgrounds/RippleDemo')
+  'ripple': () => import('../demo/Backgrounds/RippleDemo'),
+  'cover-flow': () => import('../demo/ThreeD/CoverFlowDemo'),
+  'card-deck': () => import('../demo/ThreeD/CardDeckDemo'),
+  'cube-showcase': () => import('../demo/ThreeD/CubeShowcaseDemo'),
+  'tag-sphere': () => import('../demo/ThreeD/TagSphereDemo'),
+  'depth-tunnel': () => import('../demo/ThreeD/DepthTunnelDemo')
 };
 
 export const componentMap = {

@@ -349,5 +349,35 @@ export const componentMetadata = {
     category: 'Backgrounds',
     name: 'Ripple',
     tags: ['background', 'ripple', 'interactive', 'motion']
+  },
+  'ThreeD/CoverFlow': {
+    description: 'A horizontal cover-flow carousel where side items angle back in perspective with reflections, draggable with snap and keyboard control.',
+    category: 'ThreeD',
+    name: 'CoverFlow',
+    tags: ['3d', 'carousel', 'coverflow', 'drag', 'perspective']
+  },
+  'ThreeD/CardDeck': {
+    description: 'A depth-stacked card deck where the front card swipes away and the rest rise forward through Z-space, with drag and keyboard control.',
+    category: 'ThreeD',
+    name: 'CardDeck',
+    tags: ['3d', 'cards', 'deck', 'swipe', 'stack']
+  },
+  'ThreeD/CubeShowcase': {
+    description: 'A rotating 3D cube that cycles through content faces, draggable to spin freely and snapping to the nearest face.',
+    category: 'ThreeD',
+    name: 'CubeShowcase',
+    tags: ['3d', 'cube', 'rotate', 'drag', 'showcase']
+  },
+  'ThreeD/TagSphere': {
+    description: 'A spherical tag cloud whose labels orbit a 3D sphere with idle drift and drag-driven inertia, depth-faded toward the back.',
+    category: 'ThreeD',
+    name: 'TagSphere',
+    tags: ['3d', 'sphere', 'tags', 'cloud', 'drag']
+  },
+  'ThreeD/DepthTunnel': {
+    description: 'A perspective tunnel of receding panels you fly through by dragging or scrolling, with depth fog and a looping path.',
+    category: 'ThreeD',
+    name: 'DepthTunnel',
+    tags: ['3d', 'tunnel', 'depth', 'parallax', 'scroll']
   }
 };

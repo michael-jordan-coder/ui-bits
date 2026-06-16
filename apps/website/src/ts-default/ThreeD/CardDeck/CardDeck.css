@@ -1,0 +1,7 @@
+.card-deck-root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+  color: #fff;
+}
