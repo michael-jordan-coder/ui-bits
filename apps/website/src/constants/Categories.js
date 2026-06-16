@@ -28,7 +28,8 @@ export const CATEGORIES = [
       'Magnetic Button',
       'Accordion',
       'Toast',
-      'Dock'
+      'Dock',
+      'Floating Input'
     ]
   },
   {

@@ -29,7 +29,8 @@ const components = {
   'magnetic-button': () => import('../demo/Components/MagneticButtonDemo'),
   'accordion': () => import('../demo/Components/AccordionDemo'),
   'toast': () => import('../demo/Components/ToastDemo'),
-  'dock': () => import('../demo/Components/DockDemo')
+  'dock': () => import('../demo/Components/DockDemo'),
+  'floating-input': () => import('../demo/Components/FloatingInputDemo')
 };
 
 export const componentMap = {

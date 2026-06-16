@@ -201,5 +201,12 @@ export const componentMetadata = {
     category: 'Components',
     name: 'Dock',
     tags: ['dock', 'macos', 'magnify', 'navigation', 'motion']
+  },
+  'Components/FloatingInput': {
+    description:
+      'A filled text field whose label rests as a placeholder then floats up and shrinks on focus or fill, with an accent underline that sweeps in from the center, an error state, and a password reveal toggle, inspired by Google’s Material Design floating label.',
+    category: 'Components',
+    name: 'FloatingInput',
+    tags: ['form', 'input', 'floating-label', 'material', 'motion']
   }
 };
