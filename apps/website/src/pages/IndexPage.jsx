@@ -1,22 +1,47 @@
 import { useMemo } from 'react';
-import { showcaseItems } from '../constants/showcaseItems';
+import { CATEGORIES } from '../constants/Categories';
+import { componentMetadata } from '../constants/Information';
+import { slug } from '../utils/utils';
 import ComponentCard from '../components/common/ComponentCard';
+import LivePreview from '../components/common/LivePreview';
 import BackToTopButton from '../components/common/BackToTopButton';
 
-const CATEGORY_ORDER = ['Components', '3D', 'Scroll', 'Text Animations', 'Backgrounds'];
+const DISPLAY_TO_FOLDER = { '3D': 'ThreeD', 'Text Animations': 'TextAnimations' };
+const folderFor = displayName => DISPLAY_TO_FOLDER[displayName] || displayName;
+
+// Catalog completeness is structural: it mirrors the sidebar (CATEGORIES) and is
+// cross-checked against the component registry, so new components appear here
+// automatically and the page can never silently drop one.
+const buildSections = () => {
+  const sections = CATEGORIES.filter(category => category.name !== 'Get Started').map(category => {
+    const folder = folderFor(category.name);
+    const items = category.subcategories.map(displayName => {
+      const componentSlug = slug(displayName);
+      const meta = componentMetadata[`${folder}/${displayName.replace(/\s+/g, '')}`];
+      return {
+        key: componentSlug,
+        name: displayName,
+        category: category.name,
+        route: `/${slug(category.name)}/${componentSlug}`,
+        tags: meta?.tags ?? [],
+        render: () => <LivePreview slug={componentSlug} name={displayName} />
+      };
+    });
+    return { name: category.name, items };
+  });
+
+  const shown = sections.reduce((total, section) => total + section.items.length, 0);
+  const registered = Object.keys(componentMetadata).length;
+  if (import.meta.env.DEV && shown !== registered) {
+    // Invariant: every registered component must surface on the catalog page.
+    console.warn(`[IndexPage] catalog shows ${shown} components but ${registered} are registered.`);
+  }
+
+  return sections;
+};
 
 const IndexPage = () => {
-  const sections = useMemo(() => {
-    const byCategory = new Map();
-    for (const item of showcaseItems) {
-      if (!byCategory.has(item.category)) byCategory.set(item.category, []);
-      byCategory.get(item.category).push(item);
-    }
-    return CATEGORY_ORDER.filter(name => byCategory.has(name)).map(name => ({
-      name,
-      items: byCategory.get(name)
-    }));
-  }, []);
+  const sections = useMemo(buildSections, []);
 
   return (
     <div className="index-page">
