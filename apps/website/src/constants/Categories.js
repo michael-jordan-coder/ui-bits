@@ -47,7 +47,8 @@ export const CATEGORIES = [
       'Tag Input',
       'Tabs',
       'Speed Dial',
-      'Reaction Bar'
+      'Reaction Bar',
+      'Split Pane'
     ]
   },
   {
