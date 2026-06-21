@@ -393,5 +393,12 @@ export const componentMetadata = {
     category: 'Components',
     name: 'SplitPane',
     tags: ['layout', 'resize', 'split', 'drag', 'panels']
+  },
+  'Components/StageTracker': {
+    description:
+      "A multi-stage progress tracker with check-in pops and a shimmering active connector, inspired by Linear's import-assistant indicator.",
+    category: 'Components',
+    name: 'StageTracker',
+    tags: ['progress', 'steps', 'stages', 'onboarding', 'motion']
   }
 };

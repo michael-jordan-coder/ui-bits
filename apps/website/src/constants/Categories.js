@@ -48,7 +48,8 @@ export const CATEGORIES = [
       'Tabs',
       'Speed Dial',
       'Reaction Bar',
-      'Split Pane'
+      'Split Pane',
+      'Stage Tracker'
     ]
   },
   {
