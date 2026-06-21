@@ -57,7 +57,8 @@ const components = {
   'card-deck': () => import('../demo/ThreeD/CardDeckDemo'),
   'cube-showcase': () => import('../demo/ThreeD/CubeShowcaseDemo'),
   'tag-sphere': () => import('../demo/ThreeD/TagSphereDemo'),
-  'depth-tunnel': () => import('../demo/ThreeD/DepthTunnelDemo')
+  'depth-tunnel': () => import('../demo/ThreeD/DepthTunnelDemo'),
+  'reaction-bar': () => import('../demo/Components/ReactionBarDemo')
 };
 
 export const componentMap = {

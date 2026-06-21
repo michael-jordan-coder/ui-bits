@@ -379,5 +379,12 @@ export const componentMetadata = {
     category: 'ThreeD',
     name: 'DepthTunnel',
     tags: ['3d', 'tunnel', 'depth', 'parallax', 'scroll']
+  },
+  'Components/ReactionBar': {
+    description:
+      'A horizontal emoji reaction picker whose glyphs magnify and tilt toward the cursor in a lens-like 3D warp, with single-select and a running count. Inspired by Telegram\'s magnifying emoji reaction picker.',
+    category: 'Components',
+    name: 'ReactionBar',
+    tags: ['reactions', 'emoji', 'magnify', 'motion', 'social']
   }
 };

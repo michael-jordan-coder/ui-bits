@@ -46,7 +46,8 @@ export const CATEGORIES = [
       'Flip Card',
       'Tag Input',
       'Tabs',
-      'Speed Dial'
+      'Speed Dial',
+      'Reaction Bar'
     ]
   },
   {
