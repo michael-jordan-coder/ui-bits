@@ -1,0 +1,20 @@
+ui bits
+Copyright (c) 2026 Daniel Gourarye
+
+This product includes components and patterns that were ported from, or
+inspired by, the following open-source and reference projects. Their authors
+are gratefully acknowledged:
+
+- react-bits (https://github.com/DavidHDev/react-bits) — MIT License.
+  The four-variant architecture (JS+CSS / JS+Tailwind / TS+CSS / TS+Tailwind)
+  and several component implementations are derived from this project.
+
+- designspells.com (https://www.designspells.com) — used as interaction-design
+  reference for a number of micro-interactions. No code was copied; these
+  components are independent reimplementations inspired by the documented
+  interactions.
+
+- reactbits.dev (https://reactbits.dev) — additional component reference.
+
+Each component's source of inspiration is recorded in its entry in
+apps/website/src/constants/Information.js.

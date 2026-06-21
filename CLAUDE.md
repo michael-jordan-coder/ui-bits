@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project name
 
-The site under `apps/website/` is called **ui bits**. The placeholder `community-bits` still appears in `apps/website/package.json` (as `"name": "website"` — the older `community-bits` string survives in the jsrepo registry namespace) and as the GitHub repo name (`michael-jordan-coder/community-bits`, private) until Daniel renames them. Treat "ui bits" as the canonical product name in any user-facing copy, docs, and new code; do not propagate the `community-bits` placeholder further.
+The site under `apps/website/` is called **ui bits**. It is the canonical product name everywhere: the workspace package is `ui-bits-website`, the jsrepo registry namespace is `@ui-bits`, and the public GitHub repo is `michael-jordan-coder/ui-bits`. The earlier `community-bits` placeholder has been retired — do not reintroduce it. (The live Vercel domain is still `community-bits.vercel.app`; renaming that project is a separate, optional follow-up.)
 
 ## Workspace layout
 
@@ -15,7 +15,7 @@ This is a **pnpm + turbo monorepo**. Top-level `package.json` is `ui-bits-monore
 - `docs/` — **planning artifacts only.** Contains `PLAN.md` (the canonical spec that produced the `apps/website/` shell) and any future markdown briefs. No code.
 - `branding/` — brand source artwork and standalone previews. Currently: `Logo.preview.jsx` (renders the mark at 16/24/48/128/512 on light + dark surfaces) and `explorations/` (source SVGs that fed the canonical assets in `apps/website/public/`).
 
-The git remote (`origin`) is the private `michael-jordan-coder/community-bits` repo. Deployment is wired through `vercel.json` pointing `outputDirectory` at `apps/website/dist`.
+The git remote (`origin`) is the public `michael-jordan-coder/ui-bits` repo (MIT-licensed; `main` is protected against force-push and deletion). Deployment is wired through `vercel.json` pointing `outputDirectory` at `apps/website/dist`.
 
 ## Commands
 

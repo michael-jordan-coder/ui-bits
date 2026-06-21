@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { FaArrowRight } from 'react-icons/fa6';
 import './QuickStart.css';
 
-const INSTALL_COMMAND = 'npx jsrepo add @community-bits/<Component>';
+const INSTALL_COMMAND = 'npx jsrepo add @ui-bits/<Component>';
 
 const QuickStart = () => (
   <section id="quick-start" className="cb-quickstart">

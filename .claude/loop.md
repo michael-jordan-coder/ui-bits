@@ -226,7 +226,7 @@ Requirements:
 Then verify the new component route is registered correctly by running the Vite dev server in the background and curling its output:
 
 ```bash
-pnpm --filter website dev &
+pnpm --filter ui-bits-website dev &
 DEV_PID=$!
 sleep 8
 SLUG=$(echo "<kebab-slug>" | tr '[:upper:]' '[:lower:]')

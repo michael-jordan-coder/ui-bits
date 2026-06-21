@@ -15,11 +15,11 @@ interface ComponentMeta {
 
 export default defineConfig({
   registry: {
-    name: '@community-bits',
+    name: '@ui-bits',
     homepage: 'https://community-bits.vercel.app',
     description:
-      'A community-driven collection of animated, interactive React components shipped as copyable source.',
-    authors: ['community-bits'],
+      'An open collection of animated, interactive React components shipped as copyable source.',
+    authors: ['ui-bits'],
     excludeDeps: ['react'],
     outputs: [output({ dir: 'public/r', format: true })],
     items: [
