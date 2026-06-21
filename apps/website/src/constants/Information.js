@@ -386,5 +386,12 @@ export const componentMetadata = {
     category: 'Components',
     name: 'ReactionBar',
     tags: ['reactions', 'emoji', 'magnify', 'motion', 'social']
+  },
+  'Components/SplitPane': {
+    description:
+      'A resizable two-pane splitter with a draggable divider, snap points, double-click reset, and keyboard control — inspired by Amie’s drag-to-resize split view of calendar and todos.',
+    category: 'Components',
+    name: 'SplitPane',
+    tags: ['layout', 'resize', 'split', 'drag', 'panels']
   }
 };

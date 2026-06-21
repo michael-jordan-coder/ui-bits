@@ -58,7 +58,8 @@ const components = {
   'cube-showcase': () => import('../demo/ThreeD/CubeShowcaseDemo'),
   'tag-sphere': () => import('../demo/ThreeD/TagSphereDemo'),
   'depth-tunnel': () => import('../demo/ThreeD/DepthTunnelDemo'),
-  'reaction-bar': () => import('../demo/Components/ReactionBarDemo')
+  'reaction-bar': () => import('../demo/Components/ReactionBarDemo'),
+  'split-pane': () => import('../demo/Components/SplitPaneDemo')
 };
 
 export const componentMap = {
