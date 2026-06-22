@@ -688,18 +688,18 @@ export const componentMetadata = {
     name: 'LiquidChrome',
     tags: ['background', 'webgl', 'shader', 'chrome', 'metal', 'interactive']
   },
-  'Backgrounds/FluidWarp': {
+  'Backgrounds/LiquidGlass': {
     description:
-      'A full-bleed WebGL shader of domain-warped fbm — neon ink that folds and flows, with the pointer stirring a swirling, pushing current into the fluid. Reduced-motion-safe.',
+      'A full-bleed WebGL shader of liquid glass — drifting metaballs rendered as refractive, dispersive glass over LiquidChrome\'s reconstructed studio environment, refraction blended with reflection by fresnel. One blob tracks the pointer. Reduced-motion-safe.',
     category: 'Backgrounds',
-    name: 'FluidWarp',
-    tags: ['background', 'webgl', 'shader', 'fluid', 'noise', 'interactive']
+    name: 'LiquidGlass',
+    tags: ['background', 'webgl', 'shader', 'glass', 'refraction', 'interactive']
   },
-  'Backgrounds/Kaleidoscope': {
+  'Backgrounds/Iridescence': {
     description:
-      'A full-bleed WebGL shader that folds an animated fbm field into mirrored kaleidoscope segments; the pointer steers the rotation and zoom while bands and sparkle drift through it. Reduced-motion-safe.',
+      'A full-bleed WebGL shader of iridescent metal — LiquidChrome\'s studio-lit metaballs coated in a view-angle thin-film palette so the chrome shifts hue like oil on water. One blob tracks the pointer. Reduced-motion-safe.',
     category: 'Backgrounds',
-    name: 'Kaleidoscope',
-    tags: ['background', 'webgl', 'shader', 'kaleidoscope', 'symmetry', 'interactive']
+    name: 'Iridescence',
+    tags: ['background', 'webgl', 'shader', 'iridescent', 'metal', 'interactive']
   }
 };

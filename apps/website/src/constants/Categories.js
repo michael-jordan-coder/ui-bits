@@ -124,8 +124,8 @@ export const CATEGORIES = [
       'Rain',
       'Vortex',
       'Liquid Chrome',
-      'Fluid Warp',
-      'Kaleidoscope'
+      'Liquid Glass',
+      'Iridescence'
     ]
   }
 ];

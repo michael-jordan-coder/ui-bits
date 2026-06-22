@@ -108,8 +108,8 @@ const components = {
   'focus-carousel': () => import('../demo/Scroll/FocusCarouselDemo'),
   'tilt-carousel': () => import('../demo/Scroll/TiltCarouselDemo'),
   'liquid-chrome': () => import('../demo/Backgrounds/LiquidChromeDemo'),
-  'fluid-warp': () => import('../demo/Backgrounds/FluidWarpDemo'),
-  'kaleidoscope': () => import('../demo/Backgrounds/KaleidoscopeDemo')
+  'liquid-glass': () => import('../demo/Backgrounds/LiquidGlassDemo'),
+  'iridescence': () => import('../demo/Backgrounds/IridescenceDemo')
 };
 
 export const componentMap = {

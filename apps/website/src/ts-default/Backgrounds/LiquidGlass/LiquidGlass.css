@@ -1,4 +1,4 @@
-.kaleidoscope {
+.liquid-glass {
   position: relative;
   width: 100%;
   height: 100%;
@@ -7,7 +7,7 @@
   background-color: #05060a;
 }
 
-.kaleidoscope-canvas {
+.liquid-glass-canvas {
   display: block;
   width: 100%;
   height: 100%;
