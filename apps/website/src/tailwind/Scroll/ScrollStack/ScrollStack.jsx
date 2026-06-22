@@ -23,12 +23,12 @@ function StackCard({ index, total, item, scrollY, peek, gap, cardHeight, scaleSt
 
   return (
     <motion.div
-      className="sticky mb-[18px] box-border flex items-start gap-[18px] rounded-2xl px-[26px] py-6 text-white shadow-[0_18px_40px_-24px_rgba(0,0,0,0.65)] [transform-origin:50%_0%] [will-change:transform,opacity]"
+      className="sticky mb-[18px] box-border flex items-start gap-[18px] rounded-2xl px-[26px] py-6 text-white shadow-[0_18px_40px_-24px_rgba(0,0,0,0.65)] [transform-origin:50%_0%] [backdrop-filter:blur(14px)] [-webkit-backdrop-filter:blur(14px)] [will-change:transform,opacity]"
       style={{
         top: pinTop,
         height: cardHeight,
         zIndex: index,
-        background: item.accent,
+        background: `color-mix(in srgb, ${item.accent} 68%, transparent)`,
         scale: reduce ? 1 : scale,
         opacity: reduce ? 1 : opacity
       }}
