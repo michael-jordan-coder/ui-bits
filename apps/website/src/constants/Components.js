@@ -64,7 +64,9 @@ const components = {
   'scroll-stack': () => import('../demo/Scroll/ScrollStackDemo'),
   'waves': () => import('../demo/Backgrounds/WavesDemo'),
   'scroll-velocity': () => import('../demo/Scroll/ScrollVelocityDemo'),
-  'grid': () => import('../demo/Backgrounds/GridDemo')
+  'grid': () => import('../demo/Backgrounds/GridDemo'),
+  'scroll-reveal': () => import('../demo/Scroll/ScrollRevealDemo'),
+  'beams': () => import('../demo/Backgrounds/BeamsDemo')
 };
 
 export const componentMap = {

@@ -1,0 +1,59 @@
+.scroll-reveal {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: 18px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll-reveal::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-reveal-track {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px 4px;
+}
+
+.scroll-reveal-item {
+  width: 100%;
+}
+
+.scroll-reveal-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 22px 24px;
+  border-radius: 16px;
+  background-color: #131318;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.scroll-reveal-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #7c8cff;
+}
+
+.scroll-reveal-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #fafafa;
+}
+
+.scroll-reveal-body {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(250, 250, 250, 0.66);
+}

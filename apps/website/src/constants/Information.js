@@ -424,5 +424,17 @@ export const componentMetadata = {
     category: 'Backgrounds',
     name: 'Grid',
     tags: ['background', 'grid', 'lines', 'canvas', 'ambient']
+  },
+  'Scroll/ScrollReveal': {
+    description: 'Children that fade, rise, and unblur in sequence as they scroll into view — the staggered reveal-on-scroll interaction.',
+    category: 'Scroll',
+    name: 'ScrollReveal',
+    tags: ['scroll', 'reveal', 'stagger', 'in-view', 'motion']
+  },
+  'Backgrounds/Beams': {
+    description: 'Soft vertical light beams drifting and breathing across a flat surface — an ambient light-beam backdrop.',
+    category: 'Backgrounds',
+    name: 'Beams',
+    tags: ['background', 'beams', 'light', 'canvas', 'ambient']
   }
 };
