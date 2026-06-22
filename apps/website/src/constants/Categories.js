@@ -72,7 +72,8 @@ export const CATEGORIES = [
       'Horizontal Scroll',
       'Scroll Progress',
       'Parallax Scroll',
-      'Scroll Spy Nav'
+      'Scroll Spy Nav',
+      'Sticky Grid Scroll'
     ]
   },
   {
@@ -92,7 +93,8 @@ export const CATEGORIES = [
       'Threads',
       'Starfield',
       'Plasma',
-      'Grain'
+      'Grain',
+      'Flow Field'
     ]
   }
 ];

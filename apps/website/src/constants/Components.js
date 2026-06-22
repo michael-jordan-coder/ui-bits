@@ -74,7 +74,9 @@ const components = {
   'parallax-scroll': () => import('../demo/Scroll/ParallaxScrollDemo'),
   'plasma': () => import('../demo/Backgrounds/PlasmaDemo'),
   'scroll-spy-nav': () => import('../demo/Scroll/ScrollSpyNavDemo'),
-  'grain': () => import('../demo/Backgrounds/GrainDemo')
+  'grain': () => import('../demo/Backgrounds/GrainDemo'),
+  'flow-field': () => import('../demo/Backgrounds/FlowFieldDemo'),
+  'sticky-grid-scroll': () => import('../demo/Scroll/StickyGridScrollDemo')
 };
 
 export const componentMap = {

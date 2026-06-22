@@ -14,7 +14,7 @@
  *
  * Exits 0 only when all checks pass; non-zero otherwise.
  */
-import { readdirSync, readFileSync, existsSync, statSync } from 'node:fs';
+import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 

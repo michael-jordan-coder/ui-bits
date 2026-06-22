@@ -484,5 +484,17 @@ export const componentMetadata = {
     category: 'Backgrounds',
     name: 'Grain',
     tags: ['background', 'grain', 'noise', 'canvas', 'texture']
+  },
+  'Backgrounds/FlowField': {
+    description: 'Ambient canvas backdrop where particles drift along a slowly evolving noise vector field, leaving fading filament trails.',
+    category: 'Backgrounds',
+    name: 'FlowField',
+    tags: ['background', 'canvas', 'flow field', 'particles', 'noise', 'ambient', 'generative']
+  },
+  'Scroll/StickyGridScroll': {
+    description: 'A pinned grid that assembles as you scroll — tiles cascade up into place column by column while the whole grid eases down from a slight zoom.',
+    category: 'Scroll',
+    name: 'StickyGridScroll',
+    tags: ['scroll', 'grid', 'sticky', 'reveal', 'stagger', 'parallax', 'motion']
   }
 };
