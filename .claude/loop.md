@@ -33,11 +33,9 @@ Continuously add new, high-quality, genuinely useful components to the ui bits l
 apps/website/
 ```
 
-Each component must be sourced from a delightful interaction documented on:
-
-```txt
-https://designspells.com
-```
+Each component must be sourced from a delightful, real interaction. You choose
+which inspiration site to explore each loop (see the source palette in step 2) —
+vary it across loops so the library doesn't converge on one site's aesthetic.
 
 Run the full pipeline end-to-end for each component, open a PR, then immediately compact context and start the next component. Repeat until the stop conditions trigger.
 
@@ -125,36 +123,36 @@ another agent holds a branch there.
 
 ## 2) Discover a spell
 
-Find a fresh interaction on:
+**You decide which source to explore this loop.** Pick from the palette below
+based on this loop's focus (e.g. Scroll/motion → 60fps.design or Codrops; AI-product
+UI → shapeof.ai) and on what you explored last loop — rotate so the library draws
+from many sources, not one. There is no fixed primary; any of these is a valid
+first choice.
 
-```txt
-https://designspells.com
-```
+Source palette (each note is what it's best for):
 
-Use browser-first discovery if a browser/MCP tool is available.
+- `https://designspells.com` — curated catalog of delightful product micro-interactions
+- `https://tympanus.net/codrops` — cutting-edge interaction demos with source code (highest signal for novel, buildable effects)
+- `https://60fps.design` — buttery-smooth micro-interactions and motion studies (great for Scroll/motion components)
+- `https://www.shapeof.ai` — world-class AI product UI interactions
+- `https://reactbits.dev` — component interactions and animation patterns
+- `https://animations.dev` — motion craft reference (easing, spring, choreography) for building to a high bar
+- `https://mobbin.com` — real-world UI/UX flows from top-tier apps
 
-If browser access is not available, fall back to WebSearch with:
+Use browser-first discovery if a browser/MCP tool is available. Otherwise use
+WebSearch scoped to the chosen site, e.g.:
 
 ```js
-allowed_domains=["designspells.com"]
+allowed_domains=["tympanus.net"]   // or designspells.com, 60fps.design, etc.
 ```
-
-Example query:
 
 ```txt
-site:designspells.com <topic>
+site:<chosen-domain> <topic>
 ```
 
-Choose an interaction that maps to a self-contained, reusable, controllable UI component.
-
-The component should be genuinely useful, not merely decorative.
-
-If you truly cannot find a fresh high-quality spell on designspells.com, fall back in this order:
-
-1. `https://60fps.design` — buttery-smooth micro-interactions and motion studies (great for Scroll/motion components)
-2. `https://www.shapeof.ai` — world-class AI product UI interactions
-3. `https://reactbits.dev` — component interactions and animation patterns
-4. `https://mobbin.com` — real-world UI/UX flows from top-tier apps
+Choose an interaction that maps to a self-contained, reusable, controllable UI
+component — genuinely useful, not merely decorative. If the source you picked is
+dry this loop, switch to another in the palette rather than forcing a weak spell.
 
 Record the source URL clearly.
 
