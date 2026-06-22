@@ -448,5 +448,17 @@ export const componentMetadata = {
     category: 'Backgrounds',
     name: 'Threads',
     tags: ['background', 'threads', 'lines', 'canvas', 'ambient']
+  },
+  'Scroll/ScrollProgress': {
+    description: 'A sticky reading-progress rail and circular percentage dial driven by scroll position — the reading-progress indicator.',
+    category: 'Scroll',
+    name: 'ScrollProgress',
+    tags: ['scroll', 'progress', 'reading', 'indicator', 'motion']
+  },
+  'Backgrounds/Starfield': {
+    description: 'Projected stars flying toward the viewer with warp streaks, resetting at the far plane — a warp-speed starfield backdrop.',
+    category: 'Backgrounds',
+    name: 'Starfield',
+    tags: ['background', 'stars', 'warp', 'canvas', 'space']
   }
 };

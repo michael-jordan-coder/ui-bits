@@ -68,7 +68,9 @@ const components = {
   'scroll-reveal': () => import('../demo/Scroll/ScrollRevealDemo'),
   'beams': () => import('../demo/Backgrounds/BeamsDemo'),
   'horizontal-scroll': () => import('../demo/Scroll/HorizontalScrollDemo'),
-  'threads': () => import('../demo/Backgrounds/ThreadsDemo')
+  'threads': () => import('../demo/Backgrounds/ThreadsDemo'),
+  'scroll-progress': () => import('../demo/Scroll/ScrollProgressDemo'),
+  'starfield': () => import('../demo/Backgrounds/StarfieldDemo')
 };
 
 export const componentMap = {
