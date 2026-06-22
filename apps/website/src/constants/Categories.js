@@ -71,7 +71,8 @@ export const CATEGORIES = [
       'Scroll Reveal',
       'Horizontal Scroll',
       'Scroll Progress',
-      'Parallax Scroll'
+      'Parallax Scroll',
+      'Scroll Spy Nav'
     ]
   },
   {
@@ -90,7 +91,8 @@ export const CATEGORIES = [
       'Beams',
       'Threads',
       'Starfield',
-      'Plasma'
+      'Plasma',
+      'Grain'
     ]
   }
 ];

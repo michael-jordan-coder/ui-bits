@@ -72,7 +72,9 @@ const components = {
   'scroll-progress': () => import('../demo/Scroll/ScrollProgressDemo'),
   'starfield': () => import('../demo/Backgrounds/StarfieldDemo'),
   'parallax-scroll': () => import('../demo/Scroll/ParallaxScrollDemo'),
-  'plasma': () => import('../demo/Backgrounds/PlasmaDemo')
+  'plasma': () => import('../demo/Backgrounds/PlasmaDemo'),
+  'scroll-spy-nav': () => import('../demo/Scroll/ScrollSpyNavDemo'),
+  'grain': () => import('../demo/Backgrounds/GrainDemo')
 };
 
 export const componentMap = {
