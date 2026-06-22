@@ -60,7 +60,9 @@ const components = {
   'depth-tunnel': () => import('../demo/ThreeD/DepthTunnelDemo'),
   'reaction-bar': () => import('../demo/Components/ReactionBarDemo'),
   'split-pane': () => import('../demo/Components/SplitPaneDemo'),
-  'stage-tracker': () => import('../demo/Components/StageTrackerDemo')
+  'stage-tracker': () => import('../demo/Components/StageTrackerDemo'),
+  'scroll-stack': () => import('../demo/Scroll/ScrollStackDemo'),
+  'waves': () => import('../demo/Backgrounds/WavesDemo')
 };
 
 export const componentMap = {

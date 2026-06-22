@@ -65,7 +65,9 @@ export const CATEGORIES = [
   },
   {
     name: 'Scroll',
-    subcategories: ['Honeycomb Grid']
+    subcategories: ['Honeycomb Grid',
+      'Scroll Stack'
+    ]
   },
   {
     name: 'Text Animations',
@@ -77,7 +79,8 @@ export const CATEGORIES = [
       'Dot Grid',
       'Aurora',
       'Particles',
-      'Ripple'
+      'Ripple',
+      'Waves'
     ]
   }
 ];

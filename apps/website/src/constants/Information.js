@@ -400,5 +400,17 @@ export const componentMetadata = {
     category: 'Components',
     name: 'StageTracker',
     tags: ['progress', 'steps', 'stages', 'onboarding', 'motion']
+  },
+  'Scroll/ScrollStack': {
+    description: 'Cards that pin and stack as you scroll, shrinking with depth — the Apple-style sticky stacking-cards interaction.',
+    category: 'Scroll',
+    name: 'ScrollStack',
+    tags: ['scroll', 'sticky', 'cards', 'stack', 'motion']
+  },
+  'Backgrounds/Waves': {
+    description: 'A full-bleed field of flowing, woven sine lines drifting across a flat surface — an animated line-wave backdrop.',
+    category: 'Backgrounds',
+    name: 'Waves',
+    tags: ['background', 'waves', 'lines', 'canvas', 'ambient']
   }
 };
