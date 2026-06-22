@@ -1,0 +1,57 @@
+.scroll-velocity {
+  position: relative;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: 18px;
+  background-color: #08080c;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll-velocity::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-velocity-scroll {
+  position: relative;
+  width: 100%;
+}
+
+.scroll-velocity-stage {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.scroll-velocity-lane {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.scroll-velocity-track {
+  display: flex;
+  width: max-content;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.scroll-velocity-text {
+  display: inline-block;
+  padding-right: 0.4em;
+  font-size: clamp(2rem, 6vw, 3.6rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #fafafa;
+}
+
+.scroll-velocity-lane:nth-child(even) .scroll-velocity-text {
+  color: #5227ff;
+}

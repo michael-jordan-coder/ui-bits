@@ -62,7 +62,9 @@ const components = {
   'split-pane': () => import('../demo/Components/SplitPaneDemo'),
   'stage-tracker': () => import('../demo/Components/StageTrackerDemo'),
   'scroll-stack': () => import('../demo/Scroll/ScrollStackDemo'),
-  'waves': () => import('../demo/Backgrounds/WavesDemo')
+  'waves': () => import('../demo/Backgrounds/WavesDemo'),
+  'scroll-velocity': () => import('../demo/Scroll/ScrollVelocityDemo'),
+  'grid': () => import('../demo/Backgrounds/GridDemo')
 };
 
 export const componentMap = {

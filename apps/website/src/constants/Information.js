@@ -412,5 +412,17 @@ export const componentMetadata = {
     category: 'Backgrounds',
     name: 'Waves',
     tags: ['background', 'waves', 'lines', 'canvas', 'ambient']
+  },
+  'Scroll/ScrollVelocity': {
+    description: 'Marquee lanes that surge and flip direction with scroll velocity, easing back to an idle drift — the scroll-velocity marquee.',
+    category: 'Scroll',
+    name: 'ScrollVelocity',
+    tags: ['scroll', 'velocity', 'marquee', 'motion', 'ticker']
+  },
+  'Backgrounds/Grid': {
+    description: 'A quiet animated line grid with a soft bloom drifting across it — an ambient grid backdrop.',
+    category: 'Backgrounds',
+    name: 'Grid',
+    tags: ['background', 'grid', 'lines', 'canvas', 'ambient']
   }
 };

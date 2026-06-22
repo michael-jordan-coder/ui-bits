@@ -1,0 +1,23 @@
+.grid-bg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  overflow: hidden;
+  background-color: #08080c;
+}
+
+.grid-bg-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.grid-bg-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
