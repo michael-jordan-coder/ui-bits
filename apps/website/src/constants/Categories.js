@@ -122,7 +122,10 @@ export const CATEGORIES = [
       'Hex Pulse',
       'Noise Contours',
       'Rain',
-      'Vortex'
+      'Vortex',
+      'Liquid Chrome',
+      'Fluid Warp',
+      'Kaleidoscope'
     ]
   }
 ];

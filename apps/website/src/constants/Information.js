@@ -680,5 +680,26 @@ export const componentMetadata = {
     category: 'Scroll',
     name: 'TiltCarousel',
     tags: ['scroll', 'carousel', 'coverflow', 'tilt', 'perspective', 'swipe']
+  },
+  'Backgrounds/LiquidChrome': {
+    description:
+      'A full-bleed WebGL shader of liquid chrome — drifting metaballs shaded with a reconstructed studio environment (mirror reflections, fresnel, key specular, ACES tone map), with one blob tracking the pointer. Reduced-motion-safe.',
+    category: 'Backgrounds',
+    name: 'LiquidChrome',
+    tags: ['background', 'webgl', 'shader', 'chrome', 'metal', 'interactive']
+  },
+  'Backgrounds/FluidWarp': {
+    description:
+      'A full-bleed WebGL shader of domain-warped fbm — neon ink that folds and flows, with the pointer stirring a swirling, pushing current into the fluid. Reduced-motion-safe.',
+    category: 'Backgrounds',
+    name: 'FluidWarp',
+    tags: ['background', 'webgl', 'shader', 'fluid', 'noise', 'interactive']
+  },
+  'Backgrounds/Kaleidoscope': {
+    description:
+      'A full-bleed WebGL shader that folds an animated fbm field into mirrored kaleidoscope segments; the pointer steers the rotation and zoom while bands and sparkle drift through it. Reduced-motion-safe.',
+    category: 'Backgrounds',
+    name: 'Kaleidoscope',
+    tags: ['background', 'webgl', 'shader', 'kaleidoscope', 'symmetry', 'interactive']
   }
 };

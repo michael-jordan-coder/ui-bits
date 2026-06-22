@@ -106,7 +106,10 @@ const components = {
   'scale-carousel': () => import('../demo/Scroll/ScaleCarouselDemo'),
   'arc-carousel': () => import('../demo/Scroll/ArcCarouselDemo'),
   'focus-carousel': () => import('../demo/Scroll/FocusCarouselDemo'),
-  'tilt-carousel': () => import('../demo/Scroll/TiltCarouselDemo')
+  'tilt-carousel': () => import('../demo/Scroll/TiltCarouselDemo'),
+  'liquid-chrome': () => import('../demo/Backgrounds/LiquidChromeDemo'),
+  'fluid-warp': () => import('../demo/Backgrounds/FluidWarpDemo'),
+  'kaleidoscope': () => import('../demo/Backgrounds/KaleidoscopeDemo')
 };
 
 export const componentMap = {

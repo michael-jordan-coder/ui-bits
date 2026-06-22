@@ -1,0 +1,14 @@
+.kaleidoscope {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  overflow: hidden;
+  background-color: #05060a;
+}
+
+.kaleidoscope-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
