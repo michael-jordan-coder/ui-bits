@@ -1,169 +1,246 @@
 ---
 name: ui-bits-component-manager
-description: Use this skill whenever the user wants to add, scaffold, create, rename, move, or register a component or a category in the ui bits library at `website/`. Triggers on phrases like "add a component", "create a [Name] component", "scaffold X", "new category", "add [name] to [category]", "make a category called X", "register X", "move [component] to [category]". Handles the 4-variant scaffold, picks the right folder/display-name pair, updates the three constants files, and preserves git history on moves.
+description: Use this skill whenever the user wants to add, scaffold, create, rename, move, or register a component or a category in the ui bits library at `apps/website/`. Triggers on phrases like "add a component", "create a [Name] component", "scaffold X", "new category", "add [name] to [category]", "make a category called X", "register X", "move [component] to [category]". Handles the 4-variant scaffold, derives the TS variants with a codemod, picks the right folder/display-name pair, updates the three constants files, and preserves git history on moves.
 ---
 
 # ui bits component manager
 
-ui bits ships every component in **four variants that must produce identical visuals and behavior**: JS+CSS, JS+Tailwind, TS+CSS, TS+Tailwind. There is a scaffolder — never hand-write the 8 files from scratch.
+Every component ships in **four variants with identical visuals and behavior** —
+JS+CSS, JS+Tailwind, TS+CSS, TS+Tailwind — plus a demo and a code-metadata file.
+You never hand-write all of that: a scaffolder stamps the files and registers
+them, and a codemod derives the TS variants from the JS ones. Author **two files
+by hand**, run **two commands**, and you have a green component.
 
-## Trigger checklist
+All paths below are relative to `apps/website/`. The repo is **pnpm + turbo**;
+never `npm`. `cd apps/website` once at the start.
 
-Invoke this skill silently the moment you read any of these in the user's message:
-- "add a component" / "new component" / "create [a/the] [Name] component" / "scaffold X"
-- "add a category" / "new category" / "make a category called X"
-- "move [component] to [category]" / "put X under Y" / "reorganize"
-- "register" / "wire up X" in the context of components
+## Happy path — idea to green component
 
-Then do the work. Don't ask permission to start — only ask if the category is ambiguous.
+```bash
+cd apps/website
 
-## Current categories
+# 1. Scaffold all 8 files + register in the three constants files.
+node scripts/generateComponent.js <Category> <PascalName>     # e.g. Scroll ScrollStack
 
-| Sidebar label | URL slug | Folder name | Information.js `category` | Purpose |
+# 2. Author BY HAND (the only real work):
+#    src/content/<Category>/<PascalName>/<PascalName>.jsx   ← the component (JS + CSS)
+#    src/content/<Category>/<PascalName>/<PascalName>.css
+#    src/tailwind/<Category>/<PascalName>/<PascalName>.jsx  ← same component, Tailwind classes
+#    src/demo/<Category>/<PascalName>Demo.jsx               ← DemoShell demo + real controls
+#    src/constants/code/<Category>/<camelName>Code.js       ← dependencies + usage example
+#    src/constants/Information.js entry                      ← real description + tags
+
+# 3. Derive the TS variants + byte-identical CSS copy (no hand-retyping):
+node scripts/generateTsVariants.js <Category> <PascalName>
+#    Read its output; if it warns about an inner helper component or a prop it
+#    couldn't type, finish those types by hand in the two generated .tsx files.
+
+# 4. Verify (real signal — see "Verify").
+pnpm lint && pnpm build
+SLUG=<kebab-slug>; NAME=<PascalName>
+grep -rlq "$SLUG" dist/assets/ && ls dist/assets/ | grep -q "${NAME}Demo-" && echo OK
+```
+
+That's the whole loop. Everything below is detail for the steps.
+
+## Categories
+
+| Sidebar label | URL slug | Folder name | `Information.js` category | Use for |
 |---|---|---|---|---|
-| Components | `/components/` | `Components` | `Components` | Buttons, interactive primitives |
-| 3D | `/3d/` | `ThreeD` | `ThreeD` | 3D scenes, cinematic showpieces |
-| Scroll | `/scroll/` | `Scroll` | `Scroll` | Drag- and scroll-driven interactions |
-| Text Animations | `/text-animations/` | `TextAnimations` | `TextAnimations` | Glyph/character text effects |
-| Backgrounds | `/backgrounds/` | `Backgrounds` | `Backgrounds` | Full-bleed canvas/ambient backdrops |
+| Components | `/components/` | `Components` | `Components` | Buttons, inputs, menus, overlays — interactive primitives |
+| 3D | `/3d/` | `ThreeD` | `ThreeD` | 3D scenes, perspective/WebGL showpieces |
+| Scroll | `/scroll/` | `Scroll` | `Scroll` | Scroll- and drag-driven interactions |
+| Text Animations | `/text-animations/` | `TextAnimations` | `TextAnimations` | Glyph/character text effects, no interactive controls |
+| Backgrounds | `/backgrounds/` | `Backgrounds` | `Backgrounds` | Full-bleed canvas / ambient backdrops |
 
-**Two-name rule.** The folder name is the jsrepo lookup path — it MUST match the actual directory under `src/content/<Folder>/`, `src/tailwind/<Folder>/`, `src/ts-default/<Folder>/`, `src/ts-tailwind/<Folder>/`, and the `category` field in `src/constants/Information.js`. The Categories.js `name` is the sidebar display + URL slug; it can differ (e.g., folder `ThreeD`, display `'3D'`).
+Default to `Components` unless the fit is unambiguous. Don't invent categories.
 
-## Adding a component
+**Two-name rule.** The **folder name** is the jsrepo lookup path — it MUST match
+the directories under `src/content/<Folder>/`, `src/tailwind/<Folder>/`,
+`src/ts-default/<Folder>/`, `src/ts-tailwind/<Folder>/`, and the `category` field
+in `Information.js`. The Categories.js `name` is the sidebar label + URL slug and
+may differ (folder `ThreeD`, label `'3D'`). Pass the **folder name** to both scripts.
 
-1. **Pick the category.** If unclear, ask one sharp question. Default-map by purpose:
-   - Buttons / hover / click micro-interactions → `Components`
-   - Anything with `rotateY`, perspective, helix, drum, tunnel → `ThreeD`
-   - Drag-scroll, scroll-jacking, parallax, scroll-progress → `Scroll`
+## Authoring the variants
 
-2. **Run the scaffolder** from `website/`:
-   ```bash
-   cd website && npm run new:component -- <FolderCategory> <ComponentName>
-   ```
-   - `<FolderCategory>`: PascalCase folder (e.g. `Components`, `ThreeD`, `Scroll`).
-   - `<ComponentName>`: PascalCase (e.g. `MagneticCard`).
+Author the two JS variants by hand; the codemod produces the rest.
 
-   The scaffolder creates:
-   - `src/content/<Cat>/<Name>/<Name>.jsx` + `.css`
-   - `src/tailwind/<Cat>/<Name>/<Name>.jsx`
-   - `src/ts-default/<Cat>/<Name>/<Name>.tsx` + `.css`
-   - `src/ts-tailwind/<Cat>/<Name>/<Name>.tsx`
-   - `src/demo/<Cat>/<Name>Demo.jsx`
-   - `src/constants/code/<Cat>/<camelName>Code.js`
-   - Entries in `Components.js`, `Categories.js`, `Information.js`
+- **`content/<Name>.jsx`** — the canonical component (JS + CSS classes).
+- **`content/<Name>.css`** — its styles.
+- **`tailwind/<Name>.jsx`** — the same component with Tailwind utility classes
+  (and inline styles for dynamic values). Visually + behaviorally identical.
+- **`generateTsVariants.js`** then writes `ts-default/<Name>.tsx` (typed copy of
+  the content variant), `ts-default/<Name>.css` (byte-identical copy), and
+  `ts-tailwind/<Name>.tsx` (typed copy of the tailwind variant).
 
-3. **Fill the 8 files** per `reactbits-clone/react-bits/.context/new-component.md`. The four variants must produce identical visuals and behavior.
+Rules that keep the four in lockstep:
 
-4. **Demo file** uses `DemoShell` (`src/components/common/Preview/DemoShell.jsx`). The shell owns `ComponentPropsProvider`, `TabsLayout`, `useComponentProps` + `useForceRerender`, the preview `<Flex>`, `FullscreenButton` + `RefreshButton`, `Customize`, `PropTable`, `Dependencies`, and `CodeExample`. The demo passes static props (`defaultProps`, `propData`, `dependencies`, `codeObject`, `componentName`, optional `flexProps`, `demoOnlyProps`, `computedProps`) and two render callbacks:
-   - `preview={({ props, key }) => <Component key={key} {...props} />}` — caller applies `key` so refresh works. Use this to handle children-bearing components (`<Component>{props.label}</Component>`), sample data, or literal-string overrides.
-   - `controls={({ props, updateProp, forceRerender }) => <>...</>}` — Customize controls, rendered inside the shell's `<Customize>` which portals into the right shell panel.
-   Demo imports the component from `content/` (the JS+CSS variant). Reference: `src/demo/Components/SidebarDemo.jsx` (plain spread + `flexProps` override), `src/demo/Components/FillButtonDemo.jsx` (children-bearing + `demoOnlyProps`), `src/demo/ThreeD/PosterHelixDemo.jsx` (sample data + literal accent prop), `src/demo/Components/DropdownDemo.jsx` (selects + switch).
+- Animate with **`motion`** via `import { ... } from 'motion/react'`. Never `framer-motion`.
+- Icons from **`lucide-react`**.
+- Dynamic colors/sizes/positions go through **inline styles** (or CSS custom
+  properties), so the same values drive every variant.
+- **Registry sources legitimately hardcode their palettes (inline hex).** They are
+  standalone copy-paste artifacts and can't reference site design tokens — the
+  `design-guard` hook is scoped to skip these dirs, so inline hex here is correct,
+  not a violation. (Uppercase/serif/breakpoint rules still apply.)
+- Polished, accessible, **reduced-motion-friendly** (`useReducedMotion`): paint a
+  static frame / disable loops when reduced motion is on.
+- One focused component. No overbuilding, no speculative props.
 
-   **Always ship real Customize controls — the scaffolder emits an empty `controls` stub, and an empty right panel is a bug, not a finished demo.** Import the control primitives explicitly from `src/components/common/Preview/`:
-   ```jsx
-   import PreviewSlider from '../../components/common/Preview/PreviewSlider';
-   import PreviewSwitch from '../../components/common/Preview/PreviewSwitch';
-   import PreviewSelect from '../../components/common/Preview/PreviewSelect';
-   ```
-   Wire one control per meaningful prop, and use the established `set` helper so rAF/canvas/observer components re-init on change:
-   ```jsx
-   controls={({ props, updateProp, forceRerender }) => {
-     const set = (name, val) => { updateProp(name, val); forceRerender(); };
-     return (
-       <>
-         <PreviewSlider title="Gap" min={16} max={64} value={props.gap} valueUnit="px" onChange={v => set('gap', v)} />
-         <PreviewSwitch title="Grain" isChecked={props.showGrain} onChange={v => set('showGrain', v)} />
-         <PreviewSelect title="Trigger" options={[{ value: 'hover', label: 'On hover' }, { value: 'view', label: 'In view' }]} value={props.trigger} onChange={v => set('trigger', v)} />
-       </>
-     );
-   }}
-   ```
-   Control-API gotchas (read the source if unsure — `PreviewSlider.jsx`, `PreviewSwitch.jsx`, `PreviewSelect.jsx`):
-   - `PreviewSlider`: `{ title, min, max, step?, value, valueUnit?, onChange }`. **`displayValue` is a FUNCTION** (`displayValue(value)`), not a string — for a plain unit suffix use `valueUnit="px"`, never `displayValue={`${x}px`}` (that throws).
-   - `PreviewSwitch`: `{ title, isChecked, onChange }` — `onChange` receives the next boolean.
-   - `PreviewSelect`: `{ title, options, value, onChange }` — `options` is `[{ value, label }]`; `onChange` receives the chosen `value`.
+### The codemod (`generateTsVariants.js`)
 
-   **Full-bleed components (backgrounds, canvas, 3D scenes) must fill fullscreen.** Do NOT wrap them in a fixed-height `<div>` in the demo — that breaks the `FullscreenButton`. Make the component root `width:100%; height:100%` (drive its canvas with a `ResizeObserver`), then pass `flexProps={{ padding: 0, overflow: 'hidden' }}` and render it directly so it fills the preview Flex in both normal and fullscreen modes.
+Reliably types: the default-export props interface (inferred from the prop
+defaults — scalars, `children`, `...rest` → `HTMLAttributes`, and identifier
+defaults via `typeof`), the refs (`canvas*` → `HTMLCanvasElement`, else
+`HTMLDivElement`), the `join`/`hexToRgb` helpers, and the type-only React imports.
 
-5. **Update the Information.js description** — the scaffolder writes a placeholder like `"Foo component."`; replace with a real one-line description.
+It **warns** (does not guess) when it can't confidently type a prop — typically an
+object-array prop (e.g. `items`, `sections`) — or when there's an **inner helper
+component** (e.g. a per-row sub-component). When it warns: in both `.tsx` files,
+add an exported item interface (`export interface <Name>Item { ... }`), point the
+prop at it (`items?: <Name>Item[]`), and type the inner component's props. Skim the
+output every time regardless.
 
-6. **Verify** the new route renders:
-   ```bash
-   curl -s -o /dev/null -w "%{http_code}" http://localhost:5173/<category-slug>/<component-slug>
-   ```
-   Expect `200`. The dev server hot-reloads — no rebuild needed.
+## Demo (`DemoShell`)
+
+The demo imports the component from `content/` and renders through `DemoShell`
+(`src/components/common/Preview/DemoShell.jsx`), which owns the tabs, preview
+`<Flex>`, fullscreen/refresh toolbar, `Customize`, `PropTable`, `Dependencies`,
+and `CodeExample`. You pass static props (`defaultProps`, `propData`,
+`dependencies`, `codeObject`, `componentName`, optional `flexProps`,
+`demoOnlyProps`, `computedProps`) and two render callbacks:
+
+- `preview={({ props, key }) => <Component key={key} {...props} />}` — caller
+  applies `key` so refresh re-mounts. Use this for children-bearing components,
+  sample data, or literal-string prop overrides.
+- `controls={({ props, updateProp, forceRerender }) => <>…</>}` — Customize controls.
+
+**Always ship real controls** — the scaffolder emits an empty `controls` stub, and
+an empty right panel is a bug. One control per meaningful prop. Use the `set`
+helper so rAF/canvas/observer components re-init on change:
+
+```jsx
+import PreviewSlider from '../../components/common/Preview/PreviewSlider';
+import PreviewSwitch from '../../components/common/Preview/PreviewSwitch';
+import PreviewSelect from '../../components/common/Preview/PreviewSelect';
+
+controls={({ props, updateProp, forceRerender }) => {
+  const set = (name, val) => { updateProp(name, val); forceRerender(); };
+  return (
+    <>
+      <PreviewSlider title="Gap" min={16} max={64} value={props.gap} valueUnit="px" onChange={v => set('gap', v)} />
+      <PreviewSwitch title="Streaks" isChecked={props.streak} onChange={v => set('streak', v)} />
+      <PreviewSelect title="Direction" options={[{ value: 'up', label: 'Up' }, { value: 'down', label: 'Down' }]} value={props.direction} onChange={v => set('direction', v)} />
+    </>
+  );
+}}
+```
+
+Control-API gotchas (read the source if unsure):
+- **`PreviewSlider`** `{ title, min, max, step?, value, valueUnit?, onChange }` —
+  **`displayValue` is a FUNCTION**, not a string. For a unit suffix use
+  `valueUnit="px"`; `displayValue={`${x}px`}` throws.
+- **`PreviewSwitch`** `{ title, isChecked, onChange }` — `onChange` gets the next boolean.
+- **`PreviewSelect`** `{ title, options, value, onChange }` — `options` is
+  `[{ value, label }]`; `onChange` gets the chosen `value`.
+
+**Full-bleed components (backgrounds, canvas, 3D)** must fill fullscreen: make the
+root `width:100%; height:100%`, drive the canvas with a `ResizeObserver`, and pass
+`flexProps={{ padding: 0, overflow: 'hidden' }}` — never wrap them in a fixed-height
+`<div>` (it breaks `FullscreenButton`).
+
+Reference demos: `src/demo/Components/SidebarDemo.jsx` (plain + `flexProps`),
+`src/demo/Components/FillButtonDemo.jsx` (children + `demoOnlyProps`),
+`src/demo/ThreeD/PosterHelixDemo.jsx` (sample data + literal prop),
+`src/demo/Components/DropdownDemo.jsx` (select + switch),
+`src/demo/Backgrounds/ParticlesDemo.jsx` (full-bleed canvas).
+
+## Code-metadata + Information.js
+
+- **`constants/code/<Category>/<camelName>Code.js`** — replace the empty
+  `dependencies` and the stub `usage` with the real dependency string (e.g.
+  `'motion'`) and a real, copy-paste usage example.
+- **`constants/Information.js`** — replace the scaffolder's `"Foo component."`
+  placeholder with a real one-line description that names the source interaction,
+  and add real `tags`.
+
+## Verify
+
+`pnpm lint` (0 warnings) and `pnpm build` must pass. Then check **registration
+against the build output**, not a dev route:
+
+```bash
+# from apps/website, after `pnpm build`
+SLUG=<kebab-slug>; NAME=<PascalName>
+grep -rlq "$SLUG" dist/assets/ && echo "✓ slug registered" || echo "✗ slug MISSING"
+ls dist/assets/ | grep -q "${NAME}Demo-" && echo "✓ demo chunk built" || echo "✗ demo chunk MISSING"
+cmp src/content/<Category>/<NAME>/<NAME>.css src/ts-default/<Category>/<NAME>/<NAME>.css && echo "✓ CSS byte-identical"
+```
+
+A dev-server `curl … → 200` is **not** acceptance: the SPA rewrites every path to
+`index.html`, so any string returns 200. The slug + demo-chunk grep is the real
+signal that the lazy import compiled and the registry wired up.
 
 ## Adding a category
 
-1. **Pick folder name (PascalCase) and display name.** Examples:
-   - Folder `Animations`, display `'Animations'` (most common — same)
-   - Folder `ThreeD`, display `'3D'` (when display has digits / special chars)
-   - Folder `TextEffects`, display `'Text Effects'`
-
-2. **Edit `src/constants/Categories.js`** — add an entry:
-   ```js
-   { name: 'Display Name', subcategories: [] }
-   ```
-   Subcategories list fills as components are scaffolded.
-
-3. **No directory creation needed.** The variant directories appear on first scaffold under that category.
-
-4. **Note the scaffolder mismatch.** `scripts/generateComponent.js` matches Categories.js entries by looking for `name: '<FolderCategory>'`. If your display name differs from the folder name (e.g. folder `ThreeD`, display `'3D'`), the scaffolder warns "Category not found in Categories.js" — this is harmless; manually add the new subcategory line to the correct entry. If you want to silence the warning long-term, add a `folder` field to Categories entries and patch the scaffolder.
+1. Pick a **folder name** (PascalCase) and **display name**. Same when plain
+   (`Animations`); differ when the label has digits/spaces (folder `ThreeD` →
+   `'3D'`; folder `TextEffects` → `'Text Effects'`).
+2. In `src/constants/Categories.js`, add `{ name: 'Display Name', subcategories: [] }`.
+3. No directory creation needed — variant dirs appear on first scaffold.
+4. **Scaffolder match quirk:** `generateComponent.js` finds the category by
+   `name: '<FolderCategory>'` in Categories.js. If display ≠ folder, it warns
+   "Category not found" — harmless; just add the subcategory line to the right
+   entry by hand. To silence it long-term, add a `folder` field to Categories
+   entries and patch the scaffolder.
 
 ## Moving a component between categories
 
-Use `git mv` to preserve history. Update every reference.
+Use `git mv` to preserve history; update every reference.
 
-1. **Move directories** for each of the 4 variants + the demo + the code-metadata file:
-   ```bash
-   git mv src/content/<OldCat>/<Name>     src/content/<NewCat>/<Name>
-   git mv src/tailwind/<OldCat>/<Name>    src/tailwind/<NewCat>/<Name>
-   git mv src/ts-default/<OldCat>/<Name>  src/ts-default/<NewCat>/<Name>
-   git mv src/ts-tailwind/<OldCat>/<Name> src/ts-tailwind/<NewCat>/<Name>
-   git mv src/demo/<OldCat>/<Name>Demo.jsx          src/demo/<NewCat>/<Name>Demo.jsx
-   git mv src/constants/code/<OldCat>/<camelName>Code.js src/constants/code/<NewCat>/<camelName>Code.js
-   ```
+```bash
+git mv src/content/<Old>/<Name>     src/content/<New>/<Name>
+git mv src/tailwind/<Old>/<Name>    src/tailwind/<New>/<Name>
+git mv src/ts-default/<Old>/<Name>  src/ts-default/<New>/<Name>
+git mv src/ts-tailwind/<Old>/<Name> src/ts-tailwind/<New>/<Name>
+git mv src/demo/<Old>/<Name>Demo.jsx              src/demo/<New>/<Name>Demo.jsx
+git mv src/constants/code/<Old>/<camelName>Code.js src/constants/code/<New>/<camelName>Code.js
+```
 
-2. **Update the moved demo file**: the two imports of the component and its code metadata switch from `<OldCat>` to `<NewCat>`.
-
-3. **Update the moved code-metadata file**: all five `?raw` imports change `@content/<OldCat>/`, `@tailwind/<OldCat>/`, `@ts-default/<OldCat>/`, `@ts-tailwind/<OldCat>/` to the new category.
-
-4. **Update `src/constants/Components.js`**: change `'<kebab-name>': () => import('../demo/<OldCat>/<Name>Demo')` to the new category.
-
-5. **Update `src/constants/Categories.js`**: remove from old category's `subcategories`, add to new.
-
-6. **Update `src/constants/Information.js`**: rename the key from `'<OldCat>/<Name>'` to `'<NewCat>/<Name>'` and change the `category:` value.
-
-7. **Sanity check**: grep for any leftover stale paths.
-   ```bash
-   grep -rn "<OldCat>/<Name>\|<OldCat>/<camelName>" src/
-   ```
-   Should return nothing.
+Then update:
+1. Moved **demo**: the two imports (component + code metadata) switch `<Old>`→`<New>`.
+2. Moved **code-metadata**: all five `?raw` imports (`@content`, `@tailwind`,
+   `@ts-default`, `@ts-tailwind`, css) switch category.
+3. **`Components.js`**: the demo import path `../demo/<Old>/…` → `<New>`.
+4. **`Categories.js`**: remove from old `subcategories`, add to new.
+5. **`Information.js`**: rename key `'<Old>/<Name>'` → `'<New>/<Name>'`, change `category`.
+6. Grep clean: `grep -rn "<Old>/<Name>\|<Old>/<camelName>" src/` returns nothing.
 
 ## Naming conventions
 
 | Context | Format | Example |
 |---|---|---|
-| Component name | PascalCase | `MagneticCard` |
-| Component folder | matches component | `MagneticCard/` |
-| CSS class prefix | kebab-case | `.magnetic-card-*` |
-| Route slug | kebab-case | `magnetic-card` |
-| Code metadata file | `<camel>Code.js` | `magneticCardCode.js` |
-| Code metadata export | camelCase | `magneticCard` |
-| Display name in Categories | Space-separated | `Magnetic Card` |
-| Category folder | PascalCase | `Animations`, `ThreeD` |
+| Component / folder | PascalCase | `ScrollStack` |
+| CSS class prefix | kebab-case | `.scroll-stack-*` |
+| Route slug | kebab-case | `scroll-stack` |
+| Code-metadata file / export | `<camel>Code.js` / camelCase | `scrollStackCode.js` / `scrollStack` |
+| Categories display name | space-separated | `Scroll Stack` |
+| Category folder | PascalCase | `Scroll`, `ThreeD` |
 
 ## Hard rules
 
-- **CSS files in `content/` and `ts-default/` are byte-identical.** Copy with `cp`, not retype.
-- **All 4 variants render identically.** Differences are language and styling syntax only.
-- **Never hand-write the registration entries on first scaffold** — let the scaffolder do it.
-- **On move**: use `git mv` to preserve history; update every `?raw` import; verify with grep.
-- **No placeholders** in shipped components: no `// TODO`, no demo strings like `"Foo bar"`, no hardcoded test data unless it's curated sample data the demo explicitly needs.
+- The two CSS files (`content/` + `ts-default/`) are **byte-identical** — the
+  codemod copies them; if you edit CSS later, re-copy (`cp`) and re-`cmp`.
+- All four variants render identically; differences are language + styling syntax only.
+- Let the scaffolder write the registration entries; never hand-add them on first scaffold.
+- No placeholders in shipped code: no `// TODO`, no `"Foo bar"` demo strings, no
+  stub data unless it's curated sample data the demo needs.
+- On move: `git mv` (preserve history), update every `?raw` import, grep clean.
 
 ## Reference
 
+- Scaffolder: `scripts/generateComponent.js` (source of truth for files + registration)
+- TS codemod: `scripts/generateTsVariants.js`
 - Demo shell API: `src/components/common/Preview/DemoShell.jsx`
-- Scaffolder source: `scripts/generateComponent.js` (source of truth — generates a `DemoShell`-based demo)
-- Upstream react-bits recipe (variant rules, naming): `reactbits-clone/react-bits/.context/new-component.md` — note the inline demo pattern there is intentionally **not** followed; this codebase uses `DemoShell` instead.
-- Workspace + repo conventions: workspace CLAUDE.md and the website CLAUDE.md
+- Registry constants: `src/constants/{Components,Categories,Information}.js`
+- Repo conventions: root `CLAUDE.md` and `apps/website/CLAUDE.md`
