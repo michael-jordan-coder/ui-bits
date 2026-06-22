@@ -151,11 +151,12 @@ The component should be genuinely useful, not merely decorative.
 
 If you truly cannot find a fresh high-quality spell on designspells.com, fall back in this order:
 
-1. `https://60fps.design` — buttery-smooth micro-interactions and motion studies (great for Scroll/motion components)
-2. `https://www.shapeof.ai` — world-class AI product UI interactions
-3. `https://reactbits.dev` — component interactions and animation patterns
-4. `https://animations.dev` — motion craft reference (easing, spring, choreography) for building to a high bar
-5. `https://mobbin.com` — real-world UI/UX flows from top-tier apps
+1. `https://tympanus.net/codrops` — cutting-edge interaction demos with source code (highest signal for novel, buildable effects)
+2. `https://60fps.design` — buttery-smooth micro-interactions and motion studies (great for Scroll/motion components)
+3. `https://www.shapeof.ai` — world-class AI product UI interactions
+4. `https://reactbits.dev` — component interactions and animation patterns
+5. `https://animations.dev` — motion craft reference (easing, spring, choreography) for building to a high bar
+6. `https://mobbin.com` — real-world UI/UX flows from top-tier apps
 
 Record the source URL clearly.
 
