@@ -532,5 +532,125 @@ export const componentMetadata = {
     category: 'Components',
     name: 'BottomSheet',
     tags: ['bottom-sheet', 'drag', 'snap-points', 'dialog', 'motion', 'gesture']
+  },
+  'Backgrounds/Lightning': {
+    description: 'Branching electric arcs that periodically strike across a dark surface, drawn on canvas with a bright core and soft glow.',
+    category: 'Backgrounds',
+    name: 'Lightning',
+    tags: ['background', 'lightning', 'canvas', 'animated', 'ambient']
+  },
+  'Backgrounds/LiquidMetal': {
+    description: 'A mercury-like metaball surface of merging blobs with a metallic sheen, rendered on canvas.',
+    category: 'Backgrounds',
+    name: 'LiquidMetal',
+    tags: ['background', 'metaballs', 'liquid', 'canvas', 'ambient']
+  },
+  'Backgrounds/Constellation': {
+    description: 'Drifting nodes linked by fading lines when they pass near each other, with a subtle pointer attraction.',
+    category: 'Backgrounds',
+    name: 'Constellation',
+    tags: ['background', 'network', 'particles', 'canvas', 'ambient']
+  },
+  'Backgrounds/HexPulse': {
+    description: 'A hexagon tessellation where concentric pulse waves light up cells as they ripple outward from a drifting origin.',
+    category: 'Backgrounds',
+    name: 'HexPulse',
+    tags: ['background', 'hexagon', 'pulse', 'canvas', 'ambient']
+  },
+  'Backgrounds/NoiseContours': {
+    description: 'Flowing topographic contour lines drawn from a layered noise field, drifting like an animated elevation map.',
+    category: 'Backgrounds',
+    name: 'NoiseContours',
+    tags: ['background', 'contours', 'noise', 'canvas', 'ambient']
+  },
+  'Backgrounds/Rain': {
+    description: 'Parallax rainfall of layered streaks falling at a wind angle, with near drops faster and brighter than far ones.',
+    category: 'Backgrounds',
+    name: 'Rain',
+    tags: ['background', 'rain', 'parallax', 'canvas', 'ambient']
+  },
+  'Backgrounds/Vortex': {
+    description: 'Particles spiralling inward around a central vortex with motion trails, like a whirlpool or galaxy.',
+    category: 'Backgrounds',
+    name: 'Vortex',
+    tags: ['background', 'vortex', 'spiral', 'canvas', 'ambient']
+  },
+  'Scroll/ScrollTimeline': {
+    description: 'A vertical timeline whose spine fills and whose nodes activate one by one as the section scrolls into view.',
+    category: 'Scroll',
+    name: 'ScrollTimeline',
+    tags: ['scroll', 'timeline', 'progress', 'in-view', 'motion']
+  },
+  'Scroll/ScrollMask': {
+    description: 'A panel revealed by an expanding clip-path wipe bound to scroll progress while the stage stays pinned.',
+    category: 'Scroll',
+    name: 'ScrollMask',
+    tags: ['scroll', 'reveal', 'clip-path', 'sticky', 'motion']
+  },
+  'Scroll/ScrollFloat': {
+    description: 'Rows that float into place with a perspective tilt and fade as they pass through the viewport on scroll.',
+    category: 'Scroll',
+    name: 'ScrollFloat',
+    tags: ['scroll', 'float', 'perspective', 'in-view', 'motion']
+  },
+  'Scroll/ScrollZoom': {
+    description: 'A pinned panel that scales up and fades in, bound to scroll progress, then holds while the track finishes.',
+    category: 'Scroll',
+    name: 'ScrollZoom',
+    tags: ['scroll', 'zoom', 'scale', 'sticky', 'motion']
+  },
+  'Scroll/ReadingHighlight': {
+    description: 'A paragraph whose words light up from dim to bright one by one as you scroll through the block.',
+    category: 'Scroll',
+    name: 'ReadingHighlight',
+    tags: ['scroll', 'text', 'highlight', 'reading', 'motion']
+  },
+  'Scroll/ScrollRotate': {
+    description: 'A geometric mark that rotates and scales bound to scroll progress while pinned in a sticky stage.',
+    category: 'Scroll',
+    name: 'ScrollRotate',
+    tags: ['scroll', 'rotate', 'sticky', 'transform', 'motion']
+  },
+  'Scroll/ScrollSnap': {
+    description: 'A vertical scroll-snap pager with full-height panels and a dot rail that tracks and jumps to the active panel.',
+    category: 'Scroll',
+    name: 'ScrollSnap',
+    tags: ['scroll', 'snap', 'pager', 'navigation', 'motion']
+  },
+  'Components/ColorPicker': {
+    description: 'A compact color picker with a draggable hue strip, preset swatches, and a live preview chip with its hex value.',
+    category: 'Components',
+    name: 'ColorPicker',
+    tags: ['input', 'color', 'picker', 'swatches', 'accessible']
+  },
+  'Components/NotificationStack': {
+    description: 'An iOS-style notification stack that collapses into a peeking pile and fans out into a readable, dismissible list.',
+    category: 'Components',
+    name: 'NotificationStack',
+    tags: ['notification', 'stack', 'collapse', 'motion', 'list']
+  },
+  'Components/FileDrop': {
+    description: 'A drag-and-drop upload zone that reacts on drag-over and lists dropped files as removable chips with sizes.',
+    category: 'Components',
+    name: 'FileDrop',
+    tags: ['upload', 'drag-drop', 'file', 'input', 'accessible']
+  },
+  'Components/ImageCompare': {
+    description: 'A before-and-after comparison slider with a draggable divider, operable by pointer and keyboard.',
+    category: 'Components',
+    name: 'ImageCompare',
+    tags: ['compare', 'slider', 'before-after', 'drag', 'accessible']
+  },
+  'TextAnimations/SplitText': {
+    description: 'Text that splits into characters or words and staggers in with a rise and fade when it scrolls into view.',
+    category: 'TextAnimations',
+    name: 'SplitText',
+    tags: ['text', 'split', 'stagger', 'in-view', 'reveal']
+  },
+  'TextAnimations/BlurText': {
+    description: 'Words that resolve from blurred and offset into sharp focus, staggered, when the text scrolls into view.',
+    category: 'TextAnimations',
+    name: 'BlurText',
+    tags: ['text', 'blur', 'focus', 'in-view', 'reveal']
   }
 };

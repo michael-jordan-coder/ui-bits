@@ -1,0 +1,230 @@
+import { useEffect, useRef, type HTMLAttributes, type ReactNode } from 'react';
+import { useReducedMotion } from 'motion/react';
+
+const hexToRgb = (hex: string): [number, number, number] => {
+  const v = hex.replace('#', '');
+  const n = v.length === 3 ? v.split('').map(c => c + c).join('') : v;
+  const int = parseInt(n, 16);
+  return [(int >> 16) & 255, (int >> 8) & 255, int & 255];
+};
+
+// Canvas drawing is identical to the CSS variant; only the wrapper uses Tailwind
+// utility classes. Branching lightning bolts (recursive midpoint displacement +
+// forked branches) periodically strike, each a bright core plus translucent glow
+// that flashes in and fades out. Single rAF loop using the timestamp as the
+// clock, dpr-scaled canvas, ResizeObserver. Honors prefers-reduced-motion by
+// drawing one static bolt instead of looping.
+interface Point {
+  x: number;
+  y: number;
+}
+
+interface Bolt {
+  main: Point[];
+  branches: Point[][];
+  born: number;
+  life: number;
+}
+
+export interface LightningProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
+  color?: string;
+  surfaceColor?: string;
+  frequency?: number;
+  branchiness?: number;
+  glow?: number;
+  className?: string;
+  children?: ReactNode;
+}
+
+export default function Lightning({
+  color = '#7aa2ff',
+  surfaceColor = '#06070d',
+  frequency = 1,
+  branchiness = 1,
+  glow = 1,
+  className = '',
+  children,
+  ...rest
+}: LightningProps) {
+  const reduceMotion = useReducedMotion();
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const wrap = wrapRef.current;
+    const canvas = canvasRef.current;
+    if (!wrap || !canvas) return undefined;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return undefined;
+
+    const reduce = !!reduceMotion;
+    const [cr, cg, cb] = hexToRgb(color);
+    const rgb = `${cr}, ${cg}, ${cb}`;
+
+    let width = 0;
+    let height = 0;
+    let rafId = 0;
+    let start = 0;
+    let nextStrike = 0;
+    let bolt: Bolt | null = null;
+
+    const rand = (min: number, max: number) => min + Math.random() * (max - min);
+
+    // Subdivide a segment by recursive midpoint displacement: each midpoint is
+    // offset perpendicular to the segment by a jitter that scales with length.
+    const displace = (
+      ax: number,
+      ay: number,
+      bx: number,
+      by: number,
+      displacement: number,
+      points: Point[]
+    ): void => {
+      if (displacement < 4) {
+        points.push({ x: bx, y: by });
+        return;
+      }
+      const mx = (ax + bx) / 2;
+      const my = (ay + by) / 2;
+      const nx = -(by - ay);
+      const ny = bx - ax;
+      const len = Math.hypot(nx, ny) || 1;
+      const offset = rand(-displacement, displacement);
+      const px = mx + (nx / len) * offset;
+      const py = my + (ny / len) * offset;
+      displace(ax, ay, px, py, displacement / 2, points);
+      displace(px, py, bx, by, displacement / 2, points);
+    };
+
+    const buildChannel = (ax: number, ay: number, bx: number, by: number, displacement: number): Point[] => {
+      const points: Point[] = [{ x: ax, y: ay }];
+      displace(ax, ay, bx, by, displacement, points);
+      return points;
+    };
+
+    const spawnBolt = (): Bolt => {
+      const startX = rand(width * 0.2, width * 0.8);
+      const endX = startX + rand(-width * 0.18, width * 0.18);
+      const main = buildChannel(startX, 0, endX, height, Math.min(width, height) * 0.12);
+
+      const branches: Point[][] = [];
+      const branchCount = Math.round(rand(1, 3) * branchiness);
+      for (let i = 0; i < branchCount; i++) {
+        const anchor = main[Math.floor(rand(1, main.length - 1))];
+        const reach = rand(0.18, 0.4) * height;
+        const bx = anchor.x + rand(-1, 1) * reach * branchiness;
+        const by = Math.min(anchor.y + reach, height);
+        branches.push(buildChannel(anchor.x, anchor.y, bx, by, reach * 0.18));
+      }
+
+      return { main, branches, born: 0, life: rand(300, 450) };
+    };
+
+    const strokeChannel = (points: Point[], lineWidth: number, strokeStyle: string): void => {
+      ctx.lineWidth = lineWidth;
+      ctx.strokeStyle = strokeStyle;
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, points[0].y);
+      for (let i = 1; i < points.length; i++) ctx.lineTo(points[i].x, points[i].y);
+      ctx.stroke();
+    };
+
+    const drawBolt = (b: Bolt, intensity: number): void => {
+      ctx.save();
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+
+      // Wider translucent glow pass (additive), then the bright thin core.
+      ctx.globalCompositeOperation = 'lighter';
+      const glowAlpha = 0.18 * glow * intensity;
+      strokeChannel(b.main, 9, `rgba(${rgb}, ${glowAlpha})`);
+      for (const branch of b.branches) strokeChannel(branch, 6, `rgba(${rgb}, ${glowAlpha * 0.7})`);
+
+      const coreAlpha = 0.95 * intensity;
+      strokeChannel(b.main, 1.6, `rgba(${rgb}, ${coreAlpha})`);
+      for (const branch of b.branches) strokeChannel(branch, 1.1, `rgba(${rgb}, ${coreAlpha * 0.8})`);
+
+      ctx.restore();
+    };
+
+    const paintSurface = (afterglow = 0): void => {
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.fillStyle = surfaceColor;
+      ctx.fillRect(0, 0, width, height);
+      if (afterglow > 0) {
+        const grad = ctx.createRadialGradient(width / 2, 0, 0, width / 2, 0, Math.max(width, height));
+        grad.addColorStop(0, `rgba(${rgb}, ${0.06 * glow * afterglow})`);
+        grad.addColorStop(1, `rgba(${rgb}, 0)`);
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, width, height);
+      }
+    };
+
+    const paint = (elapsed: number): void => {
+      if (!bolt || elapsed >= nextStrike) {
+        bolt = spawnBolt();
+        bolt.born = elapsed;
+        // Mean interval ~1.6s at frequency 1; higher frequency strikes sooner.
+        nextStrike = elapsed + rand(700, 2500) / Math.max(frequency, 0.001);
+      }
+      const age = elapsed - bolt.born;
+      const progress = Math.min(age / bolt.life, 1);
+      // Fast flash-in (first 12%) then ease-out fade.
+      const intensity = progress < 0.12 ? progress / 0.12 : 1 - (progress - 0.12) / 0.88;
+      const lit = Math.max(intensity, 0);
+
+      paintSurface(lit * 0.5);
+      if (lit > 0) drawBolt(bolt, lit);
+    };
+
+    const resize = () => {
+      const rect = wrap.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+      if (width <= 0 || height <= 0) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      if (reduce) {
+        paintSurface(0.5);
+        const staticBolt = spawnBolt();
+        drawBolt(staticBolt, 1);
+      }
+    };
+
+    const frame = (now: number): void => {
+      if (!start) start = now;
+      paint(now - start);
+      rafId = requestAnimationFrame(frame);
+    };
+
+    resize();
+    const ro = new ResizeObserver(resize);
+    ro.observe(wrap);
+
+    if (!reduce) {
+      rafId = requestAnimationFrame(frame);
+    }
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      ro.disconnect();
+    };
+  }, [color, surfaceColor, frequency, branchiness, glow, reduceMotion]);
+
+  return (
+    <div
+      ref={wrapRef}
+      className={`relative h-full min-h-[200px] w-full overflow-hidden bg-[#06070d] ${className}`.trim()}
+      {...rest}
+    >
+      <canvas ref={canvasRef} className="block h-full w-full" />
+      {children != null && (
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">{children}</div>
+      )}
+    </div>
+  );
+}
