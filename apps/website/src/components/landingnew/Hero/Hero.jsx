@@ -15,10 +15,10 @@ const Hero = () => (
       project.
     </p>
     <div className="cb-hero-buttons">
-      <Link to="/get-started/introduction" className="cb-hero-btn cb-hero-btn-primary">
+      <Link to="/components/index" className="cb-hero-btn cb-hero-btn-primary">
         Get started <FaArrowRight size={12} />
       </Link>
-      <Link to="/components/index" className="cb-hero-btn">
+      <Link to="/components/fill-button" className="cb-hero-btn">
         Browse components
       </Link>
     </div>
