@@ -1,0 +1,108 @@
+.image-compare {
+  position: relative;
+  width: 100%;
+  max-width: 32rem;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 1rem;
+  user-select: none;
+  touch-action: none;
+  background: #0f172a;
+}
+
+.image-compare__panel {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.image-compare__panel--before {
+  clip-path: inset(0 calc(100% - var(--image-compare-split)) 0 0);
+}
+
+.image-compare__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.image-compare__label {
+  position: absolute;
+  bottom: 0.75rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #f8fafc;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(6px);
+  pointer-events: none;
+}
+
+.image-compare__label--before {
+  left: 0.75rem;
+}
+
+.image-compare__label--after {
+  right: 0.75rem;
+}
+
+.image-compare__divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--image-compare-split);
+  width: 2px;
+  transform: translateX(-1px);
+  background: var(--image-compare-accent);
+  cursor: ew-resize;
+  touch-action: none;
+}
+
+.image-compare__handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 2px solid var(--image-compare-accent);
+  border-radius: 50%;
+  color: var(--image-compare-accent);
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(6px);
+  cursor: ew-resize;
+  transition: transform 120ms ease-out;
+}
+
+.image-compare__handle:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.image-compare__handle:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(248, 250, 252, 0.55);
+}
+
+.image-compare__chevron {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image-compare__handle {
+    transition: none;
+  }
+
+  .image-compare__handle:hover {
+    transform: translate(-50%, -50%);
+  }
+}

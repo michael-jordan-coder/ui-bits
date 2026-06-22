@@ -1,0 +1,81 @@
+.scroll-rotate {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: 18px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scroll-rotate::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-rotate-track-rail {
+  position: relative;
+  width: 100%;
+}
+
+.scroll-rotate-stage {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 22px;
+  box-sizing: border-box;
+}
+
+.scroll-rotate-dial {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(180px, 60%, 260px);
+  aspect-ratio: 1 / 1;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+.scroll-rotate-ring {
+  width: 100%;
+  height: 100%;
+}
+
+.scroll-rotate-track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 1;
+}
+
+.scroll-rotate-readout {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+.scroll-rotate-value {
+  font-size: 34px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.scroll-rotate-label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.5);
+}

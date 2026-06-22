@@ -1,0 +1,13 @@
+.blur-text {
+  display: inline-block;
+  font-size: clamp(1.75rem, 5vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: #fafafa;
+}
+
+.blur-text-word {
+  display: inline-block;
+  will-change: transform, opacity, filter;
+}

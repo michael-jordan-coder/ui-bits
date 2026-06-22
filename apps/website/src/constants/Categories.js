@@ -53,7 +53,11 @@ export const CATEGORIES = [
       'Gooey Menu',
       'Password Strength',
       'Ripple Button',
-      'Bottom Sheet'
+      'Bottom Sheet',
+      'Color Picker',
+      'Notification Stack',
+      'File Drop',
+      'Image Compare'
     ]
   },
   {
@@ -78,12 +82,19 @@ export const CATEGORIES = [
       'Parallax Scroll',
       'Scroll Spy Nav',
       'Sticky Grid Scroll',
-      'Path Draw'
+      'Path Draw',
+      'Scroll Timeline',
+      'Scroll Mask',
+      'Scroll Float',
+      'Scroll Zoom',
+      'Reading Highlight',
+      'Scroll Rotate',
+      'Scroll Snap'
     ]
   },
   {
     name: 'Text Animations',
-    subcategories: ['Scramble Text', 'Number Ticker', 'Typewriter Text', 'Shiny Text']
+    subcategories: ['Scramble Text', 'Number Ticker', 'Typewriter Text', 'Shiny Text', 'Split Text', 'Blur Text']
   },
   {
     name: 'Backgrounds',
@@ -100,7 +111,14 @@ export const CATEGORIES = [
       'Plasma',
       'Grain',
       'Flow Field',
-      'Mesh Gradient'
+      'Mesh Gradient',
+      'Lightning',
+      'Liquid Metal',
+      'Constellation',
+      'Hex Pulse',
+      'Noise Contours',
+      'Rain',
+      'Vortex'
     ]
   }
 ];
