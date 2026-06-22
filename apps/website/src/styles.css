@@ -24,7 +24,9 @@ body {
   background-color: var(--bg-body);
   color: #fff;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  /* clip (not hidden) guards against horizontal overflow without turning the
+     body into a scroll container, which would break the sticky header. */
+  overflow-x: clip;
 }
 
 #root {
