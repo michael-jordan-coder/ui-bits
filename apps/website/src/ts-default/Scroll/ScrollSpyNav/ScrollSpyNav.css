@@ -1,0 +1,106 @@
+.spynav {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 18px;
+  border-radius: 18px;
+  background-color: #08080c;
+  box-sizing: border-box;
+}
+
+.spynav-rail {
+  position: sticky;
+  top: 18px;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 0 0 auto;
+  width: 132px;
+}
+
+.spynav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 9px;
+  background: transparent;
+  color: rgba(250, 250, 250, 0.55);
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: color 120ms ease-out, background-color 120ms ease-out;
+}
+
+.spynav-link:hover {
+  color: rgba(250, 250, 250, 0.85);
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.spynav-link--active {
+  background-color: rgba(255, 255, 255, 0.06);
+  font-weight: 600;
+}
+
+.spynav-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  background: rgba(250, 250, 250, 0.3);
+  transition: transform 120ms ease-out;
+}
+
+.spynav-link--active .spynav-dot {
+  transform: scale(1.25);
+}
+
+.spynav-scroll {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.spynav-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.spynav-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 18px 22px;
+  border-radius: 14px;
+  background-color: #131318;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: 16px;
+}
+
+.spynav-section:last-child {
+  margin-bottom: 0;
+  min-height: 70%;
+}
+
+.spynav-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #fafafa;
+}
+
+.spynav-body {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(250, 250, 250, 0.66);
+}

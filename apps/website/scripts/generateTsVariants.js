@@ -165,6 +165,16 @@ function transform(src, { isTailwind }) {
     }
   }
 
+  // 4b) Type the two top-level helpers the loop reuses verbatim across components.
+  out = out.replace(
+    /const join = \(\.\.\.classes\) =>/,
+    'const join = (...classes: Array<string | false | undefined>) =>'
+  );
+  out = out.replace(
+    /const hexToRgb = hex =>/,
+    'const hexToRgb = (hex: string): [number, number, number] =>'
+  );
+
   // 5) Flag inner helper components — their props are not auto-typed.
   const inner = [...out.matchAll(/\nfunction ([A-Z]\w*)\s*\(/g)].map(m => m[1]);
   if (inner.length) {

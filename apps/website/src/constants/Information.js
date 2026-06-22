@@ -472,5 +472,17 @@ export const componentMetadata = {
     category: 'Backgrounds',
     name: 'Plasma',
     tags: ['background', 'plasma', 'waves', 'canvas', 'ambient']
+  },
+  'Scroll/ScrollSpyNav': {
+    description: 'A sticky side rail whose active link tracks the section in view and glides to any section on click — the scroll-spy docs nav.',
+    category: 'Scroll',
+    name: 'ScrollSpyNav',
+    tags: ['scroll', 'spy', 'nav', 'in-view', 'docs']
+  },
+  'Backgrounds/Grain': {
+    description: 'An animated film-grain speckle laid over a flat surface at a tasteful frame rate — a noise / grain backdrop.',
+    category: 'Backgrounds',
+    name: 'Grain',
+    tags: ['background', 'grain', 'noise', 'canvas', 'texture']
   }
 };
