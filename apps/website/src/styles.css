@@ -1006,6 +1006,27 @@ a {
   display: none;
 }
 
+.scrubber-track--input {
+  cursor: text;
+}
+
+.scrubber-input {
+  margin-left: auto;
+  min-width: 0;
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  text-align: right;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  color: inherit;
+}
+
+.scrubber-input::placeholder {
+  color: var(--text-muted);
+}
+
 .scrubber-track--switch {
   background: var(--bg-elevated);
 }

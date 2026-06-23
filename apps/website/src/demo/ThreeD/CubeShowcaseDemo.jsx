@@ -73,7 +73,7 @@ const CubeShowcaseDemo = () => {
       dependencies={[]}
       codeObject={cubeShowcase}
       componentName="CubeShowcase"
-      flexProps={{ alignItems: 'stretch', minH: '520px' }}
+      flexProps={{ minH: '520px' }}
       preview={({ props, key }) => <CubeShowcase key={key} {...props} faces={SAMPLE_FACES} accentColor="var(--accent)" />}
       controls={({ props, updateProp, forceRerender }) => {
         const set = (name, val) => {

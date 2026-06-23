@@ -3,6 +3,7 @@ import DemoShell from '../../components/common/Preview/DemoShell';
 import PreviewSlider from '../../components/common/Preview/PreviewSlider';
 import PreviewSelect from '../../components/common/Preview/PreviewSelect';
 import PreviewSwitch from '../../components/common/Preview/PreviewSwitch';
+import PreviewInput from '../../components/common/Preview/PreviewInput';
 
 import NumberTicker from '../../content/TextAnimations/NumberTicker/NumberTicker';
 import { numberTicker } from '../../constants/code/TextAnimations/numberTickerCode';
@@ -61,6 +62,17 @@ const NumberTickerDemo = () => {
         const set = (name, val) => updateProp(name, val);
         return (
           <>
+            <PreviewInput
+              title="Value"
+              value={String(props.value)}
+              placeholder="Type a number…"
+              inputMode="decimal"
+              maxLength={12}
+              onChange={v => {
+                const n = Number(v.replace(/[^0-9.-]/g, ''));
+                set('value', Number.isFinite(n) ? n : 0);
+              }}
+            />
             <PreviewSlider title="Value" min={0} max={99999} value={props.value} onChange={v => set('value', v)} />
             <PreviewSlider title="Decimals" min={0} max={2} value={props.decimals} onChange={v => set('decimals', v)} />
             <PreviewSlider

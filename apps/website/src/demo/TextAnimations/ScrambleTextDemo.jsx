@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import DemoShell from '../../components/common/Preview/DemoShell';
 import PreviewSlider from '../../components/common/Preview/PreviewSlider';
 import PreviewSelect from '../../components/common/Preview/PreviewSelect';
+import PreviewInput from '../../components/common/Preview/PreviewInput';
 
 import ScrambleText from '../../content/TextAnimations/ScrambleText/ScrambleText';
 import { scrambleText } from '../../constants/code/TextAnimations/scrambleTextCode';
@@ -54,6 +55,13 @@ const ScrambleTextDemo = () => {
         };
         return (
           <>
+            <PreviewInput
+              title="Text"
+              value={props.text}
+              placeholder="Type text…"
+              maxLength={48}
+              onChange={val => set('text', val)}
+            />
             <PreviewSelect
               title="Trigger"
               options={TRIGGER_OPTIONS}

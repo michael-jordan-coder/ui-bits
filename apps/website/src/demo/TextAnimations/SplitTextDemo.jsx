@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import DemoShell from '../../components/common/Preview/DemoShell';
 import PreviewSlider from '../../components/common/Preview/PreviewSlider';
 import PreviewSelect from '../../components/common/Preview/PreviewSelect';
+import PreviewInput from '../../components/common/Preview/PreviewInput';
 
 import SplitText from '../../content/TextAnimations/SplitText/SplitText';
 import { splitText } from '../../constants/code/TextAnimations/splitTextCode';
@@ -56,6 +57,13 @@ const SplitTextDemo = () => {
         };
         return (
           <>
+            <PreviewInput
+              title="Text"
+              value={props.text}
+              placeholder="Type text…"
+              maxLength={64}
+              onChange={val => set('text', val)}
+            />
             <PreviewSelect title="Split by" options={AS_OPTIONS} value={props.as} onChange={val => set('as', val)} />
             <PreviewSlider
               title="Stagger"

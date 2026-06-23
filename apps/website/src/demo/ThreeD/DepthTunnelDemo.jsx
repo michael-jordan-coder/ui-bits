@@ -63,7 +63,7 @@ const DepthTunnelDemo = () => {
       dependencies={[]}
       codeObject={depthTunnel}
       componentName="DepthTunnel"
-      flexProps={{ alignItems: 'stretch', minH: '560px' }}
+      flexProps={{ minH: '560px' }}
       preview={({ props, key }) => (
         <DepthTunnel key={key} {...props} items={SAMPLE_ITEMS} accentColor="var(--accent)" />
       )}

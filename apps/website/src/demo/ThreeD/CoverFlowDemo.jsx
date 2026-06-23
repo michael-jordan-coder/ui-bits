@@ -68,7 +68,7 @@ const CoverFlowDemo = () => {
       dependencies={[]}
       codeObject={coverFlow}
       componentName="CoverFlow"
-      flexProps={{ alignItems: 'stretch', minH: '560px' }}
+      flexProps={{ minH: '560px' }}
       preview={({ props, key }) => (
         <CoverFlow key={key} {...props} items={SAMPLE_ITEMS} accentColor="var(--accent)" />
       )}

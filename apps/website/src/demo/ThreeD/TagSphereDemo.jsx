@@ -95,7 +95,7 @@ const TagSphereDemo = () => {
       dependencies={[]}
       codeObject={tagSphere}
       componentName="TagSphere"
-      flexProps={{ alignItems: 'stretch', minH: '480px' }}
+      flexProps={{ minH: '480px' }}
       preview={({ props, key }) => <TagSphere key={key} {...props} tags={SAMPLE_TAGS} accentColor="var(--accent)" />}
       controls={({ props, updateProp, forceRerender }) => {
         const set = (name, val) => {

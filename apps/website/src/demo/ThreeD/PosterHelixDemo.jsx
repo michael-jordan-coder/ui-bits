@@ -69,7 +69,7 @@ const PosterHelixDemo = () => {
       dependencies={[]}
       codeObject={posterHelix}
       componentName="PosterHelix"
-      flexProps={{ alignItems: 'stretch', minH: '640px' }}
+      flexProps={{ minH: '640px' }}
       preview={({ props, key }) => (
         <PosterHelix key={key} {...props} posters={SAMPLE_POSTERS} accentColor="var(--accent)" />
       )}

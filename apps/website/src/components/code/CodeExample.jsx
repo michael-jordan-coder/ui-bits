@@ -1,9 +1,51 @@
 import { useMemo } from 'react';
-import { Box } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import { useOptions } from '../context/OptionsContext/useOptions';
 import { useComponentPropsContext } from '../../hooks/useComponentPropsContext';
 import CodeHighlighter from './CodeHighlighter';
 import { colors } from '../../constants/colors';
+
+const STYLE_OPTIONS = [
+  { value: 'CSS', label: 'CSS' },
+  { value: 'TW', label: 'Tailwind' }
+];
+
+const StyleToggle = ({ value, onChange }) => (
+  <Flex
+    role="tablist"
+    aria-label="Styling"
+    gap={1}
+    p={1}
+    border={`1px solid ${colors.borderSecondary}`}
+    borderRadius="10px"
+    w="fit-content"
+  >
+    {STYLE_OPTIONS.map(opt => {
+      const selected = value === opt.value;
+      return (
+        <Box
+          key={opt.value}
+          as="button"
+          role="tab"
+          aria-selected={selected}
+          onClick={() => onChange(opt.value)}
+          cursor="pointer"
+          fontSize="13px"
+          fontWeight={500}
+          lineHeight="1"
+          px={3}
+          py="6px"
+          borderRadius="7px"
+          bg={selected ? colors.bgElevated : 'transparent'}
+          color={selected ? colors.accent : colors.textMuted}
+          _hover={selected ? {} : { bg: colors.bgHover }}
+        >
+          {opt.label}
+        </Box>
+      );
+    })}
+  </Flex>
+);
 
 function injectPropsIntoCode(usageCode, props, defaultProps, componentName, demoOnlyProps = []) {
   if (!usageCode || !props || !componentName) return usageCode;
@@ -48,7 +90,7 @@ const pickSnippet = (codeObject, lang, style) => {
 };
 
 const CodeExample = ({ codeObject, componentName }) => {
-  const { languagePreset, stylePreset } = useOptions();
+  const { languagePreset, stylePreset, setStylePreset } = useOptions();
   const { props, demoOnlyProps, computedProps } = useComponentPropsContext();
 
   const dynamicUsage = useMemo(() => {
@@ -63,6 +105,10 @@ const CodeExample = ({ codeObject, componentName }) => {
 
   return (
     <>
+      <Box mb={5}>
+        <StyleToggle value={stylePreset} onChange={setStylePreset} />
+      </Box>
+
       {codeObject.dependencies && (
         <Box mb={4}>
           <h2 className="demo-title">Install</h2>
@@ -77,7 +123,7 @@ const CodeExample = ({ codeObject, componentName }) => {
       {dynamicUsage && (
         <Box>
           <h2 className="demo-title">Usage</h2>
-          <CodeHighlighter language="jsx" codeString={dynamicUsage} />
+          <CodeHighlighter language="tsx" codeString={dynamicUsage} />
         </Box>
       )}
 

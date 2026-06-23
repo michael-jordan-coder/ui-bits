@@ -59,7 +59,7 @@ const TinderSlidesDemo = () => {
       dependencies={[]}
       codeObject={tinderSlides}
       componentName="TinderSlides"
-      flexProps={{ alignItems: 'stretch', minH: '560px' }}
+      flexProps={{ minH: '560px' }}
       preview={({ props, key }) => (
         <TinderSlides key={key} {...props} items={SAMPLE_ITEMS} accentColor="var(--accent)" />
       )}

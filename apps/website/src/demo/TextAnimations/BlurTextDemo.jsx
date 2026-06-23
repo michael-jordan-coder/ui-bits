@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import DemoShell from '../../components/common/Preview/DemoShell';
 import PreviewSlider from '../../components/common/Preview/PreviewSlider';
+import PreviewInput from '../../components/common/Preview/PreviewInput';
 
 import BlurText from '../../content/TextAnimations/BlurText/BlurText';
 import { blurText } from '../../constants/code/TextAnimations/blurTextCode';
@@ -50,6 +51,13 @@ const BlurTextDemo = () => {
         };
         return (
           <>
+            <PreviewInput
+              title="Text"
+              value={props.text}
+              placeholder="Type text…"
+              maxLength={64}
+              onChange={val => set('text', val)}
+            />
             <PreviewSlider
               title="Stagger"
               min={0}

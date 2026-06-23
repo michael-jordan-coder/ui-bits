@@ -3,6 +3,7 @@ import DemoShell from '../../components/common/Preview/DemoShell';
 import PreviewSlider from '../../components/common/Preview/PreviewSlider';
 import PreviewSelect from '../../components/common/Preview/PreviewSelect';
 import PreviewSwitch from '../../components/common/Preview/PreviewSwitch';
+import PreviewInput from '../../components/common/Preview/PreviewInput';
 
 import ShinyText from '../../content/TextAnimations/ShinyText/ShinyText';
 import { shinyText } from '../../constants/code/TextAnimations/shinyTextCode';
@@ -60,6 +61,13 @@ const ShinyTextDemo = () => {
         };
         return (
           <>
+            <PreviewInput
+              title="Text"
+              value={props.text}
+              placeholder="Type text…"
+              maxLength={48}
+              onChange={val => set('text', val)}
+            />
             <PreviewSlider
               title="Speed"
               min={1}

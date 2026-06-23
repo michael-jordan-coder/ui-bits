@@ -3,6 +3,7 @@ import DemoShell from '../../components/common/Preview/DemoShell';
 import PreviewSlider from '../../components/common/Preview/PreviewSlider';
 import PreviewSelect from '../../components/common/Preview/PreviewSelect';
 import PreviewSwitch from '../../components/common/Preview/PreviewSwitch';
+import PreviewInput from '../../components/common/Preview/PreviewInput';
 
 import TypewriterText from '../../content/TextAnimations/TypewriterText/TypewriterText';
 import { typewriterText } from '../../constants/code/TextAnimations/typewriterTextCode';
@@ -15,6 +16,7 @@ const PHRASE_SETS = {
 
 const DEFAULT_PROPS = {
   phraseSet: 'product',
+  customText: '',
   typingSpeed: 70,
   deletingSpeed: 40,
   pauseDuration: 1600,
@@ -66,13 +68,26 @@ const TypewriterTextDemo = () => {
       dependencies={['motion']}
       codeObject={typewriterText}
       componentName="TypewriterText"
-      demoOnlyProps={['phraseSet']}
+      demoOnlyProps={['phraseSet', 'customText']}
       preview={({ props, key }) => {
-        const { phraseSet, ...rest } = props;
-        return <TypewriterText key={key} {...rest} strings={PHRASE_SETS[phraseSet] ?? PHRASE_SETS.product} />;
+        const { phraseSet, customText, ...rest } = props;
+        const custom = customText?.trim()
+          ? customText.split('|').map(s => s.trim()).filter(Boolean)
+          : null;
+        return <TypewriterText key={key} {...rest} strings={custom ?? PHRASE_SETS[phraseSet] ?? PHRASE_SETS.product} />;
       }}
       controls={({ props, updateProp, forceRerender }) => (
         <>
+          <PreviewInput
+            title="Custom text"
+            value={props.customText}
+            placeholder="Phrase 1 | Phrase 2"
+            maxLength={120}
+            onChange={v => {
+              updateProp('customText', v);
+              forceRerender();
+            }}
+          />
           <PreviewSelect
             title="Phrases"
             options={PHRASES}
