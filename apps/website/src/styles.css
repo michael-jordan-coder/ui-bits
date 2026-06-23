@@ -14,6 +14,19 @@
   --surface-neutral: #161616;
   --surface-neutral-elevated: #1f1f1f;
   --surface-neutral-border: #2a2a2a;
+
+  /* Chrome redesign (Figma pixel-match) */
+  --chrome-sidebar-bg: #181818;
+  --chrome-sidebar-border: rgba(255, 255, 255, 0.05);
+  --chrome-search-bg: #1e1e1e;
+  --chrome-search-border: #2c2c2c;
+  --chrome-nav-active-bg: rgba(255, 255, 255, 0.1);
+  --chrome-topbar-bg: #161616;
+  --chrome-toggle-bg: rgba(255, 255, 255, 0.06);
+  --chrome-toggle-border: rgba(255, 255, 255, 0.08);
+  --chrome-toggle-active: #6e6e6e;
+  --chrome-iconbtn-bg: rgba(249, 250, 251, 0.05);
+  --chrome-preview-bg: #1c1c1c;
 }
 
 html,
@@ -1443,4 +1456,144 @@ body.mobile-sheet-open {
     min-height: auto;
     padding: 3em 1.25em 3.5em;
   }
+}
+
+/* ============================================================
+   Chrome redesign (Figma pixel-match) — full-height flush shell
+   Scoped to .app-container--chrome so the rest of the app is untouched.
+   ============================================================ */
+.app-container--chrome {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app-container--chrome .category-wrapper,
+.app-container--chrome .category-wrapper--collapsed {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+.app-container--chrome .category-wrapper:has(.right-panel-slot:empty),
+.app-container--chrome .category-wrapper--collapsed:has(.right-panel-slot:empty) {
+  grid-template-columns: 260px minmax(0, 1fr);
+}
+
+.app-container--chrome .category-wrapper--collapsed {
+  grid-template-columns: 56px minmax(0, 1fr);
+}
+
+/* Full-height flush sidebar — no card, no sticky offset. */
+.app-container--chrome .sidebar {
+  position: static;
+  top: 0;
+  height: 100vh;
+  border-radius: 0;
+  border: 0;
+  border-right: 1px solid var(--chrome-sidebar-border);
+  background: var(--chrome-sidebar-bg);
+  padding: 8px;
+  gap: 6px;
+}
+
+/* Top row: logo + collapse icon share a line (Figma). */
+.app-container--chrome .sidebar-toggle {
+  width: 36px;
+  margin-bottom: 0;
+}
+
+.app-container--chrome .sidebar-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 6px 8px 14px;
+}
+
+/* Search styled as a list-item pill. */
+.app-container--chrome .sidebar-search {
+  background: var(--chrome-search-bg);
+  border-color: var(--chrome-search-border);
+  border-radius: 10px;
+  margin: 0 6px 4px;
+}
+
+/* Nav items: 10px radius, translucent active fill. */
+.app-container--chrome .sidebar-item {
+  border-radius: 10px;
+  padding: 8px 10px;
+}
+
+.app-container--chrome .active-sidebar-item {
+  background: var(--chrome-nav-active-bg);
+}
+
+.app-container--chrome .sidebar-sections {
+  padding-right: 4px;
+}
+
+/* The main column is the preview surface, inset from the edges. */
+.app-container--chrome .chrome-main {
+  height: 100vh;
+  overflow-y: auto;
+  background: var(--chrome-topbar-bg);
+  padding: 24px 32px 32px;
+}
+
+.app-container--chrome .demo-container {
+  background: var(--chrome-preview-bg);
+}
+
+/* Editor panel — a third shell column, revealed by the segmented-row toggle. */
+.app-container--chrome .right-panel {
+  display: none;
+}
+
+.app-container--chrome .category-wrapper--editor-open {
+  grid-template-columns: 260px minmax(0, 1fr) 320px;
+}
+
+.app-container--chrome .category-wrapper--editor-open.category-wrapper--collapsed {
+  grid-template-columns: 56px minmax(0, 1fr) 320px;
+}
+
+.app-container--chrome .category-wrapper--editor-open .right-panel--open:not(:has(.right-panel-slot:empty)) {
+  display: flex;
+  position: static;
+  top: 0;
+  height: 100vh;
+  border: 0;
+  border-left: 1px solid var(--chrome-sidebar-border);
+  border-radius: 0;
+  background: var(--chrome-sidebar-bg);
+  padding: 16px 14px;
+}
+
+.editor-panel-close {
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.12s ease, background 0.12s ease;
+}
+
+.editor-panel-close:hover {
+  color: var(--primary);
+  background: var(--chrome-toggle-bg);
+}
+
+.editor-toggle-btn {
+  transition: color 0.12s ease, background 0.12s ease;
+}
+
+.editor-toggle-btn:hover {
+  color: var(--primary);
 }

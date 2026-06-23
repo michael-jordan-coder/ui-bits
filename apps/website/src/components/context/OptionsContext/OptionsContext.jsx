@@ -8,6 +8,7 @@ export function OptionsProvider({ children }) {
   // shown. Language is locked to 'TS'; only the styling choice is user-toggleable.
   const languagePreset = 'TS';
   const [stylePreset, setStylePreset] = useState('CSS');
+  const [editorOpen, setEditorOpen] = useState(false);
 
   useEffect(() => {
     const storedStyle = localStorage.getItem('preferredStyle');
@@ -22,13 +23,20 @@ export function OptionsProvider({ children }) {
     setStylePreset(prev => (prev === 'CSS' ? 'TW' : 'CSS'));
   }, []);
 
+  const toggleEditor = useCallback(() => {
+    setEditorOpen(prev => !prev);
+  }, []);
+
   return (
     <OptionsContext.Provider
       value={{
         languagePreset,
         stylePreset,
         setStylePreset,
-        toggleStyle
+        toggleStyle,
+        editorOpen,
+        setEditorOpen,
+        toggleEditor
       }}
     >
       {children}

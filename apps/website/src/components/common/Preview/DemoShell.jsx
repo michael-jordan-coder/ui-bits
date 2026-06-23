@@ -1,10 +1,8 @@
 import { Flex } from '@chakra-ui/react';
 import { CodeTab, PreviewTab, TabsLayout } from '../TabsLayout';
 import Customize from './Customize';
-import PropTable from './PropTable';
 import RefreshButton from './RefreshButton';
 import FullscreenButton from './FullscreenButton';
-import Dependencies from '../../code/Dependencies';
 import CodeExample from '../../code/CodeExample';
 import { ComponentPropsProvider } from '../../context/ComponentPropsContext';
 import useComponentProps from '../../../hooks/useComponentProps';
@@ -14,15 +12,14 @@ const DEFAULT_FLEX_PROPS = {
   overflow: 'hidden',
   justifyContent: 'center',
   alignItems: 'center',
-  minH: '400px',
+  // Fill the main column (sidebar chrome): viewport minus topbar/title + insets.
+  minH: 'calc(100vh - 12rem)',
   position: 'relative',
   className: 'demo-container'
 };
 
 const DemoShell = ({
   defaultProps,
-  propData,
-  dependencies = [],
   codeObject,
   componentName,
   flexProps,
@@ -55,9 +52,6 @@ const DemoShell = ({
           </Flex>
 
           {controls ? <Customize>{controls(ctx)}</Customize> : null}
-
-          <PropTable data={propData} />
-          <Dependencies dependencyList={dependencies} />
         </PreviewTab>
 
         <CodeTab>

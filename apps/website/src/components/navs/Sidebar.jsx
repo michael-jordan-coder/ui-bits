@@ -96,20 +96,27 @@ const Sidebar = ({ collapsed = false, onToggle, onExpand }) => {
 
   return (
     <Box as="nav" className={`sidebar${collapsed ? ' sidebar--collapsed' : ''}`}>
-      <button
-        type="button"
-        className="sidebar-toggle"
-        onClick={onToggle}
-        aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-        aria-expanded={!collapsed}
-        title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-      >
-        {collapsed ? (
-          <PanelLeftOpen size={14} strokeWidth={1.75} />
-        ) : (
-          <PanelLeftClose size={14} strokeWidth={1.75} />
+      <div className="sidebar-topbar">
+        {!collapsed && (
+          <Link to="/" className="sidebar-brand-logo" aria-label="ui bits home">
+            <Logo size={22} strokeWidth={1.4} dotRadius={1.6} />
+          </Link>
         )}
-      </button>
+        <button
+          type="button"
+          className="sidebar-toggle"
+          onClick={onToggle}
+          aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          aria-expanded={!collapsed}
+          title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+        >
+          {collapsed ? (
+            <PanelLeftOpen size={14} strokeWidth={1.75} />
+          ) : (
+            <PanelLeftClose size={14} strokeWidth={1.75} />
+          )}
+        </button>
+      </div>
 
       <div
         className="sidebar-search"
