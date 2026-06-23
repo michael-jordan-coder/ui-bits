@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { NuqsAdapter } from 'nuqs/adapters/react-router/v6';
+import { Analytics } from '@vercel/analytics/react';
 
 import Providers from './components/layout/Providers';
 import SidebarLayout from './components/layout/SidebarLayout';
@@ -53,6 +54,7 @@ export default function App() {
       <NuqsAdapter>
         <ActiveRouteProvider>
           <AppContent />
+          <Analytics />
         </ActiveRouteProvider>
       </NuqsAdapter>
     </Router>
