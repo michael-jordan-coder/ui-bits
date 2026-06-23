@@ -1,10 +1,31 @@
-# ui bits
+<div align="center">
+  <br />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="apps/website/public/logo-color.svg">
+    <img src="apps/website/public/logo.svg" alt="ui bits" width="92">
+  </picture>
+  <h1>ui bits</h1>
+  <strong>Animated, interactive, copy-paste React components.</strong>
+  <br />
+  <sub>Drop-in motion for backgrounds, text, and UI — own the source, tweak the props, ship.</sub>
+  <br />
+  <br />
+  <a href="https://github.com/michael-jordan-coder/ui-bits/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/michael-jordan-coder/ui-bits?style=flat&color=4d4dff"></a>
+  <a href="https://github.com/michael-jordan-coder/ui-bits/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-4d4dff"></a>
+  <br />
+  <br />
+  <a href="https://community-bits.vercel.app">🌐 Live site</a> · <a href="https://community-bits.vercel.app/components/index">🧩 Components</a> · <a href="https://community-bits.vercel.app/get-started/introduction">⚡ Get started</a>
+</div>
+
+<br />
+
+<!-- Showcase: add a ~1000px GIF/PNG of 3–4 components animating here — the single most
+     shareable README asset. Save to apps/website/public/og-showcase.png and reference it:
+     <div align="center"><img src="apps/website/public/og-showcase.png" alt="ui bits components" width="1000"></div> -->
 
 An open collection of animated, interactive React components — shipped as
 copyable source, not an installable black box. Browse them, tweak the props
 live, copy the variant you want, and own the code.
-
-**Live site → https://community-bits.vercel.app**
 
 Every component ships in four interchangeable variants so it drops into any
 React stack:
@@ -74,6 +95,10 @@ and registers the component in the three constants files. See
 Contributions are welcome. Outside contributors fork the repo and open a pull
 request; `main` is maintained by the project owner. Start with
 [`CONTRIBUTING.md`](./CONTRIBUTING.md).
+
+<a href="https://github.com/michael-jordan-coder/ui-bits/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=michael-jordan-coder/ui-bits" alt="Contributors" />
+</a>
 
 ## License
 
