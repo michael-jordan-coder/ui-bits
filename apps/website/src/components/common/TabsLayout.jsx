@@ -57,7 +57,13 @@ const TabsLayout = ({ children, className }) => {
   return (
     <Tabs.Root w="100%" variant="plain" lazyMount defaultValue="preview" className={className}>
       <Tabs.List w="100%">
-        <Flex justifyContent="flex-start" alignItems="center" gap={3} w="100%" wrap="nowrap">
+        <Flex
+          justifyContent="flex-start"
+          alignItems="center"
+          gap={3}
+          w="100%"
+          wrap={{ base: 'wrap', md: 'nowrap' }}
+        >
           <Flex {...SEGMENT_WRAP}>
             <Tabs.Trigger value="preview" {...SEGMENT_TAB}>
               <Icon as={FiEye} /> Preview
@@ -89,7 +95,7 @@ const TabsLayout = ({ children, className }) => {
           <Box
             as="button"
             type="button"
-            className="editor-toggle-btn"
+            className="editor-toggle-btn editor-toggle-btn--desktop"
             aria-label="Toggle editor panel"
             aria-pressed={editorOpen}
             onClick={toggleEditor}

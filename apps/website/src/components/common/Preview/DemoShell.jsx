@@ -13,7 +13,8 @@ const DEFAULT_FLEX_PROPS = {
   justifyContent: 'center',
   alignItems: 'center',
   // Fill the main column (sidebar chrome): viewport minus topbar/title + insets.
-  minH: 'calc(100vh - 12rem)',
+  // On mobile the page scrolls naturally, so use a shorter dynamic-viewport floor.
+  minH: { base: 'calc(100dvh - 9rem)', md: 'calc(100vh - 12rem)' },
   position: 'relative',
   className: 'demo-container'
 };

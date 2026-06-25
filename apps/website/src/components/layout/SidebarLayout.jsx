@@ -1,7 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Box } from '@chakra-ui/react';
-import { X } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
 import Sidebar from '../navs/Sidebar';
+import MobileNav from '../navs/MobileNav';
+import Logo from '../common/Logo';
+import useIsMobile from '../../hooks/useIsMobile';
 import { useOptions } from '../context/OptionsContext/useOptions';
 
 const STORAGE_KEY = 'ui-bits:chrome-sidebar-collapsed';
@@ -19,6 +23,9 @@ export default function SidebarLayout({ children }) {
   const toggle = useCallback(() => setCollapsed(prev => !prev), []);
   const expand = useCallback(() => setCollapsed(false), []);
 
+  const isMobile = useIsMobile();
+  const [navOpen, setNavOpen] = useState(false);
+
   const { editorOpen, setEditorOpen } = useOptions();
 
   const wrapperClass = [
@@ -34,6 +41,21 @@ export default function SidebarLayout({ children }) {
       <section className={wrapperClass}>
         <Sidebar collapsed={collapsed} onToggle={toggle} onExpand={expand} />
         <Box className="chrome-main" minW={0}>
+          <div className="chrome-mobilebar">
+            <button
+              type="button"
+              className="chrome-mobilebar-toggle"
+              onClick={() => setNavOpen(true)}
+              aria-label="Open navigation menu"
+              aria-expanded={navOpen}
+            >
+              <Menu size={20} strokeWidth={1.75} />
+            </button>
+            <Link to="/" className="chrome-mobilebar-brand" aria-label="ui bits home">
+              <Logo size={18} strokeWidth={1.4} dotRadius={1.3} />
+              <span>ui bits</span>
+            </Link>
+          </div>
           {children}
         </Box>
         <aside
@@ -52,6 +74,7 @@ export default function SidebarLayout({ children }) {
           <div id="customize-slot" className="right-panel-slot" />
         </aside>
       </section>
+      {isMobile && <MobileNav open={navOpen} onClose={() => setNavOpen(false)} />}
     </main>
   );
 }
