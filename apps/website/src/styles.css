@@ -1618,3 +1618,102 @@ body.mobile-sheet-open {
 .editor-toggle-btn:hover {
   color: var(--primary);
 }
+
+/* Mobile top bar inside the docs chrome — hidden on desktop, shown ≤60rem.
+   Lives at the top of .chrome-main so it tracks the content column. */
+.chrome-mobilebar {
+  display: none;
+}
+
+/* ============================================================
+   Chrome redesign — mobile reflow (≤60rem / 960px)
+   The desktop chrome rules above are scoped to .app-container--chrome
+   (specificity 0,2,0) and carry no media query, so they win over the
+   generic single-column @media block near the top of this file. These
+   overrides re-collapse the docs grid to one scrollable column on mobile
+   and reveal the mobile top bar. Desktop (≥60rem) is untouched.
+   ============================================================ */
+@media (max-width: 60rem) {
+  /* Release the full-height, non-scrolling shell so the page scrolls. */
+  .app-container--chrome {
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+  }
+
+  /* Collapse to a single content column. Every grid variant is listed
+     explicitly because the desktop chrome rules set each one — and the
+     :has(:empty) / --editor-open variants out-specify a bare selector. */
+  .app-container--chrome .category-wrapper,
+  .app-container--chrome .category-wrapper--collapsed,
+  .app-container--chrome .category-wrapper:has(.right-panel-slot:empty),
+  .app-container--chrome .category-wrapper--collapsed:has(.right-panel-slot:empty),
+  .app-container--chrome .category-wrapper--editor-open,
+  .app-container--chrome .category-wrapper--editor-open.category-wrapper--collapsed {
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+  }
+
+  /* Main column scrolls with the page instead of owning a 100vh scroller. */
+  .app-container--chrome .chrome-main {
+    height: auto;
+    overflow: visible;
+    padding: 1em 1em 2em;
+  }
+
+  /* The editor rail never opens as a column on mobile; the bottom-sheet
+     (MobileCustomize) handles customization instead. */
+  .app-container--chrome .category-wrapper--editor-open .right-panel--open:not(:has(.right-panel-slot:empty)) {
+    display: none;
+  }
+
+  /* Sticky mobile top bar: hamburger + brand. */
+  .app-container--chrome .chrome-mobilebar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 52px;
+    margin: 0 -1em 0.5em;
+    padding: calc(8px + env(safe-area-inset-top, 0px)) 1em 8px;
+    background: color-mix(in srgb, var(--chrome-topbar-bg, var(--bg-body)) 88%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-secondary);
+  }
+
+  .chrome-mobilebar-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-left: -8px;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .chrome-mobilebar-toggle:hover {
+    background: var(--bg-card);
+  }
+
+  .chrome-mobilebar-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 16px;
+    color: #fff;
+  }
+
+  /* The editor-panel toggle drives the desktop-only right rail; on mobile the
+     Customize FAB + bottom-sheet replace it, so hide the redundant button. */
+  .editor-toggle-btn--desktop {
+    display: none !important;
+  }
+}
