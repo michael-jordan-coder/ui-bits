@@ -1652,6 +1652,12 @@ body.mobile-sheet-open {
   .app-container--chrome .category-wrapper--editor-open.category-wrapper--collapsed {
     grid-template-columns: minmax(0, 1fr);
     height: auto;
+    /* Keep the wrapper flush — .chrome-main owns the single mobile inset. The
+       generic mobile :has(:empty) rule (specificity 0,3,0) would otherwise add
+       a second 1em padding on top of chrome-main's, double-insetting the
+       catalog/get-started pages. */
+    padding: 0;
+    gap: 0;
   }
 
   /* Main column scrolls with the page instead of owning a 100vh scroller. */
