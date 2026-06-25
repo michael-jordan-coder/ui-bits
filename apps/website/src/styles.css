@@ -1667,6 +1667,20 @@ body.mobile-sheet-open {
     padding: 1em 1em 2em;
   }
 
+  /* Full-bleed preview: the demo card breaks out of .chrome-main's 1em side
+     padding to span the full viewport width, with squared corners and no side
+     borders (true edge-to-edge). The space-filling min-height is unchanged, so
+     it still fills the available vertical room. The width:100vw +
+     margin-inline:calc(50% - 50vw) pair is the standard full-bleed trick and is
+     robust to the nesting between .chrome-main and the demo card. */
+  .app-container--chrome .demo-container {
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+
   /* The editor rail never opens as a column on mobile; the bottom-sheet
      (MobileCustomize) handles customization instead. */
   .app-container--chrome .category-wrapper--editor-open .right-panel--open:not(:has(.right-panel-slot:empty)) {
