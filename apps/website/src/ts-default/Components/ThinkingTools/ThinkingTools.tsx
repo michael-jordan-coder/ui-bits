@@ -17,13 +17,13 @@ export default function ThinkingTools({
   tools = DEFAULT_TOOLS,
   interval = 1600,
   dotColor = '#a1a1aa',
-  textColor = '#a1a1aa',
-  completedColor = '#52525b',
+  textColor = '#52525b',
+  completedColor = '#3f3f46',
   className = '',
   ...rest
 }: ThinkingToolsProps) {
   const reduced = useReducedMotion();
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(reduced ? tools.length - 1 : 0);
 
   useEffect(() => {
     if (reduced) { setActiveIndex(tools.length - 1); return; }
@@ -41,19 +41,34 @@ export default function ThinkingTools({
     <div
       className={`thinking-tools-root ${className}`}
       style={{ '--tt-dot': dotColor, '--tt-text': textColor, '--tt-done': completedColor }}
+      aria-live="polite"
       {...rest}
     >
       {tools.map((tool, i) => {
         const isDone = i < activeIndex;
         const isActive = i === activeIndex;
+
         return (
           <div
             key={tool}
-            className={`thinking-tools-row${isDone ? ' thinking-tools-done' : ''}${isActive ? ' thinking-tools-active' : ''}`}
-            style={{ animationDelay: reduced ? '0ms' : `${i * 60}ms` }}
+            className={[
+              'thinking-tools-row',
+              isActive ? 'thinking-tools-row--active' : '',
+              isDone   ? 'thinking-tools-row--done'   : '',
+            ].join(' ')}
+            style={reduced ? undefined : { animationDelay: `${i * 50}ms` }}
           >
-            <span className={`thinking-tools-dot${reduced ? ' thinking-tools-static' : ''}`} />
-            <span className="thinking-tools-label">{tool}</span>
+            <span
+              className={[
+                'thinking-tools-dot',
+                isActive && !reduced ? 'thinking-tools-dot--ripple' : '',
+              ].join(' ')}
+            />
+            {isActive && !reduced ? (
+              <span className="thinking-tools-shimmer" aria-label={tool}>{tool}</span>
+            ) : (
+              <span className="thinking-tools-label">{tool}</span>
+            )}
           </div>
         );
       })}

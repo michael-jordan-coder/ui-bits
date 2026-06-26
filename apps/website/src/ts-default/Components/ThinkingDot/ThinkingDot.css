@@ -3,55 +3,87 @@
   align-items: center;
   gap: 8px;
   font-family: inherit;
+  user-select: none;
 }
 
-/* sizes */
-.thinking-dot-size-sm { font-size: 13px; }
-.thinking-dot-size-md { font-size: 14px; }
-.thinking-dot-size-lg { font-size: 16px; }
+.thinking-dot-sm { font-size: 13px; }
+.thinking-dot-md { font-size: 14px; }
+.thinking-dot-lg { font-size: 16px; }
 
-.thinking-dot-circle {
+/* ── Indicator dot — radiates outward like Perplexity ── */
+.thinking-dot-indicator {
   display: block;
-  width: 0.7em;
-  height: 0.7em;
+  width: 0.55em;
+  height: 0.55em;
   border-radius: 50%;
   background: var(--td-dot, #a1a1aa);
   flex-shrink: 0;
-  animation: thinking-dot-pulse 1.8s ease-in-out infinite;
+  opacity: 0.7;
 }
 
-.thinking-dot-static {
-  animation: none;
-  opacity: 0.5;
+.thinking-dot-indicator--ripple {
+  animation: td-ripple 2s ease-out infinite;
 }
 
-@keyframes thinking-dot-pulse {
-  0%, 100% { opacity: 0.3; transform: scale(0.85); }
-  50%       { opacity: 1;   transform: scale(1); }
+@keyframes td-ripple {
+  0%   { box-shadow: 0 0 0 0   rgba(161, 161, 170, 0.5); opacity: 0.7; }
+  60%  { box-shadow: 0 0 0 6px rgba(161, 161, 170, 0);   opacity: 1; }
+  100% { box-shadow: 0 0 0 0   rgba(161, 161, 170, 0);   opacity: 0.7; }
 }
 
-.thinking-dot-label {
-  color: var(--td-text, #a1a1aa);
-  display: inline-flex;
-  align-items: baseline;
-  gap: 1px;
+/* ── Shimmer sweep — Claude v0 / Vercel AI SDK pattern ── */
+.thinking-dot-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--td-text, #52525b) 0%,
+    var(--td-text, #52525b) 20%,
+    #e4e4e7 50%,
+    var(--td-text, #52525b) 80%,
+    var(--td-text, #52525b) 100%
+  );
+  background-size: 300% auto;
+  background-position: 100% center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: td-shimmer 2.4s linear infinite;
   letter-spacing: 0.01em;
 }
 
-.thinking-dot-ellipsis {
+@keyframes td-shimmer {
+  0%   { background-position: 100% center; }
+  100% { background-position: -200% center; }
+}
+
+/* ── Reduced-motion fallback ── */
+.thinking-dot-static {
+  color: var(--td-text, #a1a1aa);
+  letter-spacing: 0.01em;
+}
+
+/* ── Bouncing dots — ChatGPT pattern, translateY not scale ── */
+.thinking-dot-bounce {
   display: inline-flex;
-  gap: 1px;
+  align-items: flex-end;
+  gap: 3px;
+  padding-bottom: 0.12em;
 }
 
-.thinking-dot-ellipsis span {
-  animation: thinking-dot-blink 1.4s ease-in-out infinite;
+.thinking-dot-bounce span {
+  display: block;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--td-text, #52525b);
+  opacity: 0.5;
+  animation: td-bounce 1.2s ease-in-out infinite;
 }
 
-.thinking-dot-ellipsis span:nth-child(1) { animation-delay: 0s; }
-.thinking-dot-ellipsis span:nth-child(2) { animation-delay: 0.2s; }
-.thinking-dot-ellipsis span:nth-child(3) { animation-delay: 0.4s; }
+.thinking-dot-bounce span:nth-child(1) { animation-delay: 0s; }
+.thinking-dot-bounce span:nth-child(2) { animation-delay: 0.15s; }
+.thinking-dot-bounce span:nth-child(3) { animation-delay: 0.3s; }
 
-@keyframes thinking-dot-blink {
-  0%, 60%, 100% { opacity: 0.2; }
-  30%           { opacity: 1; }
+@keyframes td-bounce {
+  0%, 60%, 100% { transform: translateY(0);    opacity: 0.3; }
+  30%            { transform: translateY(-4px); opacity: 0.9; }
 }

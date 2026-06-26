@@ -5,7 +5,7 @@ const sizeClass = { sm: 'text-[13px]', md: 'text-[14px]', lg: 'text-[16px]' };
 export default function ThinkingDot({
   text = 'Thinking',
   dotColor = '#a1a1aa',
-  textColor = '#a1a1aa',
+  textColor = '#52525b',
   size = 'md',
   className = '',
   ...rest
@@ -14,46 +14,80 @@ export default function ThinkingDot({
 
   return (
     <div
-      className={`inline-flex items-center gap-2 font-[inherit] ${sizeClass[size] ?? sizeClass.md} ${className}`}
+      className={`inline-flex items-center gap-2 font-[inherit] select-none ${sizeClass[size] ?? sizeClass.md} ${className}`}
+      aria-label={`${text}…`}
+      aria-live="polite"
       {...rest}
     >
+      {/* Radiating indicator dot */}
       <span
-        className={`block rounded-full flex-shrink-0${reduced ? ' opacity-50' : ''}`}
+        className="block rounded-full flex-shrink-0"
         style={{
-          width: '0.7em',
-          height: '0.7em',
+          width: '0.55em',
+          height: '0.55em',
           background: dotColor,
-          animation: reduced ? 'none' : 'thinking-dot-pulse 1.8s ease-in-out infinite',
+          opacity: 0.7,
+          animation: reduced ? 'none' : 'td-ripple 2s ease-out infinite',
         }}
       />
-      <span
-        className="inline-flex items-baseline gap-[1px] tracking-[0.01em]"
-        style={{ color: textColor }}
-      >
-        {text}
-        {!reduced && (
-          <span className="inline-flex gap-[1px]" aria-hidden="true">
-            {[0, 0.2, 0.4].map((delay, i) => (
+
+      {reduced ? (
+        <span style={{ color: textColor, letterSpacing: '0.01em' }}>{text}…</span>
+      ) : (
+        <>
+          {/* Shimmer text */}
+          <span
+            aria-hidden="true"
+            style={{
+              background: `linear-gradient(90deg, ${textColor} 0%, ${textColor} 20%, #e4e4e7 50%, ${textColor} 80%, ${textColor} 100%)`,
+              backgroundSize: '300% auto',
+              backgroundPosition: '100% center',
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              animation: 'td-shimmer 2.4s linear infinite',
+              letterSpacing: '0.01em',
+            }}
+          >
+            {text}
+          </span>
+
+          {/* Bouncing dots */}
+          <span
+            aria-hidden="true"
+            className="inline-flex items-end gap-[3px]"
+            style={{ paddingBottom: '0.12em' }}
+          >
+            {[0, 0.15, 0.3].map((delay, i) => (
               <span
                 key={i}
-                style={{ animation: `thinking-dot-blink 1.4s ease-in-out ${delay}s infinite` }}
-              >
-                .
-              </span>
+                className="block rounded-full"
+                style={{
+                  width: 3,
+                  height: 3,
+                  background: textColor,
+                  opacity: 0.5,
+                  animation: `td-bounce 1.2s ease-in-out ${delay}s infinite`,
+                }}
+              />
             ))}
           </span>
-        )}
-        {reduced && '…'}
-      </span>
+        </>
+      )}
 
       <style>{`
-        @keyframes thinking-dot-pulse {
-          0%, 100% { opacity: 0.3; transform: scale(0.85); }
-          50%       { opacity: 1;   transform: scale(1); }
+        @keyframes td-ripple {
+          0%   { box-shadow: 0 0 0 0   rgba(161,161,170,0.5); opacity: 0.7; }
+          60%  { box-shadow: 0 0 0 6px rgba(161,161,170,0);   opacity: 1; }
+          100% { box-shadow: 0 0 0 0   rgba(161,161,170,0);   opacity: 0.7; }
         }
-        @keyframes thinking-dot-blink {
-          0%, 60%, 100% { opacity: 0.2; }
-          30%           { opacity: 1; }
+        @keyframes td-shimmer {
+          0%   { background-position: 100% center; }
+          100% { background-position: -200% center; }
+        }
+        @keyframes td-bounce {
+          0%, 60%, 100% { transform: translateY(0);    opacity: 0.3; }
+          30%            { transform: translateY(-4px); opacity: 0.9; }
         }
       `}</style>
     </div>

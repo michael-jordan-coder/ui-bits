@@ -7,13 +7,13 @@ export default function ThinkingTools({
   tools = DEFAULT_TOOLS,
   interval = 1600,
   dotColor = '#a1a1aa',
-  textColor = '#a1a1aa',
-  completedColor = '#52525b',
+  textColor = '#52525b',
+  completedColor = '#3f3f46',
   className = '',
   ...rest
 }) {
   const reduced = useReducedMotion();
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(reduced ? tools.length - 1 : 0);
 
   useEffect(() => {
     if (reduced) { setActiveIndex(tools.length - 1); return; }
@@ -29,7 +29,8 @@ export default function ThinkingTools({
 
   return (
     <div
-      className={`inline-flex flex-col gap-[7px] font-[inherit] text-[14px] ${className}`}
+      className={`inline-flex flex-col gap-2 font-[inherit] text-[14px] select-none ${className}`}
+      aria-live="polite"
       {...rest}
     >
       {tools.map((tool, i) => {
@@ -37,44 +38,71 @@ export default function ThinkingTools({
         const isActive = i === activeIndex;
         const isQueued = !isDone && !isActive;
 
-        const dotStyle = {
-          width: '0.7em',
-          height: '0.7em',
-          background: isDone ? completedColor : dotColor,
-          animation: isActive && !reduced ? 'tt-pulse 1.8s ease-in-out infinite' : 'none',
-          opacity: isActive ? 1 : isDone ? 0.2 : 0.3,
-          transform: isActive ? 'scale(1)' : isDone ? 'scale(0.8)' : 'scale(0.85)',
-          transition: 'opacity 0.3s, transform 0.3s',
-        };
-
-        const labelColor = isActive ? textColor : completedColor;
-        const labelOpacity = isQueued ? 0.35 : isDone ? 0.6 : 1;
-
         return (
           <div
             key={tool}
-            className="inline-flex items-center gap-2"
-            style={{ animation: `tt-fadein 0.25s ease ${reduced ? 0 : i * 60}ms both` }}
+            className="inline-flex items-center gap-[9px]"
+            style={{ animation: reduced ? 'none' : `tt-row-in 0.3s cubic-bezier(0.22,1,0.36,1) ${i * 50}ms both` }}
           >
-            <span className="block rounded-full flex-shrink-0" style={dotStyle} />
+            {/* Dot */}
             <span
-              className="tracking-[0.01em] transition-[color,opacity] duration-300"
-              style={{ color: labelColor, opacity: labelOpacity }}
-            >
-              {tool}
-            </span>
+              className="block rounded-full flex-shrink-0"
+              style={{
+                width: '0.55em',
+                height: '0.55em',
+                background: isActive ? dotColor : completedColor,
+                opacity: isActive ? 0.8 : isDone ? 0.15 : 0.2,
+                transition: 'background 0.4s ease, opacity 0.4s ease',
+                animation: isActive && !reduced ? 'tt-ripple 2s ease-out infinite' : 'none',
+              }}
+            />
+
+            {/* Label */}
+            {isActive && !reduced ? (
+              <span
+                aria-label={tool}
+                style={{
+                  background: `linear-gradient(90deg, ${textColor} 0%, ${textColor} 20%, #e4e4e7 50%, ${textColor} 80%, ${textColor} 100%)`,
+                  backgroundSize: '300% auto',
+                  backgroundPosition: '100% center',
+                  WebkitBackgroundClip: 'text',
+                  backgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  animation: 'tt-shimmer 2.4s linear infinite',
+                  letterSpacing: '0.01em',
+                }}
+              >
+                {tool}
+              </span>
+            ) : (
+              <span
+                style={{
+                  color: completedColor,
+                  opacity: isDone ? 0.3 : isQueued ? 0.2 : 1,
+                  transition: 'opacity 0.4s ease',
+                  letterSpacing: '0.01em',
+                }}
+              >
+                {tool}
+              </span>
+            )}
           </div>
         );
       })}
 
       <style>{`
-        @keyframes tt-pulse {
-          0%, 100% { opacity: 0.4; transform: scale(0.85); }
-          50%       { opacity: 1;   transform: scale(1); }
-        }
-        @keyframes tt-fadein {
-          from { opacity: 0; transform: translateY(3px); }
+        @keyframes tt-row-in {
+          from { opacity: 0; transform: translateY(4px); }
           to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes tt-ripple {
+          0%   { box-shadow: 0 0 0 0   rgba(161,161,170,0.5); opacity: 0.8; }
+          60%  { box-shadow: 0 0 0 6px rgba(161,161,170,0);   opacity: 1; }
+          100% { box-shadow: 0 0 0 0   rgba(161,161,170,0);   opacity: 0.8; }
+        }
+        @keyframes tt-shimmer {
+          0%   { background-position: 100% center; }
+          100% { background-position: -200% center; }
         }
       `}</style>
     </div>
