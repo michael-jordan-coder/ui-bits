@@ -109,7 +109,10 @@ const components = {
   'tilt-carousel': () => import('../demo/Scroll/TiltCarouselDemo'),
   'liquid-chrome': () => import('../demo/Backgrounds/LiquidChromeDemo'),
   'liquid-glass': () => import('../demo/Backgrounds/LiquidGlassDemo'),
-  'iridescence': () => import('../demo/Backgrounds/IridescenceDemo')
+  'iridescence': () => import('../demo/Backgrounds/IridescenceDemo'),
+  'thinking-dot': () => import('../demo/Components/ThinkingDotDemo'),
+  'thinking-steps': () => import('../demo/Components/ThinkingStepsDemo'),
+  'thinking-tools': () => import('../demo/Components/ThinkingToolsDemo')
 };
 
 export const componentMap = {

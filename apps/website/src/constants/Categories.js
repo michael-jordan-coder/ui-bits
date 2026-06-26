@@ -57,7 +57,10 @@ export const CATEGORIES = [
       'Color Picker',
       'Notification Stack',
       'File Drop',
-      'Image Compare'
+      'Image Compare',
+      'Thinking Dot',
+      'Thinking Steps',
+      'Thinking Tools'
     ]
   },
   {

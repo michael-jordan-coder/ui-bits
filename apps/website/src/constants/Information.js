@@ -701,5 +701,23 @@ export const componentMetadata = {
     category: 'Backgrounds',
     name: 'Iridescence',
     tags: ['background', 'webgl', 'shader', 'iridescent', 'metal', 'interactive']
+  },
+  'Components/ThinkingDot': {
+    description: 'Quiet inline AI thinking indicator — a pulsing dot with animated ellipsis that signals the assistant is working without interrupting the conversation.',
+    category: 'Components',
+    name: 'ThinkingDot',
+    tags: ['ai', 'chat', 'thinking', 'loading', 'status', 'pulse', 'animation']
+  },
+  'Components/ThinkingSteps': {
+    description: 'Expandable AI reasoning state that reveals activity labels one-by-one to communicate multi-step thinking with calm, sequential feedback.',
+    category: 'Components',
+    name: 'ThinkingSteps',
+    tags: ['ai', 'chat', 'thinking', 'steps', 'reasoning', 'loading', 'status', 'animation']
+  },
+  'Components/ThinkingTools': {
+    description: 'AI tool-activity status that cycles through labelled actions — searching, reading, analyzing — dimming completed steps and pulsing the current one.',
+    category: 'Components',
+    name: 'ThinkingTools',
+    tags: ['ai', 'chat', 'thinking', 'tools', 'status', 'loading', 'animation', 'sequential']
   }
 };
