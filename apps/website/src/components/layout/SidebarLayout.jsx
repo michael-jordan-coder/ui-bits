@@ -1,14 +1,24 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Box } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { ChevronLeft, ChevronRight, Menu, X } from 'lucide-react';
 import Sidebar from '../navs/Sidebar';
 import MobileNav from '../navs/MobileNav';
 import Logo from '../common/Logo';
 import useIsMobile from '../../hooks/useIsMobile';
 import { useOptions } from '../context/OptionsContext/useOptions';
+import { CATEGORIES } from '../../constants/Categories';
+import { slug } from '../../utils/utils';
 
 const STORAGE_KEY = 'ui-bits:chrome-sidebar-collapsed';
+
+// Flat ordered list matching the sidebar order — used for prev/next navigation.
+const ALL_COMPONENTS = CATEGORIES.flatMap(cat =>
+  cat.subcategories.map(sub => ({
+    path: `/${slug(cat.name)}/${slug(sub)}`,
+    label: sub,
+  }))
+);
 
 export default function SidebarLayout({ children }) {
   const [collapsed, setCollapsed] = useState(() => {
@@ -25,8 +35,16 @@ export default function SidebarLayout({ children }) {
 
   const isMobile = useIsMobile();
   const [navOpen, setNavOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const { editorOpen, setEditorOpen } = useOptions();
+
+  // Resolve current component position for prev/next arrows.
+  const currentIdx = ALL_COMPONENTS.findIndex(c => c.path === location.pathname);
+  const isComponentPage = currentIdx >= 0;
+  const prev = currentIdx > 0 ? ALL_COMPONENTS[currentIdx - 1] : null;
+  const next = currentIdx < ALL_COMPONENTS.length - 1 ? ALL_COMPONENTS[currentIdx + 1] : null;
 
   const wrapperClass = [
     'category-wrapper',
@@ -51,10 +69,40 @@ export default function SidebarLayout({ children }) {
             >
               <Menu size={20} strokeWidth={1.75} />
             </button>
-            <Link to="/" className="chrome-mobilebar-brand" aria-label="ui bits home">
-              <Logo size={18} strokeWidth={1.4} dotRadius={1.3} />
-              <span>ui bits</span>
-            </Link>
+
+            {isComponentPage ? (
+              <span className="chrome-mobilebar-title">
+                {ALL_COMPONENTS[currentIdx].label}
+              </span>
+            ) : (
+              <Link to="/" className="chrome-mobilebar-brand" aria-label="ui bits home">
+                <Logo size={18} strokeWidth={1.4} dotRadius={1.3} />
+                <span>ui bits</span>
+              </Link>
+            )}
+
+            {isComponentPage && (
+              <nav className="chrome-mobilebar-nav" aria-label="Component navigation">
+                <button
+                  type="button"
+                  className="chrome-mobilebar-navbtn"
+                  disabled={!prev}
+                  onClick={() => prev && navigate(prev.path)}
+                  aria-label={prev ? `Previous: ${prev.label}` : 'No previous component'}
+                >
+                  <ChevronLeft size={18} strokeWidth={1.75} />
+                </button>
+                <button
+                  type="button"
+                  className="chrome-mobilebar-navbtn"
+                  disabled={!next}
+                  onClick={() => next && navigate(next.path)}
+                  aria-label={next ? `Next: ${next.label}` : 'No next component'}
+                >
+                  <ChevronRight size={18} strokeWidth={1.75} />
+                </button>
+              </nav>
+            )}
           </div>
           {children}
         </Box>
