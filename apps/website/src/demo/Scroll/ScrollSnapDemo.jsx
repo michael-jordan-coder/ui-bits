@@ -1,14 +1,24 @@
 import { useMemo } from 'react';
 import DemoShell from '../../components/common/Preview/DemoShell';
 import PreviewSlider from '../../components/common/Preview/PreviewSlider';
+import PreviewSelect from '../../components/common/Preview/PreviewSelect';
 
 import ScrollSnap from '../../content/Scroll/ScrollSnap/ScrollSnap';
 import { scrollSnap } from '../../constants/code/Scroll/scrollSnapCode';
 
 const DEFAULT_PROPS = {
   panels: 4,
-  accent: '#3ecf8e'
+  accent: '#3ecf8e',
+  height: 460
 };
+
+const ACCENTS = [
+  { value: '#3ecf8e', label: 'Emerald' },
+  { value: '#5227ff', label: 'Violet' },
+  { value: '#f59e0b', label: 'Amber' },
+  { value: '#f43f5e', label: 'Rose' },
+  { value: '#38bdf8', label: 'Sky' }
+];
 
 const ScrollSnapDemo = () => {
   const propData = useMemo(
@@ -36,7 +46,19 @@ const ScrollSnapDemo = () => {
           forceRerender();
         };
         return (
-          <PreviewSlider title="Panels" min={3} max={6} value={props.panels} onChange={val => set('panels', val)} />
+          <>
+            <PreviewSlider title="Panels" min={3} max={6} value={props.panels} onChange={val => set('panels', val)} />
+            <PreviewSelect title="Accent" options={ACCENTS} value={props.accent} onChange={v => set('accent', v)} />
+            <PreviewSlider
+              title="Height"
+              min={360}
+              max={560}
+              step={10}
+              value={props.height}
+              valueUnit="px"
+              onChange={v => set('height', v)}
+            />
+          </>
         );
       }}
     />

@@ -1,13 +1,23 @@
 import { useMemo } from 'react';
 import DemoShell from '../../components/common/Preview/DemoShell';
 import PreviewSlider from '../../components/common/Preview/PreviewSlider';
+import PreviewSelect from '../../components/common/Preview/PreviewSelect';
 
 import ParallaxScroll from '../../content/Scroll/ParallaxScroll/ParallaxScroll';
 import { parallaxScroll } from '../../constants/code/Scroll/parallaxScrollCode';
 
 const DEFAULT_PROPS = {
-  bgSpeed: 0.4
+  bgSpeed: 0.4,
+  blobColor: '#5227ff'
 };
+
+const ACCENTS = [
+  { value: '#5227ff', label: 'Violet' },
+  { value: '#3ecf8e', label: 'Emerald' },
+  { value: '#f59e0b', label: 'Amber' },
+  { value: '#f43f5e', label: 'Rose' },
+  { value: '#38bdf8', label: 'Sky' }
+];
 
 const ParallaxScrollDemo = () => {
   const propData = useMemo(
@@ -48,6 +58,7 @@ const ParallaxScrollDemo = () => {
         return (
           <>
             <PreviewSlider title="Background speed" min={0} max={1} step={0.05} value={props.bgSpeed} onChange={v => set('bgSpeed', v)} />
+            <PreviewSelect title="Blob color" options={ACCENTS} value={props.blobColor} onChange={v => set('blobColor', v)} />
           </>
         );
       }}

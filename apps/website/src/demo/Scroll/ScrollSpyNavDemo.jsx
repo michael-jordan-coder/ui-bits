@@ -1,13 +1,23 @@
 import { useMemo } from 'react';
 import DemoShell from '../../components/common/Preview/DemoShell';
 import PreviewSlider from '../../components/common/Preview/PreviewSlider';
+import PreviewSelect from '../../components/common/Preview/PreviewSelect';
 
 import ScrollSpyNav from '../../content/Scroll/ScrollSpyNav/ScrollSpyNav';
 import { scrollSpyNav } from '../../constants/code/Scroll/scrollSpyNavCode';
 
 const DEFAULT_PROPS = {
+  activeColor: '#5227ff',
   height: 460
 };
+
+const ACCENTS = [
+  { value: '#5227ff', label: 'Violet' },
+  { value: '#3ecf8e', label: 'Emerald' },
+  { value: '#f59e0b', label: 'Amber' },
+  { value: '#f43f5e', label: 'Rose' },
+  { value: '#38bdf8', label: 'Sky' }
+];
 
 const ScrollSpyNavDemo = () => {
   const propData = useMemo(
@@ -41,6 +51,7 @@ const ScrollSpyNavDemo = () => {
         };
         return (
           <>
+            <PreviewSelect title="Active color" options={ACCENTS} value={props.activeColor} onChange={v => set('activeColor', v)} />
             <PreviewSlider title="Height" min={320} max={560} step={10} value={props.height} valueUnit="px" onChange={v => set('height', v)} />
           </>
         );

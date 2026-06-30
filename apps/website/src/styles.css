@@ -1038,6 +1038,10 @@ a {
   cursor: text;
 }
 
+.scrubber-file-input {
+  display: none;
+}
+
 .scrubber-input {
   margin-left: auto;
   min-width: 0;
