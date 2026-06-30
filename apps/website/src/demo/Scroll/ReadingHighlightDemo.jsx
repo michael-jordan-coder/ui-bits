@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import DemoShell from '../../components/common/Preview/DemoShell';
 import PreviewSlider from '../../components/common/Preview/PreviewSlider';
+import PreviewSelect from '../../components/common/Preview/PreviewSelect';
 
 import ReadingHighlight from '../../content/Scroll/ReadingHighlight/ReadingHighlight';
 import { readingHighlight } from '../../constants/code/Scroll/readingHighlightCode';
@@ -9,8 +10,17 @@ const SAMPLE_TEXT =
   'Good software starts as a small honest idea and grows one careful decision at a time. You read each line slowly, let the meaning settle, and only then move on to the next thought.';
 
 const DEFAULT_PROPS = {
+  bright: '#f5f7fa',
   height: 460
 };
+
+const HIGHLIGHTS = [
+  { value: '#f5f7fa', label: 'Off-white' },
+  { value: '#3ecf8e', label: 'Emerald' },
+  { value: '#fbbf24', label: 'Amber' },
+  { value: '#7aa2ff', label: 'Periwinkle' },
+  { value: '#fb7185', label: 'Rose' }
+];
 
 const ReadingHighlightDemo = () => {
   const propData = useMemo(
@@ -44,14 +54,17 @@ const ReadingHighlightDemo = () => {
           forceRerender();
         };
         return (
-          <PreviewSlider
-            title="Height"
-            min={320}
-            max={620}
-            value={props.height}
-            valueUnit="px"
-            onChange={val => set('height', val)}
-          />
+          <>
+            <PreviewSelect title="Highlight" options={HIGHLIGHTS} value={props.bright} onChange={v => set('bright', v)} />
+            <PreviewSlider
+              title="Height"
+              min={320}
+              max={620}
+              value={props.height}
+              valueUnit="px"
+              onChange={val => set('height', val)}
+            />
+          </>
         );
       }}
     />
