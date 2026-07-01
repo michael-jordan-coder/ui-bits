@@ -3,33 +3,17 @@ import { useCallback, useMemo, useRef } from 'react';
 
 const isHexColor = value => typeof value === 'string' && /^#?[0-9a-fA-F]{3,8}$/.test(value);
 
+const makeParser = (parse, serialize = v => String(v)) => ({
+  parse: v => (v === null || v === '' ? null : parse(v)),
+  serialize,
+  eq: (a, b) => a === b
+});
+
 const createParser = defaultValue => {
-  if (typeof defaultValue === 'number') {
-    return {
-      parse: v => (v === null || v === '' ? null : Number(v)),
-      serialize: v => String(v),
-      eq: (a, b) => a === b
-    };
-  }
-  if (typeof defaultValue === 'boolean') {
-    return {
-      parse: v => (v === null || v === '' ? null : v === 'true'),
-      serialize: v => String(v),
-      eq: (a, b) => a === b
-    };
-  }
-  if (isHexColor(defaultValue)) {
-    return {
-      parse: v => (v === null || v === '' ? null : `#${v}`),
-      serialize: v => v.replace(/^#/, ''),
-      eq: (a, b) => a === b
-    };
-  }
-  return {
-    parse: v => (v === null || v === '' ? null : v),
-    serialize: v => String(v),
-    eq: (a, b) => a === b
-  };
+  if (typeof defaultValue === 'number') return makeParser(Number);
+  if (typeof defaultValue === 'boolean') return makeParser(v => v === 'true');
+  if (isHexColor(defaultValue)) return makeParser(v => `#${v}`, v => v.replace(/^#/, ''));
+  return makeParser(v => v);
 };
 
 export function useComponentProps(defaultProps) {
