@@ -66,6 +66,7 @@ const LikeButtonDemo = () => {
               onChange={v => set('particleCount', v)}
             />
             <PreviewSlider title="Size" min={20} max={56} value={props.size} valueUnit="px" onChange={v => set('size', v)} />
+            <PreviewSlider title="Base count" min={0} max={9999} value={props.count} onChange={v => set('count', v)} />
             <PreviewSwitch title="Show count" isChecked={props.showCount} onChange={v => set('showCount', v)} />
           </>
         );

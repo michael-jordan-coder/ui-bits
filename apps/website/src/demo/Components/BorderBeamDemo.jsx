@@ -22,6 +22,20 @@ const BEAM_COLORS = [
   { value: '#ec4899', label: 'Pink' }
 ];
 
+const BEAM_COLORS_TO = [
+  { value: '#a855f7', label: 'Violet' },
+  { value: '#3b82f6', label: 'Blue' },
+  { value: '#f43f5e', label: 'Rose' },
+  { value: '#fbbf24', label: 'Yellow' }
+];
+
+const SURFACE_COLORS = [
+  { value: '#16181d', label: 'Charcoal' },
+  { value: '#1e293b', label: 'Slate' },
+  { value: '#0f172a', label: 'Navy' },
+  { value: '#18181b', label: 'Zinc' }
+];
+
 const SampleCard = () => (
   <div style={{ width: 280, padding: '1.5rem 1.6rem', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
     <span
@@ -127,6 +141,18 @@ const BorderBeamDemo = () => {
               options={BEAM_COLORS}
               value={props.beamColor}
               onChange={v => set('beamColor', v)}
+            />
+            <PreviewSelect
+              title="Beam color (to)"
+              options={BEAM_COLORS_TO}
+              value={props.beamColorTo}
+              onChange={v => set('beamColorTo', v)}
+            />
+            <PreviewSelect
+              title="Surface"
+              options={SURFACE_COLORS}
+              value={props.surfaceColor}
+              onChange={v => set('surfaceColor', v)}
             />
           </>
         );

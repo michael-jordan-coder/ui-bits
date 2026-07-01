@@ -26,6 +26,13 @@ const PREFIXES = [
   { value: '#', label: 'Hash (#)' }
 ];
 
+const SUFFIXES = [
+  { value: '', label: 'None' },
+  { value: '%', label: 'Percent (%)' },
+  { value: 'k', label: 'Thousand (k)' },
+  { value: '+', label: 'Plus (+)' }
+];
+
 const COLORS = [
   { value: '#fafafa', label: 'White' },
   { value: '#fbbf24', label: 'Amber' },
@@ -93,6 +100,7 @@ const NumberTickerDemo = () => {
               onChange={v => set('fontSize', v)}
             />
             <PreviewSelect title="Prefix" options={PREFIXES} value={props.prefix} onChange={v => set('prefix', v)} />
+            <PreviewSelect title="Suffix" options={SUFFIXES} value={props.suffix} onChange={v => set('suffix', v)} />
             <PreviewSelect title="Color" options={COLORS} value={props.color} onChange={v => set('color', v)} />
             <PreviewSwitch title="Group (commas)" isChecked={props.group} onChange={v => set('group', v)} />
           </>

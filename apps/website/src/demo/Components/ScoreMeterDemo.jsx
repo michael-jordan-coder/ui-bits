@@ -53,6 +53,14 @@ const ScoreMeterDemo = () => {
         return (
           <>
             <PreviewSlider title="Score" min={0} max={props.max} value={props.score} onChange={v => set('score', v)} />
+            <PreviewSlider
+              title="Max"
+              min={10}
+              max={300}
+              step={10}
+              value={props.max}
+              onChange={v => { updateProp('max', v); updateProp('score', Math.min(props.score, v)); forceRerender(); }}
+            />
             <PreviewSlider title="Size" min={120} max={280} value={props.size} valueUnit="px" onChange={v => set('size', v)} />
             <PreviewSlider title="Thickness" min={6} max={28} value={props.thickness} valueUnit="px" onChange={v => set('thickness', v)} />
             <PreviewSlider

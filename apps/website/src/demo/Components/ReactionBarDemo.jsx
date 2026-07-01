@@ -93,6 +93,7 @@ const ReactionBarDemo = () => {
               valueUnit="px"
               onChange={v => set('range', v)}
             />
+            <PreviewSlider title="Base count" min={0} max={9999} value={props.count} onChange={v => set('count', v)} />
             <PreviewSwitch title="Show count" isChecked={props.showCount} onChange={v => set('showCount', v)} />
           </>
         );

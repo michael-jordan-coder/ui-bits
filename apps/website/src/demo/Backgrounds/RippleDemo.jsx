@@ -24,6 +24,13 @@ const COLOR_OPTIONS = [
   { label: 'Amber', value: '#fbbf24' }
 ];
 
+const BACKGROUND_OPTIONS = [
+  { label: 'Midnight', value: '#0a0a0f' },
+  { label: 'Charcoal', value: '#16181d' },
+  { label: 'Navy', value: '#0f172a' },
+  { label: 'Black', value: '#000000' }
+];
+
 const RippleDemo = () => {
   const propData = useMemo(
     () => [
@@ -95,6 +102,19 @@ const RippleDemo = () => {
               options={COLOR_OPTIONS}
               value={props.color}
               onChange={val => set('color', val)}
+            />
+            <PreviewSelect
+              title="Background"
+              options={BACKGROUND_OPTIONS}
+              value={props.backgroundColor}
+              onChange={val => set('backgroundColor', val)}
+            />
+            <PreviewSlider
+              title="Max ripples"
+              min={2}
+              max={20}
+              value={props.maxRipples}
+              onChange={val => set('maxRipples', val)}
             />
             <PreviewSwitch
               title="Interactive"
